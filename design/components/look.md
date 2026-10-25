@@ -30,6 +30,9 @@ Starlight changes, for little gain on a docs site.
   green or in the theme's own green, a gray background and medium blue
   strings in the light theme. Each looked better with GitHub's themes, but
   was a color chosen for them, which another theme would need chosen again.
+- **404 page.** `src/content/docs/404.md`, a splash page like the landing
+  page, with links to each package's docs. Without it, Starlight warns on
+  every build that it has no 404 entry and uses its own.
 - **Fonts.** IBM Plex Sans and IBM Plex Mono, from `@fontsource`, served with
   the site.
 - **Landing page.** `src/content/docs/index.mdx`, the one page written here

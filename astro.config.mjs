@@ -33,8 +33,8 @@ export default defineConfig({
         "./src/styles/custom.css"
       ],
       plugins: [
-        // The landing page is the only page that isn't a package's.
-        starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/"] }),
+        // The landing page and the 404 page aren't a package's.
+        starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/", "/404"] }),
         // After the topics, which make the sidebar the API groups go in.
         ...apis.map((api) => api.plugin),
         starlightLinksValidator()
