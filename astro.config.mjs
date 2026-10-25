@@ -5,6 +5,7 @@ import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import siteLinks from "./plugins/site-links.js";
 import versionMarkers from "./plugins/version-markers.js";
+import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
 import { apis } from "./api.js";
 import { topics, topicPages } from "./sidebar.js";
 
@@ -18,6 +19,7 @@ export default defineConfig({
       title: "Hyperjump",
       components: { SiteTitle: "./src/components/SiteTitle.astro" },
       routeMiddleware: "./src/route-data.js",
+      expressiveCode: { plugins: [pluginJsonSchema()] },
       favicon: "/favicon.svg",
       social: [{ icon: "github", label: "GitHub", href: "https://github.com/hyperjump-io" }],
       customCss: [

@@ -15,6 +15,8 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
   browser
 - [Look](components/look.md): Starlight with Hyperjump's logo, forest green, and a
   landing page
+- [JSON Schema highlighting](components/highlighting.md): keywords and
+  property names in schema examples
 - [Tooling](components/tooling.md): Starlight, and Astro's markdown processor
 - [Deployment](components/deployment.md): GitHub Pages, and rebuilding when
   docs change

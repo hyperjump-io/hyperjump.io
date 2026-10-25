@@ -37,6 +37,8 @@ rest.
 - Mark a feature that isn't released with `*Coming soon*` on its own line
   under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
+- A `json` code block with `$schema` is highlighted as a schema: keywords
+  stand out from property names that aren't keywords.
 - API pages come from the declaration files and the repo's `typedoc.json`.
   Link to another package's API with `https://hyperjump.io/<section>/api/...`
   in `externalSymbolLinkMappings`.

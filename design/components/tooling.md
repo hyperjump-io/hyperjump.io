@@ -34,14 +34,8 @@ JSON Schema highlighting, doesn't depend on it.
 
 ## JSON Schema highlighting
 
-Not done yet. Highlighting keywords differently from property names needs to
-know the schema: `"type"` in `properties` is a property name, and which words
-are keywords depends on the dialect. A TextMate grammar, which is what Shiki
-uses, can't get that right. It'd be a function from a code block's text to
-ranges, using `@hyperjump/browser/json` and json-schema's keywords, plugged
-into Expressive Code, Starlight's code blocks. It doesn't depend on the
-markdown processor. The language server does the same thing for editors in
-`json-schema-language-tools/language-server/src/features/semantic-tokens.js`.
+See [JSON Schema highlighting](highlighting.md). It's an Expressive Code
+plugin, so it doesn't depend on the markdown processor.
 
 ## Versions
 

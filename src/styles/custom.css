@@ -41,6 +41,74 @@
   height: auto;
 }
 
+/* Properties in JSON Schema code blocks. See
+   plugins/expressive-code-json-schema.js for what each class marks. They
+   keep the code theme's colors, and stand apart by weight, slant, and
+   underline. Keywords are a stronger shade of the code theme's color for
+   property names, brighter in the dark theme, and deeper in the light one,
+   more saturated rather than only darker, which would gray it. It's a
+   filter, so it follows the code theme. Only comments, and what has no
+   effect, get a color of their own. */
+.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference, .json-schema-reference-brace) {
+  filter: brightness(1.35);
+}
+:root[data-theme="light"] .expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference, .json-schema-reference-brace) {
+  filter: saturate(1.6) brightness(0.8);
+}
+.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference),
+.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference) span {
+  font-weight: 600;
+}
+/* Core keywords ($schema, $id, $ref, $defs, ...) are italic, so the
+   keywords that identify, reference, and hold schemas read apart from the
+   ones that describe instances. */
+.expressive-code :is(.json-schema-core, .json-schema-extension),
+.expressive-code :is(.json-schema-core, .json-schema-extension) span {
+  font-style: italic;
+}
+
+/* $schema's dialect is bold, so it stands out from other values. */
+.expressive-code .json-schema-dialect-uri,
+.expressive-code .json-schema-dialect-uri span {
+  font-weight: 600;
+}
+
+/* An identifier's value is underlined with dots, and a reference's is
+   underlined like a link. A reference also gets a faint tint of the accent:
+   behind its value, or, for a $ref that replaces the schema it's in, behind
+   the whole object, which isn't a schema or plain JSON, with its braces in
+   the accent, made stronger like a keyword. That $ref's value is bold too.
+   Expressive Code wraps each token separately, so a tint has square
+   corners, and the pieces join. */
+.expressive-code .json-schema-identifier-value {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+}
+.expressive-code .json-schema-reference-uri {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.expressive-code :is(.json-schema-reference-object, .json-schema-reference-value) {
+  background: color-mix(in srgb, var(--sl-color-accent) 12%, transparent);
+}
+.expressive-code .json-schema-reference-brace,
+.expressive-code .json-schema-reference-brace span {
+  color: var(--sl-color-accent) !important;
+  font-weight: 700;
+}
+.expressive-code .json-schema-reference-object .json-schema-reference-uri,
+.expressive-code .json-schema-reference-object .json-schema-reference-uri span {
+  font-weight: 600;
+}
+
+/* $comment is a comment, like one in code. A property that has no effect
+   looks the same, since it's no more than a comment. */
+.expressive-code :is(.json-schema-comment, .json-schema-ignored),
+.expressive-code :is(.json-schema-comment, .json-schema-ignored) span {
+  color: var(--sl-color-gray-3) !important;
+  font-style: italic;
+}
+
 /* The landing page's package cards, side by side when there's room. */
 .packages {
   display: grid;
