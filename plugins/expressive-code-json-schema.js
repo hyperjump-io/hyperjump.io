@@ -1,6 +1,8 @@
 // An Expressive Code plugin that highlights the keywords of a JSON Schema in
 // a `json` code block, so they look different from property names that
-// aren't keywords. A block is a schema if it has `$schema`. It's resolved
+// aren't keywords. A block is a schema if it has `$schema`, or if its fence
+// gives the dialect it's loaded with, for a schema without `$schema`:
+// ```json dialect=https://json-schema.org/draft/2020-12/schema```. It's resolved
 // with @hyperjump/json-schema, so a keyword is whatever the schema's dialect
 // says it is, wherever it is in the schema. Each property gets classes:
 //
@@ -56,12 +58,13 @@ export default function pluginJsonSchema() {
     name: "json-schema",
     hooks: {
       postprocessAnalyzedCode: async ({ codeBlock }) => {
-        if (codeBlock.language !== "json" || !codeBlock.code.includes("\"$schema\"")) {
+        const dialectUri = codeBlock.metaOptions.getString("dialect");
+        if (codeBlock.language !== "json" || !(dialectUri || codeBlock.code.includes("\"$schema\""))) {
           return;
         }
         const page = codeBlock.parentDocument?.sourceFilePath;
         const rule = page && lintRule(page);
-        const resolved = await resolve(codeBlock.code, rule);
+        const resolved = await resolve(codeBlock.code, dialectUri, rule);
         if (!resolved) {
           return;
         }
@@ -168,9 +171,11 @@ class ClassAnnotation extends ExpressiveCodeAnnotation {
 }
 
 // The schema AST of a code block, and the messages of a lint rule, if one is
-// given, or undefined if it can't be resolved. It can't retrieve anything, so
-// a `$schema` that isn't a built-in dialect has no keywords.
-async function resolve(code, rule) {
+// given, or undefined if it can't be resolved. A dialect, if one is given, is
+// the one the schema is loaded with, for a schema without `$schema`. It can't
+// retrieve anything, so a `$schema` that isn't a built-in dialect has no
+// keywords.
+async function resolve(code, dialectUri, rule) {
   const { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = await library();
   const processor = unified()
     .use(rejsonParse, { accept: "recovered" })
@@ -178,7 +183,8 @@ async function resolve(code, rule) {
       session: jsonSchema.session({ allowRetrieval: [] }),
       // Each block has a session of its own, so they can share a URI. It's in
       // some lint messages.
-      uri: "https://example.com/schema.json"
+      uri: "https://example.com/schema.json",
+      ...dialectUri && { dialectUri }
     });
   if (rule) {
     processor.use(await lintRules(rule));

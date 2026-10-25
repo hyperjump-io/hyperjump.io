@@ -38,7 +38,10 @@ rest.
   under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
 - A `json` code block with `$schema` is highlighted as a schema: keywords
-  stand out from property names that aren't keywords.
+  stand out from property names that aren't keywords. For a schema without
+  `$schema`, give the dialect it's loaded with in the fence:
+  ```` ```json dialect=https://json-schema.org/draft/2020-12/schema ````.
+  GitHub ignores it.
 - On a lint rule's page, each schema example is linted with the rule, and
   what each message is about is underlined. The build warns if the messages
   aren't the ones the page lists after the example.

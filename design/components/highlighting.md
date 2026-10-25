@@ -41,7 +41,15 @@ classes, which `src/styles/custom.css` styles.
 - An embedded schema is highlighted by its own dialect.
 
 A block is a schema if it has `$schema`, so the markdown is ordinary `json`
-and reads the same on GitHub. Every example in the rule pages has one.
+and reads the same on GitHub. A schema without `$schema` gives the dialect
+it's loaded with in its fence, after the language:
+```` ```json dialect=https://json-schema.org/draft/2020-12/schema ````. GitHub
+only reads the first word as the language, so it still renders. It's the
+resolver's `dialectUri`, like the `schema` parameter of a `Content-Type`.
+`implicit-dialect`'s example needs it, since that's what the rule reports.
+Rejected: reading the dialect from the prose before the example (fragile),
+and a default dialect for every block (plain JSON would be highlighted as a
+schema).
 
 Resolving it, not matching patterns, is what makes it right: whether a name
 is a keyword depends on where it is (`"type"` in `properties` is a property
@@ -94,8 +102,9 @@ failure, for now.
 
 ## Known limitations
 
-- A schema without `$schema` isn't highlighted.
+- A schema without `$schema` isn't highlighted unless its fence gives its
+  dialect.
 - A schema in a JavaScript block, like the one in Getting started, isn't
   highlighted.
-- An example without `$schema`, like `implicit-dialect`'s, isn't linted, so
-  it has no underline.
+- A message about the whole document, like `implicit-dialect`'s, underlines
+  every line of the example.
