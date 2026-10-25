@@ -1,3 +1,29 @@
+/* Forest green. Starlight's text uses accent-high in the dark theme and
+   accent in the light one, so those are the shades that need contrast with
+   the background. */
+:root {
+  --sl-font: "IBM Plex Sans", system-ui, sans-serif;
+  --sl-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --sl-color-accent-low: #0f2a1a;
+  --sl-color-accent: #5bb37a;
+  --sl-color-accent-high: #c4ebd1;
+}
+
+/* The logo is inline, from src/assets/logo.svg, so it follows the theme. */
+.logo-braces {
+  fill: var(--sl-color-white);
+}
+.logo-bolt {
+  fill: var(--sl-color-accent);
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #e2f4e8;
+  --sl-color-accent: #2f6f45;
+  --sl-color-accent-high: #1d4a2d;
+}
+
 .version-marker {
   display: inline-block;
   padding: 0.1rem 0.6rem;
@@ -7,5 +33,31 @@
   background: var(--sl-color-accent-low);
   color: var(--sl-color-accent-high);
 }
-.version-marker-coming-soon { background: var(--sl-color-orange-low); color: var(--sl-color-orange-high); }
+.version-marker-coming-soon { background: var(--sl-color-blue-low); color: var(--sl-color-blue-high); }
 .version-marker-deprecated { background: var(--sl-color-red-low); color: var(--sl-color-red-high); }
+
+.hero-html .logo {
+  width: 100%;
+  height: auto;
+}
+
+/* The landing page's package cards, side by side when there's room. */
+.packages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+.packages > * {
+  margin: 0;
+}
+.packages .body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+/* The docs link sits at the bottom of each card, so they line up. */
+.packages .body > p:last-child {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-weight: 600;
+}

@@ -14,6 +14,7 @@ npm install
 npm run dev          # docs from GitHub, at the branches in sources.js
 npm run dev:local    # docs from checkouts next to this one (../json-schema, ...)
 npm run build        # or build:local; the site goes in dist/
+npm run preview      # or preview:local; serves dist/
 ```
 
 Use the local scripts to preview docs changes before they're pushed. The docs

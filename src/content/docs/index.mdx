@@ -1,0 +1,41 @@
+---
+title: Hyperjump
+description: Tools for JSON Schema and JSON hypermedia, from validating and linting schemas to following references across documents.
+template: splash
+hero:
+  tagline: Tools for JSON Schema and JSON hypermedia. Validate, annotate, and lint schemas, from code or the command line.
+  actions:
+    - text: Get started
+      link: /json-schema/getting-started/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/hyperjump-io
+      icon: github
+      variant: minimal
+---
+
+import { Card } from "@astrojs/starlight/components";
+
+<div class="packages">
+  <Card title="JSON Schema">
+    A validator and linter for every dialect from draft-04 to 2020-12, and
+    JSON Schema v1. Errors with positions in the JSON text, and annotations.
+
+    <small>Using version 1.x of the library? Its docs are in the
+    [1.x README](https://github.com/hyperjump-io/json-schema/tree/v1#readme).</small>
+
+    [Read the docs](/json-schema/)
+  </Card>
+  <Card title="hjlint">
+    The command line tool. Lints schemas and validates JSON files against
+    them, with the same rules as the library.
+
+    [Read the docs](/hjlint/)
+  </Card>
+  <Card title="Browser">
+    A client for JSON documents that reference each other, over HTTP or from
+    files, that follows references for you.
+
+    [Read the docs](/browser/)
+  </Card>
+</div>

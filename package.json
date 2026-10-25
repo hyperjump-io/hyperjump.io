@@ -12,11 +12,14 @@
     "dev:local": "LOCAL_REPOS=.. npm run dev",
     "build": "npm run fetch && astro build",
     "build:local": "LOCAL_REPOS=.. npm run build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "preview:local": "LOCAL_REPOS=.. npm run preview"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "0.4.4",
     "@astrojs/starlight": "0.42.7",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans": "5.3.0",
     "astro": "7.4.0",
     "satteri": "0.10.5",
     "starlight-links-validator": "0.27.0",

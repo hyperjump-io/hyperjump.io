@@ -16,8 +16,16 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Hyperjump",
+      components: { SiteTitle: "./src/components/SiteTitle.astro" },
+      routeMiddleware: "./src/route-data.js",
+      favicon: "/favicon.svg",
       social: [{ icon: "github", label: "GitHub", href: "https://github.com/hyperjump-io" }],
-      customCss: ["./src/styles/custom.css"],
+      customCss: [
+        "@fontsource/ibm-plex-sans/400.css",
+        "@fontsource/ibm-plex-sans/600.css",
+        "@fontsource/ibm-plex-mono/400.css",
+        "./src/styles/custom.css"
+      ],
       plugins: [
         // The landing page is the only page that isn't a package's.
         starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/"] }),
