@@ -24,7 +24,7 @@ Starlight changes, for little gain on a docs site.
   background (`#f6f8fa`, GitHub's own for code), so a block stands apart from
   the white page, and strings in a medium blue (`#0550ae`), since GitHub's
   are so dark they read as black and left the names as the only color.
-  Picked by flipping through themes on the highlighting test page. Rejected:
+  Picked by flipping through themes on a temporary test page. Rejected:
   Night Owl, Starlight's default (teal and purple on navy, away from the
   green); everforest (good in dark, not in light); catppuccin; vitesse;
   kanagawa; plain GitHub (names and strings the same blue); and GitHub with
