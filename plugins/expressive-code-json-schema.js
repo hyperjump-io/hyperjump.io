@@ -60,12 +60,11 @@ const identifierKeyword = /^https:\/\/json-schema\.org\/keyword\/(?:draft-[^/]+\
 export default function pluginJsonSchema() {
   return {
     name: "json-schema",
-    // The color of a reference, from each code theme: its color for strings,
-    // since a reference is one. CSS gets them as `--ec-jsonSchema-*`.
+    // A reference's tint, from each code theme: its color for strings, since
+    // a reference is one. CSS gets it as `--ec-jsonSchema-referenceTint`.
     styleSettings: new PluginStyleSettings({
       defaultValues: {
         jsonSchema: {
-          reference: ({ theme }) => stringColor(theme),
           referenceTint: ({ theme }) => setAlpha(stringColor(theme), theme.type === "dark" ? 0.18 : 0.12)
         }
       }

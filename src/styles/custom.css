@@ -74,13 +74,13 @@
 }
 
 /* An identifier's value is underlined with dots, and a reference's is
-   underlined like a link. A reference is also in the code theme's color for
-   strings, since it is one (--ec-jsonSchema-*, from the highlighting
-   plugin): a faint tint of it behind its value, or, for a $ref that replaces
-   the schema it's in, behind the whole object, which isn't a schema or plain
-   JSON, with its braces in it, made stronger like a keyword. That $ref's
-   value is bold too. Expressive Code wraps each token separately, so a tint
-   has square corners, and the pieces join. */
+   underlined like a link. A reference also gets a faint tint of the code
+   theme's color for strings, since it is one (--ec-jsonSchema-referenceTint,
+   from the highlighting plugin): behind its value, or, for a $ref that
+   replaces the schema it's in, behind the whole object, which isn't a schema
+   or plain JSON, with its braces bold, made stronger like a keyword. That
+   $ref's value is bold too. Expressive Code wraps each token separately, so
+   a tint has square corners, and the pieces join. */
 .expressive-code .json-schema-identifier-value {
   text-decoration: underline dotted;
   text-underline-offset: 0.2em;
@@ -94,7 +94,6 @@
 }
 .expressive-code .json-schema-reference-brace,
 .expressive-code .json-schema-reference-brace span {
-  color: var(--ec-jsonSchema-reference) !important;
   font-weight: 700;
 }
 .expressive-code .json-schema-reference-object .json-schema-reference-uri,
