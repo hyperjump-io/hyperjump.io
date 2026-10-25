@@ -1,0 +1,24 @@
+{
+  "name": "hyperjump.io",
+  "private": true,
+  "description": "The documentation site for Hyperjump's JSON Schema tools",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "fetch": "node scripts/fetch-content.js",
+    "dev": "npm run fetch && astro dev",
+    "dev:local": "LOCAL_REPOS=.. npm run dev",
+    "build": "npm run fetch && astro build",
+    "build:local": "LOCAL_REPOS=.. npm run build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.4",
+    "@astrojs/starlight": "0.42.7",
+    "astro": "7.4.0",
+    "satteri": "0.10.5",
+    "starlight-links-validator": "0.27.0"
+  }
+}

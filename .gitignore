@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+.cache/
+TODO*
+
+# Copied from the repos by scripts/fetch-content.js
+src/content/docs/*/
