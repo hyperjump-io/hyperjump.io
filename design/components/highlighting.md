@@ -34,12 +34,15 @@ classes, which `src/styles/custom.css` styles.
   a row of chips.
 - Everything but comments keeps the code theme's colors (see
   [Look](look.md)), and stands apart by weight, slant, and underline, so
-  any code theme works without restyling. A
-  keyword's color is a stronger shade of the theme's color for property
-  names, so it matches the names that aren't keywords without blending in.
-  It's a CSS filter, brighter in the dark theme and more saturated in the
-  light one, so it follows the theme. Darkening alone, in the light theme,
-  grayed it.
+  any code theme works without restyling. A keyword is a little brighter
+  than the theme's color for property names (`filter: brightness(1.15)`), or
+  a little darker in the light theme (`0.85`), so it matches the names that
+  aren't keywords without blending in. A filter sets no color. Picked on a
+  temporary page with the options side by side. Rejected: a stronger filter
+  (`1.35`), which turned GitHub's blue cyan, since its blue channel is
+  already at the maximum and only red and green can rise; a relative color
+  (`oklch(from var(--0) …)`) that keeps the hue exactly, since it sets a
+  color; and bold alone, which wasn't enough.
 - An unknown keyword, or a sibling of a `$ref` that replaces its schema,
   has no effect, so it looks like a comment. An `x-` keyword is an
   annotation in v1, so it doesn't. Outside v1, it's unknown.
