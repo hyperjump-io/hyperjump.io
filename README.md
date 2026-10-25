@@ -17,7 +17,9 @@ npm run build        # or build:local; the site goes in dist/
 ```
 
 Use the local scripts to preview docs changes before they're pushed. The docs
-are copied when the site starts, so restart it to see later changes.
+are copied when the site starts, so restart it to see later changes. The local
+scripts use the checkouts as they are, so their dependencies need to be
+installed for the API pages.
 
 ## Writing docs
 
@@ -34,6 +36,9 @@ rest.
 - Mark a feature that isn't released with `*Coming soon*` on its own line
   under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
+- API pages come from the declaration files and the repo's `typedoc.json`.
+  Link to another package's API with `https://hyperjump.io/<section>/api/...`
+  in `externalSymbolLinkMappings`.
 
 ## Rebuilding when docs change
 

@@ -4,6 +4,7 @@ import starlight from "@astrojs/starlight";
 import starlightLinksValidator from "starlight-links-validator";
 import siteLinks from "./plugins/site-links.js";
 import versionMarkers from "./plugins/version-markers.js";
+import { apis } from "./api.js";
 import { sidebar } from "./sidebar.js";
 
 export default defineConfig({
@@ -17,7 +18,7 @@ export default defineConfig({
       social: [{ icon: "github", label: "GitHub", href: "https://github.com/hyperjump-io" }],
       sidebar,
       customCss: ["./src/styles/custom.css"],
-      plugins: [starlightLinksValidator()]
+      plugins: [...apis.map((api) => api.plugin), starlightLinksValidator()]
     })
   ]
 });

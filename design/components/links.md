@@ -11,6 +11,8 @@ them for the site:
   site path of that page.
 - A relative link that leaves `website/`, into `src/` or `design/`, becomes a
   GitHub link at the repo's branch, since those aren't on the site.
+- A link to `https://hyperjump.io/...` becomes a site path. TypeDoc writes
+  links to another package's API that way.
 - Anything else is left alone.
 
 ## Checking
@@ -19,3 +21,6 @@ them for the site:
 that doesn't exist. The repos change independently, so a page renamed in one
 breaks links in another without anyone noticing. The site build is the one
 place all three are put together, so it's where those are caught.
+
+It doesn't check a heading anchor in a link from a generated API page. See
+[API reference](api.md).

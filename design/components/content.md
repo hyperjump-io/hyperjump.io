@@ -31,8 +31,10 @@ its branch.
 The docs stay in each repo's `website/`, as plain markdown that reads well on
 GitHub. `scripts/fetch-content.js` gets them for each repo in `sources.js`:
 
-- From GitHub, a shallow, sparse clone of `website/` at the head of the
-  repo's branch, in `.cache/repos/`, updated in place on later builds.
+- From GitHub, a shallow clone at the head of the repo's branch, in
+  `.cache/repos/`, updated in place on later builds. It's sparse, with only
+  `website/`, unless the repo has [API pages](api.md), which need the whole
+  repo and `npm install`.
 - With `LOCAL_REPOS` set, from checkouts in that directory, to preview docs
   before they're pushed.
 

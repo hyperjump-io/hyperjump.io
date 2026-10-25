@@ -11,6 +11,8 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 - [Links](components/links.md): links written for GitHub, and checking them
 - [Version markers](components/version-markers.md): when a feature was added
 - [Sidebar](components/sidebar.md): built from each section's README
+- [API reference](components/api.md): TypeDoc pages for json-schema and
+  browser
 - [Tooling](components/tooling.md): Starlight, and Astro's markdown processor
 - [Deployment](components/deployment.md): GitHub Pages, and rebuilding when
   docs change

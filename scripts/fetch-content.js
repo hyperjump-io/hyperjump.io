@@ -1,16 +1,27 @@
-// Gets each repo's website/ and copies it into src/content/docs/<section>/.
+// Gets each repo, and copies its website/ into src/content/docs/<section>/.
 // README.md becomes index.md, and the first H1 moves into frontmatter as the
-// title, which Starlight requires.
+// title, which Starlight requires. A repo with API pages gets its
+// dependencies installed, for TypeDoc. With LOCAL_REPOS, the checkouts are
+// used as they are.
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join, dirname, relative } from "node:path";
-import { sources, localRepos, repoUrl, repoDir, websiteDir } from "../sources.js";
+import { sources, sections, localRepos, repoUrl, repoDir, websiteDir, needsWholeRepo } from "../sources.js";
 
 const out = "src/content/docs";
 
-for (const source of sources) {
-  if (!localRepos) checkout(source);
+if (!localRepos) {
+  for (const source of sources) {
+    checkout(source);
+  }
+  for (const source of sources.filter(needsWholeRepo)) {
+    // Not `npm ci`, since a dependency-only repo might not have a lockfile.
+    run("npm", "install", "--ignore-scripts", "--no-audit", "--no-fund", "--prefix", repoDir(source));
+  }
+}
+
+for (const source of sections) {
   const dir = websiteDir(source);
   if (!existsSync(dir)) {
     throw Error(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/ directory`);
@@ -30,22 +41,28 @@ for (const source of sources) {
   }
 }
 
-// A shallow, sparse clone of website/ only, updated in place on later runs.
+// A shallow clone, updated in place on later runs. It's sparse, with only
+// website/, unless the whole repo is needed.
 function checkout(source) {
   const dir = repoDir(source);
-  if (existsSync(dir)) {
-    git("-C", dir, "fetch", "--depth", "1", "origin", source.ref);
-    git("-C", dir, "checkout", "--detach", "FETCH_HEAD");
+  if (!existsSync(dir)) {
+    run("git", "clone", "--depth", "1", "--branch", source.ref, "--filter=blob:none", "--sparse", repoUrl(source), dir);
   } else {
-    git("clone", "--depth", "1", "--branch", source.ref, "--filter=blob:none", "--sparse", repoUrl(source), dir);
-    git("-C", dir, "sparse-checkout", "set", "website");
+    run("git", "-C", dir, "fetch", "--depth", "1", "origin", source.ref);
+    run("git", "-C", dir, "checkout", "--detach", "FETCH_HEAD");
+  }
+  if (needsWholeRepo(source)) {
+    run("git", "-C", dir, "sparse-checkout", "disable");
+  } else {
+    run("git", "-C", dir, "sparse-checkout", "set", "website");
   }
 }
 
-// Git's own error is clear enough, so a failure exits without a stack trace.
-function git(...args) {
+// The command's own error is clear enough, so a failure exits without a
+// stack trace.
+function run(command, ...args) {
   try {
-    execFileSync("git", args, { stdio: ["ignore", "ignore", "inherit"] });
+    execFileSync(command, args, { stdio: ["ignore", "ignore", "inherit"] });
   } catch {
     process.exit(1);
   }
