@@ -44,7 +44,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { ExpressiveCodeAnnotation } from "@expressive-code/core";
+import { ExpressiveCodeAnnotation, PluginStyleSettings, setAlpha } from "@expressive-code/core";
 import { h } from "@expressive-code/core/hast";
 import { javascriptSchemas } from "./javascript-schemas.js";
 import { sources, repoDir } from "../sources.js";
@@ -60,6 +60,16 @@ const identifierKeyword = /^https:\/\/json-schema\.org\/keyword\/(?:draft-[^/]+\
 export default function pluginJsonSchema() {
   return {
     name: "json-schema",
+    // The color of a reference, from each code theme: its color for strings,
+    // since a reference is one. CSS gets them as `--ec-jsonSchema-*`.
+    styleSettings: new PluginStyleSettings({
+      defaultValues: {
+        jsonSchema: {
+          reference: ({ theme }) => stringColor(theme),
+          referenceTint: ({ theme }) => setAlpha(stringColor(theme), theme.type === "dark" ? 0.18 : 0.12)
+        }
+      }
+    }),
     hooks: {
       postprocessAnalyzedCode: async ({ codeBlock }) => {
         if (codeBlock.language === "json") {
@@ -130,6 +140,13 @@ function point(code, offset) {
   const before = code.slice(0, offset);
   const line = before.split("\n").length;
   return { line, column: offset - before.lastIndexOf("\n") };
+}
+
+// A theme's color for strings: its last rule for `string`, since later rules
+// win
+function stringColor(theme) {
+  const rule = theme.settings.findLast(({ scope }) => [].concat(scope ?? []).includes("string"));
+  return rule?.settings?.foreground ?? theme.colors["editor.foreground"];
 }
 
 // The rule a page is about, from its path: `json-schema/linting/rules/<rule>.md`

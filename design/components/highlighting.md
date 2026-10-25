@@ -12,13 +12,19 @@ classes, which `src/styles/custom.css` styles.
 | A core keyword (`$schema`, `$id`, `$ref`, `$defs`, ...) | like a keyword, and italic | the theme's |
 | `$schema` | like a core keyword | bold |
 | An identifier (`$id`, `id`, `$anchor`, `$dynamicAnchor`, `$recursiveAnchor`) | like a core keyword | dotted underline |
-| `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link, on a faint tint of the accent |
+| `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link, on a faint tint of the theme's string color |
 | A `$ref` that replaces its schema (draft-04 through draft-07) | like a core keyword | bold, and underlined like a link |
-| The object a replacing `$ref` is in | a faint tint of the accent behind all of it, and its braces bold in the accent, made stronger like a keyword, since it's neither a schema nor plain JSON | |
+| The object a replacing `$ref` is in | a faint tint of the theme's string color behind all of it, and its braces bold in that color, made stronger like a keyword, since it's neither a schema nor plain JSON | |
 | An `x-` keyword in v1, an annotation | italic | the theme's |
 | `$comment`, an unknown keyword, or a sibling of a `$ref` that replaces its schema | gray and italic, like a comment in code, for all of it | |
 | Any other property, like a name in `properties` | the theme's | the theme's |
 
+- A reference's color is the code theme's color for strings, since a
+  reference is a string. The plugin gets it from each theme as an Expressive
+  Code style setting, so CSS has it as `--ec-jsonSchema-reference` and
+  `--ec-jsonSchema-referenceTint` for whichever theme is showing. It was the
+  site's accent at first, which only matched JSON, whose property names are
+  that green.
 - Everything but comments keeps the code theme's colors (see
   [Look](look.md)), and stands apart by weight, slant, and underline. A
   keyword's color is a stronger shade of the theme's color for property
