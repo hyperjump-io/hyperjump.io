@@ -20,12 +20,14 @@ classes, which `src/styles/custom.css` styles.
 | Any other property, like a name in `properties` | the theme's | the theme's |
 
 - A reference's tint is the code theme's color for strings, since a
-  reference is a string. The plugin gets it from each theme as an Expressive
-  Code style setting, so CSS has it as `--ec-jsonSchema-referenceTint` for
-  whichever theme is showing. It was the site's accent at first, which only
-  matched JSON when its property names were that green. A replacing `$ref`'s
-  braces were in that color too, and now are only bold and stronger, the
-  same in JSON and JavaScript.
+  reference is a string, and what's styled like a comment is in the theme's
+  color for comments. The plugin gets them from each theme as Expressive
+  Code style settings, so CSS has them as `--ec-jsonSchema-referenceTint`
+  and `--ec-jsonSchema-comment` for whichever theme is showing. Neither is
+  a color of the site's: the tint was the site's accent at first, which only
+  matched JSON when its property names were that green, and comments were
+  Starlight's gray. A replacing `$ref`'s braces were in the accent too, and
+  now are only bold and stronger, the same in JSON and JavaScript.
 - Expressive Code wraps each token separately, so the plugin marks the first
   and last token of each line's run (`json-schema-start`, `json-schema-end`)
   and only those corners of a tint are rounded. Rounding every token's made

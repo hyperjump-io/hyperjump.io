@@ -60,12 +60,15 @@ const identifierKeyword = /^https:\/\/json-schema\.org\/keyword\/(?:draft-[^/]+\
 export default function pluginJsonSchema() {
   return {
     name: "json-schema",
-    // A reference's tint, from each code theme: its color for strings, since
-    // a reference is one. CSS gets it as `--ec-jsonSchema-referenceTint`.
+    // Colors from each code theme, so any theme works: its color for
+    // comments, for what's styled like one, and a tint of its color for
+    // strings, for a reference, since it is one. CSS gets them as
+    // `--ec-jsonSchema-*`.
     styleSettings: new PluginStyleSettings({
       defaultValues: {
         jsonSchema: {
-          referenceTint: ({ theme }) => setAlpha(stringColor(theme), theme.type === "dark" ? 0.18 : 0.12)
+          comment: ({ theme }) => tokenColor(theme, "comment"),
+          referenceTint: ({ theme }) => setAlpha(tokenColor(theme, "string"), theme.type === "dark" ? 0.18 : 0.12)
         }
       }
     }),
@@ -141,10 +144,10 @@ function point(code, offset) {
   return { line, column: offset - before.lastIndexOf("\n") };
 }
 
-// A theme's color for strings: its last rule for `string`, since later rules
-// win
-function stringColor(theme) {
-  const rule = theme.settings.findLast(({ scope }) => [].concat(scope ?? []).includes("string"));
+// A theme's color for a scope, like `string`: its last rule for it, since
+// later rules win
+function tokenColor(theme, scope) {
+  const rule = theme.settings.findLast((setting) => [].concat(setting.scope ?? []).includes(scope));
   return rule?.settings?.foreground ?? theme.colors["editor.foreground"];
 }
 

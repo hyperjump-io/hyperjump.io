@@ -21,8 +21,8 @@ Starlight changes, for little gain on a docs site.
 - **Code theme.** GitHub's dark and light themes, stock. Any code theme
   should be able to replace them without restyling anything, so nothing
   here, including JSON Schema highlighting, sets a color of its own for
-  code: what it adds is weight, slant, underline, and shades of the
-  theme's own colors.
+  code: what it adds is weight, slant, underline, and the theme's own
+  colors, like its color for comments.
   Picked by flipping through themes on a temporary test page. Rejected:
   Night Owl, Starlight's default (teal and purple on navy, away from the
   green); everforest (good in dark, not in light); catppuccin; vitesse;

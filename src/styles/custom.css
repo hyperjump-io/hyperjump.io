@@ -110,11 +110,13 @@
   font-weight: 600;
 }
 
-/* $comment is a comment, like one in code. A property that has no effect
-   looks the same, since it's no more than a comment. */
+/* $comment is a comment, like one in code, in the code theme's color for
+   comments (--ec-jsonSchema-comment, from the highlighting plugin). A
+   property that has no effect looks the same, since it's no more than a
+   comment. */
 .expressive-code :is(.json-schema-comment, .json-schema-ignored),
 .expressive-code :is(.json-schema-comment, .json-schema-ignored) span {
-  color: var(--sl-color-gray-3) !important;
+  color: var(--ec-jsonSchema-comment) !important;
   font-style: italic;
 }
 
