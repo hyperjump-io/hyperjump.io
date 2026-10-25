@@ -38,23 +38,10 @@ rest.
 ## Rebuilding when docs change
 
 The site deploys on a push here, on a manual run, and when a repo sends a
-`docs-changed` event. Each docs repo needs a workflow like this one, with a
-`SITE_DISPATCH_TOKEN` secret that can dispatch to this repo:
-
-```yaml
-name: Docs changed
-on:
-  push:
-    branches: [v2]
-    paths: [website/**]
-jobs:
-  dispatch:
-    runs-on: ubuntu-latest
-    steps:
-      - run: gh api repos/hyperjump-io/hyperjump.io/dispatches -f event_type=docs-changed
-        env:
-          GH_TOKEN: ${{ secrets.SITE_DISPATCH_TOKEN }}
-```
+`docs-changed` event. Each docs repo's `.github/workflows/docs-changed.yml`
+sends it when `website/` changes on the branch the site builds from. They
+need a `SITE_DISPATCH_TOKEN` secret, a token that can dispatch to this repo
+(a fine-grained token with Contents read and write on hyperjump.io).
 
 ## Contributing
 
