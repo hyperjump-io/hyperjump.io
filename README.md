@@ -31,7 +31,7 @@ rest.
 - `website/README.md` lists the pages, as a nested list under a `Contents`
   heading. That list is the section's sidebar, in the same order. Without
   the heading, it's the first list on the page.
-- Link to other pages with relative links (`../usage/modes.md`). Link to
+- Link to other pages with relative links (`../guides/validating.md`). Link to
   another repo's docs with a GitHub link into its `website/`
   (`https://github.com/hyperjump-io/hjlint/blob/main/website/README.md`). A
   broken link fails the build.

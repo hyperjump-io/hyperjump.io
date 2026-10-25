@@ -4,7 +4,7 @@ Authors write links that work on GitHub, and `plugins/site-links.js` rewrites
 them for the site:
 
 - A relative link to a page becomes the page's site path.
-  `../usage/modes.md` from `json-schema/linting/` is `/json-schema/usage/modes/`,
+  `../guides/validating.md` from `json-schema/linting/` is `/json-schema/guides/validating/`,
   and `README.md` is the section or folder's index.
 - A GitHub link into another repo's `website/`
   (`https://github.com/hyperjump-io/<repo>/blob/<ref>/website/...`) becomes the

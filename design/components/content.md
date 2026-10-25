@@ -18,8 +18,8 @@ Each topic has one home, and the others link to it.
 | Topic | Home |
 |---|---|
 | Validation, dialects, keywords, custom keywords, output | json-schema |
-| Lint rules (a page each), the `lint` method | json-schema |
-| The CLI, lint configuration, rule plugins | hjlint |
+| Lint rules (a page each), presets, rule settings, configuration comments, the `lint` method | json-schema |
+| The CLI, `.hyperjumprc` and its settings, rule packages | hjlint |
 | Retrieval, URLs, media types, caching, `allowRetrieval` | browser |
 | How json-schema uses retrieval | json-schema, linking to browser |
 
