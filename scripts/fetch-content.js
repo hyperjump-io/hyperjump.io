@@ -74,5 +74,8 @@ function withTitle(markdown, path) {
     throw Error(`${path}: the page must start with an H1`);
   }
   const body = markdown.slice(match.index + match[0].length);
-  return `---\ntitle: ${JSON.stringify(match[1])}\n---\n\n${body}`;
+  // A title is plain text, so code in the heading (`ignored-ref-siblings`)
+  // loses its backticks.
+  const title = match[1].replaceAll("`", "");
+  return `---\ntitle: ${JSON.stringify(title)}\n---\n\n${body}`;
 }

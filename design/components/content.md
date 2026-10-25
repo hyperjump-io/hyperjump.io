@@ -40,7 +40,8 @@ GitHub. `scripts/fetch-content.js` gets them for each repo in `sources.js`:
 
 It copies them to `src/content/docs/<section>/`. `README.md` becomes
 `index.md`, and the page's H1 moves into frontmatter as its title, since
-Starlight requires one. A page that doesn't start with an H1 is an error.
+Starlight requires one. A title is plain text, so backticks in the H1 are
+dropped. A page that doesn't start with an H1 is an error.
 
 ## One version, from branch heads
 
