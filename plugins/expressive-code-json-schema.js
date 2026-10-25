@@ -40,7 +40,7 @@
 // message is about gets `json-schema-lint-warn` or `json-schema-lint-error`,
 // by the rule's severity in `recommended`, which the page says, with the
 // message as its title. If the messages aren't the ones the page lists after
-// the block, it warns, so the page and the rule don't drift apart.
+// the block, it's an error, so the page and the rule don't drift apart.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -156,7 +156,7 @@ function lintRule(page) {
   return /\/json-schema\/linting\/rules\/(?!index\.md$)([^/]+)\.md$/.exec(page)?.[1];
 }
 
-// Underlines what each of the rule's messages is about, and warns if they
+// Underlines what each of the rule's messages is about, and throws if they
 // aren't the messages the page lists after the block.
 function underlineLintMessages(codeBlock, page, rule, messages) {
   const severity = pageSeverity(page);
@@ -170,7 +170,7 @@ function underlineLintMessages(codeBlock, page, rule, messages) {
   const actual = messages.map((message) => message.reason).sort();
   const expected = pageMessages(page, codeBlock.code).sort();
   if (JSON.stringify(actual) !== JSON.stringify(expected)) {
-    console.warn(`[json-schema] ${page}: '${rule}' doesn't report what the page says for this example.
+    throw Error(`'${rule}' doesn't report what its page says for an example.
   The page: ${JSON.stringify(expected)}
   The rule: ${JSON.stringify(actual)}`);
   }

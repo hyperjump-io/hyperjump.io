@@ -120,9 +120,9 @@ says ("In `recommended`, as a warning"). The page's markdown doesn't change:
 the rule decides where the underlines go.
 
 If the rule's messages for an example aren't the ones the page lists after
-it, the build warns. The rule pages were generated once from the rules'
-tests, and this keeps them from drifting apart. It's a warning, not a
-failure, for now.
+it, the build fails. The rule pages were generated once from the rules'
+tests, and this keeps them from drifting apart. It was a warning until
+every page matched its rule.
 
 - Every example on a rule page works with the rule's default options; no
   example needed options to report what the page says.

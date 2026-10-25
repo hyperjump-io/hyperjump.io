@@ -44,7 +44,7 @@ rest.
   GitHub ignores it. In a `javascript` block, an object literal with
   `$schema` is highlighted the same way.
 - On a lint rule's page, each schema example is linted with the rule, and
-  what each message is about is underlined. The build warns if the messages
+  what each message is about is underlined. The build fails if the messages
   aren't the ones the page lists after the example.
 - API pages come from the declaration files and the repo's `typedoc.json`.
   Link to another package's API with `https://hyperjump.io/<section>/api/...`
