@@ -21,6 +21,13 @@ if (!localRepos) {
   }
 }
 
+// Astro caches each page's rendered HTML, and reuses it while the page's
+// markdown is the same, even when what renders it (plugins, code themes) has
+// changed. `--force` doesn't clear the cache the dev server uses, so both
+// caches are cleared here, before every start and build.
+await rm(".astro/data-store.json", { force: true });
+await rm("node_modules/.astro/data-store.json", { force: true });
+
 for (const source of sections) {
   const dir = websiteDir(source);
   if (!existsSync(dir)) {

@@ -43,6 +43,13 @@ It copies them to `src/content/docs/<section>/`. `README.md` becomes
 Starlight requires one. A title is plain text, so backticks in the H1 are
 dropped. A page that doesn't start with an H1 is an error.
 
+The fetch step deletes Astro's content caches (`.astro/data-store.json`
+and `node_modules/.astro/data-store.json`) before every start and build.
+Astro keeps each page's rendered HTML and reuses it while the page's
+markdown is the same, even when what renders it, like a plugin or the code
+themes, has changed. `astro dev --force` was tried first, and doesn't clear
+the cache the dev server uses.
+
 ## One version, from branch heads
 
 The site is built from the head of each repo's branch, not from release tags.
