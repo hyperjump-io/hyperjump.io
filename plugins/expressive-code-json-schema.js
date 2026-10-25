@@ -30,6 +30,12 @@
 // The name of a core keyword (`$schema`, `$id`, `$ref`, `$defs`, ... the core
 // vocabulary of 2019-09 and 2020-12, and the same keywords in other dialects)
 // also gets `json-schema-core`.
+//
+// On a lint rule's page, the block is linted with that rule, and what each
+// message is about gets `json-schema-lint-warn` or `json-schema-lint-error`,
+// by the rule's severity in `recommended`, which the page says, with the
+// message as its title. If the messages aren't the ones the page lists after
+// the block, it warns, so the page and the rule don't drift apart.
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -53,10 +59,13 @@ export default function pluginJsonSchema() {
         if (codeBlock.language !== "json" || !codeBlock.code.includes("\"$schema\"")) {
           return;
         }
-        const schema = await resolve(codeBlock.code);
-        if (!schema) {
+        const page = codeBlock.parentDocument?.sourceFilePath;
+        const rule = page && lintRule(page);
+        const resolved = await resolve(codeBlock.code, rule);
+        if (!resolved) {
           return;
         }
+        const { tree: schema, messages } = resolved;
         for (const [node, className] of marks(schema)) {
           annotate(codeBlock, node.position, className);
         }
@@ -67,18 +76,76 @@ export default function pluginJsonSchema() {
           annotate(codeBlock, { start, end: { ...start, column: start.column + 1 } }, "json-schema-reference-brace");
           annotate(codeBlock, { start: { ...end, column: end.column - 1 }, end }, "json-schema-reference-brace");
         }
+        if (rule) {
+          underlineLintMessages(codeBlock, page, rule, messages);
+        }
       }
     }
   };
 }
 
+// The rule a page is about, from its path: `json-schema/linting/rules/<rule>.md`
+function lintRule(page) {
+  return /\/json-schema\/linting\/rules\/(?!index\.md$)([^/]+)\.md$/.exec(page)?.[1];
+}
+
+// Underlines what each of the rule's messages is about, and warns if they
+// aren't the messages the page lists after the block.
+function underlineLintMessages(codeBlock, page, rule, messages) {
+  const severity = pageSeverity(page);
+  for (const message of messages) {
+    const position = message.place?.start ? message.place : undefined;
+    if (position) {
+      annotate(codeBlock, position, `json-schema-lint-${severity}`, "latest", { title: message.reason });
+    }
+  }
+
+  const actual = messages.map((message) => message.reason).sort();
+  const expected = pageMessages(page, codeBlock.code).sort();
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+    console.warn(`[json-schema] ${page}: '${rule}' doesn't report what the page says for this example.
+  The page: ${JSON.stringify(expected)}
+  The rule: ${JSON.stringify(actual)}`);
+  }
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+const pageSources = new Map();
+function pageSource(page) {
+  if (!pageSources.has(page)) {
+    pageSources.set(page, readFileSync(page, "utf8"));
+  }
+  return pageSources.get(page);
+}
+
+// A rule page says "In `recommended`, as a warning" (or "an error").
+function pageSeverity(page) {
+  return /In `recommended`, as an error/.test(pageSource(page)) ? "error" : "warn";
+}
+
+// The messages a page lists in the blockquote after a block, one per line.
+// The block's fence can have options after `json`.
+function pageMessages(page, code) {
+  const source = pageSource(page);
+  const block = new RegExp(`^\`\`\`json[^\\n]*\\n${escapeRegExp(code)}\\n\`\`\`\\n`, "m").exec(source);
+  if (!block) {
+    return [];
+  }
+  const after = source.slice(block.index + block[0].length);
+  const quote = /^\n*((?:> .*\n?|>\n?)+)/.exec(after)?.[1] ?? "";
+  return quote.split("\n").filter((line) => line.startsWith("> ")).map((line) => line.slice(2));
+}
+
 // A node can span lines, so each line it's on gets its own annotation,
 // without the line's indentation.
-function annotate(codeBlock, { start, end }, className, renderPhase = "earlier") {
+function annotate(codeBlock, { start, end }, className, renderPhase = "earlier", properties = {}) {
   for (let line = start.line; line <= end.line; line++) {
     const code = codeBlock.getLine(line - 1);
     const indentation = code.text.length - code.text.trimStart().length;
-    code.addAnnotation(new ClassAnnotation(className, renderPhase, {
+    code.addAnnotation(new ClassAnnotation(className, renderPhase, properties, {
       columnStart: line === start.line ? start.column - 1 : indentation,
       columnEnd: line === end.line ? end.column - 1 : code.text.length
     }));
@@ -89,31 +156,37 @@ function annotate(codeBlock, { start, end }, className, renderPhase = "earlier")
 // renders after syntax highlighting, so it wraps the highlighted tokens, and
 // one that renders later wraps the others.
 class ClassAnnotation extends ExpressiveCodeAnnotation {
-  constructor(className, renderPhase, inlineRange) {
+  constructor(className, renderPhase, properties, inlineRange) {
     super({ inlineRange, renderPhase });
     this.className = className;
+    this.properties = properties;
   }
 
   render({ nodesToTransform }) {
-    return nodesToTransform.map((node) => h("span", { class: this.className }, node));
+    return nodesToTransform.map((node) => h("span", { ...this.properties, class: this.className }, node));
   }
 }
 
-let examples = 0;
-
-// The schema AST of a code block, or undefined if it can't be resolved. It
-// can't retrieve anything, so a `$schema` that isn't a built-in dialect has
-// no keywords.
-async function resolve(code) {
-  const { jsonSchema, jsonSchemaResolve, rejsonParse, unified } = await library();
+// The schema AST of a code block, and the messages of a lint rule, if one is
+// given, or undefined if it can't be resolved. It can't retrieve anything, so
+// a `$schema` that isn't a built-in dialect has no keywords.
+async function resolve(code, rule) {
+  const { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = await library();
   const processor = unified()
     .use(rejsonParse, { accept: "recovered" })
     .use(jsonSchemaResolve, {
       session: jsonSchema.session({ allowRetrieval: [] }),
-      uri: `https://hyperjump.io/examples/${++examples}.schema.json`
+      // Each block has a session of its own, so they can share a URI. It's in
+      // some lint messages.
+      uri: "https://example.com/schema.json"
     });
+  if (rule) {
+    processor.use(await lintRules(rule));
+  }
+  const file = new VFile(code);
   try {
-    return await processor.run(processor.parse(code));
+    const tree = await processor.run(processor.parse(file), file);
+    return { tree, messages: file.messages.filter((message) => message.ruleId === rule) };
   } catch {
     return undefined;
   }
@@ -197,8 +270,10 @@ function library() {
       (await importExport(dir, subpath))[add](jsonSchema);
     }
     const { unified } = await importExport(join(dir, "node_modules/unified"), ".");
+    const { VFile } = await importExport(join(dir, "node_modules/vfile"), ".");
     const { rejsonParse } = await importExport(join(dir, "node_modules/@hyperjump/browser"), "./json");
-    return { jsonSchema, jsonSchemaResolve, rejsonParse, unified };
+    const lintRules = async (rule) => (await importExport(dir, `./lint/rules/${rule}`)).default;
+    return { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules };
   })();
   return loading;
 }
@@ -207,10 +282,25 @@ function library() {
 // to its module runner, and that's closed by the time code blocks render.
 const nativeImport = new Function("specifier", "return import(specifier)");
 
-// Imports a package's export from its directory, following its `exports`.
+// Imports a package's export from its directory, following its `exports`,
+// including a pattern like `./lint/rules/*`.
 async function importExport(dir, subpath) {
   const { exports } = JSON.parse(readFileSync(join(dir, "package.json"), "utf8"));
-  let target = typeof exports === "string" && subpath === "." ? exports : exports[subpath];
+  let target;
+  if (typeof exports === "string") {
+    target = subpath === "." ? exports : undefined;
+  } else if (subpath in exports) {
+    target = exports[subpath];
+  } else {
+    for (const [pattern, patternTarget] of Object.entries(exports)) {
+      const [prefix, suffix] = pattern.split("*");
+      if (suffix !== undefined && subpath.startsWith(prefix) && subpath.endsWith(suffix)) {
+        const match = subpath.slice(prefix.length, subpath.length - suffix.length);
+        target = JSON.parse(JSON.stringify(patternTarget).replaceAll("*", match));
+        break;
+      }
+    }
+  }
   if (typeof target === "object") {
     target = target.import ?? target.default;
   }

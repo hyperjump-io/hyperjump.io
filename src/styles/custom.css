@@ -109,6 +109,21 @@
   font-style: italic;
 }
 
+/* On a lint rule's page, what each message is about is underlined like a
+   problem in an editor, by the rule's severity. The message is its title. */
+.expressive-code :is(.json-schema-lint-warn, .json-schema-lint-error) {
+  text-decoration: underline wavy;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.3em;
+  cursor: help;
+}
+.expressive-code .json-schema-lint-warn {
+  text-decoration-color: var(--sl-color-orange);
+}
+.expressive-code .json-schema-lint-error {
+  text-decoration-color: var(--sl-color-red);
+}
+
 /* The landing page's package cards, side by side when there's room. */
 .packages {
   display: grid;

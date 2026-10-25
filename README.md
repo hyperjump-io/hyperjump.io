@@ -39,6 +39,9 @@ rest.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
 - A `json` code block with `$schema` is highlighted as a schema: keywords
   stand out from property names that aren't keywords.
+- On a lint rule's page, each schema example is linted with the rule, and
+  what each message is about is underlined. The build warns if the messages
+  aren't the ones the page lists after the example.
 - API pages come from the declaration files and the repo's `typedoc.json`.
   Link to another package's API with `https://hyperjump.io/<section>/api/...`
   in `externalSymbolLinkMappings`.

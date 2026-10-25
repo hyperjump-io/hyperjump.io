@@ -72,8 +72,30 @@ identifiers; a box or a tinted background for `$schema`; and, for a `$ref`
 object, a gray tint (too heavy) or a bar beside its lines (it marks whole
 lines, not the object).
 
+## Lint messages on rule pages
+
+On a lint rule's page, each example is linted with that rule while it's
+resolved, and what each message is about gets a wavy underline, orange for a
+warning and red for an error, with the message as its title, like a problem
+in an editor. The severity is the rule's in `recommended`, which the page
+says ("In `recommended`, as a warning"). The page's markdown doesn't change:
+the rule decides where the underlines go.
+
+If the rule's messages for an example aren't the ones the page lists after
+it, the build warns. The rule pages were generated once from the rules'
+tests, and this keeps them from drifting apart. It's a warning, not a
+failure, for now.
+
+- Every example on a rule page works with the rule's default options; no
+  example needed options to report what the page says.
+- Examples are resolved as `https://example.com/schema.json`, which shows in
+  messages that name the document, like `reference-without-target`'s. Each
+  block has a session of its own, so they can share it.
+
 ## Known limitations
 
 - A schema without `$schema` isn't highlighted.
 - A schema in a JavaScript block, like the one in Getting started, isn't
   highlighted.
+- An example without `$schema`, like `implicit-dialect`'s, isn't linted, so
+  it has no underline.
