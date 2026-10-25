@@ -32,7 +32,7 @@ rest.
   (`https://github.com/hyperjump-io/hjlint/blob/main/website/README.md`). A
   broken link fails the build.
 - Mark a feature that isn't released with `*Coming soon*` on its own line
-  under its heading. The release replaces it with `*Added in vX.Y.Z*`.
+  under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
 
 ## Rebuilding when docs change

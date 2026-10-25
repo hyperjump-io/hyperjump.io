@@ -22,6 +22,11 @@ italics.
 
 Rejected: "unreleased" in place of "Coming soon".
 
-## Not done yet
+## Releasing
 
-- Each repo's release script replacing `*Coming soon*`.
+Each repo's `version` script, `scripts/version-docs.js`, replaces
+`*Coming soon*` in `website/` with `*Added in vX.Y.Z*` and stages it. npm runs
+it after `npm version` bumps `package.json` and before it commits, so the
+markers are part of the version commit. A prerelease, like `2.1.0-dev.0`,
+leaves them, since what's in it is still coming soon. The script is the same
+in each repo, rather than a package they share, because it's a few lines.
