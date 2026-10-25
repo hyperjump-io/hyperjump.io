@@ -41,7 +41,8 @@ rest.
   stand out from property names that aren't keywords. For a schema without
   `$schema`, give the dialect it's loaded with in the fence:
   ```` ```json dialect=https://json-schema.org/draft/2020-12/schema ````.
-  GitHub ignores it.
+  GitHub ignores it. In a `javascript` block, an object literal with
+  `$schema` is highlighted the same way.
 - On a lint rule's page, each schema example is linted with the rule, and
   what each message is about is underlined. The build warns if the messages
   aren't the ones the page lists after the example.

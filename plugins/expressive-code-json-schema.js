@@ -29,6 +29,9 @@
 // - `json-schema-property` on the name of any other property, like a name in
 //   `properties`
 //
+// A `javascript` or `js` block is highlighted too, in each object literal
+// with `$schema` (see javascript-schemas.js).
+//
 // The name of a core keyword (`$schema`, `$id`, `$ref`, `$defs`, ... the core
 // vocabulary of 2019-09 and 2020-12, and the same keywords in other dialects)
 // also gets `json-schema-core`.
@@ -43,6 +46,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { ExpressiveCodeAnnotation } from "@expressive-code/core";
 import { h } from "@expressive-code/core/hast";
+import { javascriptSchemas } from "./javascript-schemas.js";
 import { sources, repoDir } from "../sources.js";
 
 const unknownKeyword = "https://json-schema.org/keyword/unknown#";
@@ -58,33 +62,74 @@ export default function pluginJsonSchema() {
     name: "json-schema",
     hooks: {
       postprocessAnalyzedCode: async ({ codeBlock }) => {
-        const dialectUri = codeBlock.metaOptions.getString("dialect");
-        if (codeBlock.language !== "json" || !(dialectUri || codeBlock.code.includes("\"$schema\""))) {
-          return;
-        }
-        const page = codeBlock.parentDocument?.sourceFilePath;
-        const rule = page && lintRule(page);
-        const resolved = await resolve(codeBlock.code, dialectUri, rule);
-        if (!resolved) {
-          return;
-        }
-        const { tree: schema, messages } = resolved;
-        for (const [node, className] of marks(schema)) {
-          annotate(codeBlock, node.position, className);
-        }
-        for (const reference of referenceObjects(schema)) {
-          const { start, end } = reference.position;
-          // It wraps everything else in the object, so it renders last.
-          annotate(codeBlock, reference.position, "json-schema-reference-object", "later");
-          annotate(codeBlock, { start, end: { ...start, column: start.column + 1 } }, "json-schema-reference-brace");
-          annotate(codeBlock, { start: { ...end, column: end.column - 1 }, end }, "json-schema-reference-brace");
-        }
-        if (rule) {
-          underlineLintMessages(codeBlock, page, rule, messages);
+        if (codeBlock.language === "json") {
+          await highlightJson(codeBlock);
+        } else if (["javascript", "js"].includes(codeBlock.language) && codeBlock.code.includes("$schema")) {
+          await highlightJavaScript(codeBlock);
         }
       }
     }
   };
+}
+
+async function highlightJson(codeBlock) {
+  const dialectUri = codeBlock.metaOptions.getString("dialect");
+  if (!dialectUri && !codeBlock.code.includes("\"$schema\"")) {
+    return;
+  }
+  const page = codeBlock.parentDocument?.sourceFilePath;
+  const rule = page && lintRule(page);
+  const resolved = await resolve(codeBlock.code, dialectUri, rule);
+  if (!resolved) {
+    return;
+  }
+  highlight(codeBlock, resolved.tree, (position) => position);
+  if (rule) {
+    underlineLintMessages(codeBlock, page, rule, resolved.messages);
+  }
+}
+
+// Each schema is resolved as JSON, and what's marked in the JSON is marked
+// where it came from in the code.
+async function highlightJavaScript(codeBlock) {
+  const { code } = codeBlock;
+  for (const { json, sourceRange } of javascriptSchemas(code)) {
+    const resolved = await resolve(json);
+    if (!resolved) {
+      continue;
+    }
+    highlight(codeBlock, resolved.tree, (position) => {
+      const range = sourceRange(position.start.offset, position.end.offset);
+      return range && { start: point(code, range[0]), end: point(code, range[1]) };
+    });
+  }
+}
+
+// Marks a schema AST's nodes in a code block, where `toBlock` says they are
+function highlight(codeBlock, schema, toBlock) {
+  for (const [node, className] of marks(schema)) {
+    const position = toBlock(node.position);
+    if (position) {
+      annotate(codeBlock, position, className);
+    }
+  }
+  for (const reference of referenceObjects(schema)) {
+    const position = toBlock(reference.position);
+    if (position) {
+      const { start, end } = position;
+      // It wraps everything else in the object, so it renders last.
+      annotate(codeBlock, position, "json-schema-reference-object", "later");
+      annotate(codeBlock, { start, end: { ...start, column: start.column + 1 } }, "json-schema-reference-brace");
+      annotate(codeBlock, { start: { ...end, column: end.column - 1 }, end }, "json-schema-reference-brace");
+    }
+  }
+}
+
+// The line and column (both from 1) of an offset in code
+function point(code, offset) {
+  const before = code.slice(0, offset);
+  const line = before.split("\n").length;
+  return { line, column: offset - before.lastIndexOf("\n") };
 }
 
 // The rule a page is about, from its path: `json-schema/linting/rules/<rule>.md`

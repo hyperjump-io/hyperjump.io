@@ -51,6 +51,19 @@ Rejected: reading the dialect from the prose before the example (fragile),
 and a default dialect for every block (plain JSON would be highlighted as a
 schema).
 
+A `javascript` or `js` block is highlighted too, in each outermost object
+literal with a `$schema` property, like the schema in Getting started.
+`plugins/javascript-schemas.js` parses the block with acorn, writes each
+such literal as JSON text, and remembers where each value, property, and
+property name in the JSON came from in the JavaScript. The JSON is resolved
+like a `json` block, and what's marked in it is marked where it came from.
+A value that isn't a literal, like a variable, is `null` in the JSON, so it
+isn't marked. A schema nested in one that's found is an embedded resource,
+which the resolver finds. JavaScript keeps its theme's colors, so a key is
+the text color, not the JSON property names' green, and a keyword stands
+out from it by weight and brightness. Recoloring every object key to match
+JSON was tried, and clashed with the rest of the JavaScript.
+
 Resolving it, not matching patterns, is what makes it right: whether a name
 is a keyword depends on where it is (`"type"` in `properties` is a property
 name) and on the dialect. A TextMate grammar, which is what Shiki uses,
@@ -104,7 +117,7 @@ failure, for now.
 
 - A schema without `$schema` isn't highlighted unless its fence gives its
   dialect.
-- A schema in a JavaScript block, like the one in Getting started, isn't
-  highlighted.
+- A schema in a JavaScript block is only found as an object literal with
+  `$schema`. One built up in code, or without `$schema`, isn't highlighted.
 - A message about the whole document, like `implicit-dialect`'s, underlines
   every line of the example.
