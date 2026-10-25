@@ -18,6 +18,17 @@ Starlight changes, for little gain on a docs site.
   background. "Coming soon" markers are blue, so they don't look like "Added
   in" ones. It was picked by flipping through options on the site with a
   temporary toggle.
+- **Code theme.** GitHub's dark and light themes, adjusted in
+  `code-themes.js`. JSON property names are the forest green, since GitHub
+  colors them like strings. The light theme also gets a light gray
+  background (`#f6f8fa`, GitHub's own for code), so a block stands apart from
+  the white page, and strings in a medium blue (`#0550ae`), since GitHub's
+  are so dark they read as black and left the names as the only color.
+  Picked by flipping through themes on the highlighting test page. Rejected:
+  Night Owl, Starlight's default (teal and purple on navy, away from the
+  green); everforest (good in dark, not in light); catppuccin; vitesse;
+  kanagawa; plain GitHub (names and strings the same blue); and GitHub with
+  its own green for names.
 - **Fonts.** IBM Plex Sans and IBM Plex Mono, from `@fontsource`, served with
   the site.
 - **Landing page.** `src/content/docs/index.mdx`, the one page written here

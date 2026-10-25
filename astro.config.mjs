@@ -8,6 +8,7 @@ import versionMarkers from "./plugins/version-markers.js";
 import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
 import { apis } from "./api.js";
 import { topics, topicPages } from "./sidebar.js";
+import { githubForestDark, githubForestLight } from "./code-themes.js";
 
 export default defineConfig({
   site: "https://hyperjump.io",
@@ -19,7 +20,10 @@ export default defineConfig({
       title: "Hyperjump",
       components: { SiteTitle: "./src/components/SiteTitle.astro" },
       routeMiddleware: "./src/route-data.js",
-      expressiveCode: { plugins: [pluginJsonSchema()] },
+      expressiveCode: {
+        plugins: [pluginJsonSchema()],
+        themes: [githubForestDark, githubForestLight]
+      },
       favicon: "/favicon.svg",
       social: [{ icon: "github", label: "GitHub", href: "https://github.com/hyperjump-io" }],
       customCss: [
