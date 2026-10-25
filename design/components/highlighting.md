@@ -12,9 +12,9 @@ classes, which `src/styles/custom.css` styles.
 | A core keyword (`$schema`, `$id`, `$ref`, `$defs`, ...) | like a keyword, and italic | the theme's |
 | `$schema` | like a core keyword | bold |
 | An identifier (`$id`, `id`, `$anchor`, `$dynamicAnchor`, `$recursiveAnchor`) | like a core keyword | dotted underline |
-| `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link, on a faint tint of the theme's string color |
+| `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link, on a faint tint of the theme's string color, with rounded ends |
 | A `$ref` that replaces its schema (draft-04 through draft-07) | like a core keyword | bold, and underlined like a link |
-| The object a replacing `$ref` is in | a faint tint of the theme's string color behind all of it, and its braces bold and made stronger like a keyword, since it's neither a schema nor plain JSON | |
+| The object a replacing `$ref` is in | a faint tint of the theme's string color behind all of it, with rounded ends, and its braces bold and made stronger like a keyword, since it's neither a schema nor plain JSON | |
 | An `x-` keyword in v1, an annotation | italic | the theme's |
 | `$comment`, an unknown keyword, or a sibling of a `$ref` that replaces its schema | gray and italic, like a comment in code, for all of it | |
 | Any other property, like a name in `properties` | the theme's | the theme's |
@@ -26,6 +26,10 @@ classes, which `src/styles/custom.css` styles.
   matched JSON when its property names were that green. A replacing `$ref`'s
   braces were in that color too, and now are only bold and stronger, the
   same in JSON and JavaScript.
+- Expressive Code wraps each token separately, so the plugin marks the first
+  and last token of each line's run (`json-schema-start`, `json-schema-end`)
+  and only those corners of a tint are rounded. Rounding every token's made
+  a row of chips.
 - Everything but comments keeps the code theme's colors (see
   [Look](look.md)), and stands apart by weight, slant, and underline, so
   any code theme works without restyling. A

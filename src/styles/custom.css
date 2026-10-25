@@ -80,7 +80,8 @@
    replaces the schema it's in, behind the whole object, which isn't a schema
    or plain JSON, with its braces bold, made stronger like a keyword. That
    $ref's value is bold too. Expressive Code wraps each token separately, so
-   a tint has square corners, and the pieces join. */
+   only the ends of a line's run of a tint are rounded, and the pieces in
+   between join. */
 .expressive-code .json-schema-identifier-value {
   text-decoration: underline dotted;
   text-underline-offset: 0.2em;
@@ -91,6 +92,14 @@
 }
 .expressive-code :is(.json-schema-reference-object, .json-schema-reference-value) {
   background: var(--ec-jsonSchema-referenceTint);
+}
+.expressive-code :is(.json-schema-reference-object, .json-schema-reference-value).json-schema-start {
+  border-start-start-radius: 0.25rem;
+  border-end-start-radius: 0.25rem;
+}
+.expressive-code :is(.json-schema-reference-object, .json-schema-reference-value).json-schema-end {
+  border-start-end-radius: 0.25rem;
+  border-end-end-radius: 0.25rem;
 }
 .expressive-code .json-schema-reference-brace,
 .expressive-code .json-schema-reference-brace span {

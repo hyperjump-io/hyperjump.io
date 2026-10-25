@@ -226,8 +226,14 @@ class ClassAnnotation extends ExpressiveCodeAnnotation {
     this.properties = properties;
   }
 
+  // Each token is wrapped separately, so the first and last of a line's are
+  // marked, for CSS that styles the ends, like rounded corners.
   render({ nodesToTransform }) {
-    return nodesToTransform.map((node) => h("span", { ...this.properties, class: this.className }, node));
+    const last = nodesToTransform.length - 1;
+    return nodesToTransform.map((node, index) => {
+      const ends = [index === 0 && "json-schema-start", index === last && "json-schema-end"].filter(Boolean);
+      return h("span", { ...this.properties, class: [this.className, ...ends] }, node);
+    });
   }
 }
 
