@@ -1,5 +1,6 @@
 ---
 title: Hyperjump
+template: splash
 ---
 
 Tools for JSON Schema and JSON hypermedia.
