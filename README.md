@@ -28,8 +28,9 @@ Docs are plain markdown that reads well on GitHub. The site build handles the
 rest.
 
 - Each page starts with an H1. It becomes the page's title.
-- `website/README.md` lists the pages, as a nested list. That list is the
-  section's sidebar, in the same order.
+- `website/README.md` lists the pages, as a nested list under a `Contents`
+  heading. That list is the section's sidebar, in the same order. Without
+  the heading, it's the first list on the page.
 - Link to other pages with relative links (`../usage/modes.md`). Link to
   another repo's docs with a GitHub link into its `website/`
   (`https://github.com/hyperjump-io/hjlint/blob/main/website/README.md`). A

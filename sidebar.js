@@ -11,7 +11,7 @@ import { sections, websiteDir } from "./sources.js";
 export const topics = sections.map((source) => {
   const { section, label } = source;
   const tree = markdownToMdast(readFileSync(`${websiteDir(source)}/README.md`, "utf8"));
-  const list = tree.children.find((node) => node.type === "list");
+  const list = contentsList(tree) ?? tree.children.find((node) => node.type === "list");
   if (!list) throw Error(`${source.repo}: website/README.md has no list of pages`);
   return {
     id: section,
@@ -25,7 +25,15 @@ export const topics = sections.map((source) => {
   };
 });
 
-export const topicPages = Object.fromEntries(sections.map(({ section }) => [section, [`/${section}/**/*`]]));
+// The first list after a "Contents" heading, so the page can have other lists
+// before it, like a list of features
+function contentsList(tree) {
+  const heading = tree.children.findIndex((node) => node.type === "heading" && toString(node).trim() === "Contents");
+  if (heading === -1) return undefined;
+  return tree.children.slice(heading + 1).find((node) => node.type === "list");
+}
+
+export const topicPages =Object.fromEntries(sections.map(({ section }) => [section, [`/${section}/**/*`]]));
 
 function toItem(listItem, section) {
   const [paragraph, sublist] = listItem.children;

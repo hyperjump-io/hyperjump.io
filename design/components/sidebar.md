@@ -8,7 +8,11 @@ topic. It's a splash page, without a sidebar.
 
 A section's sidebar is the nested list in its `website/README.md`, in the
 same order, so a repo decides its own navigation in the same commit as its
-pages. `sidebar.js` reads the list:
+pages. It's the first list after a heading named "Contents", or the first
+list on the page if there's no such heading. The heading lets a section's
+front page start with an introduction that has lists of its own, like a
+list of features, before its table of contents. `sidebar.js` reads the
+list:
 
 - A linked item is a page.
 - An item without a link, like "Usage", is a group.
