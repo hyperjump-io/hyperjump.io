@@ -8,13 +8,14 @@ import { markdownToMdast } from "satteri";
 import { sources, websiteDir } from "./sources.js";
 
 export const topics = sources.map((source) => {
-  const { section, label } = source;
+  const { section, label, icon } = source;
   const tree = markdownToMdast(readFileSync(`${websiteDir(source)}/README.md`, "utf8"));
   const list = contentsList(tree) ?? tree.children.find((node) => node.type === "list");
   if (!list) throw Error(`${source.repo}: website/README.md has no list of pages`);
   return {
     id: section,
     label,
+    icon,
     link: `/${section}/`,
     items: [
       { label: "Overview", link: `/${section}/` },

@@ -182,3 +182,15 @@
   display: grid;
   gap: 1rem;
 }
+
+/* The sidebar's list of sections. The current one has a tinted background,
+   so it reads apart from the page links below it. Its text, and a section's
+   on hover, is the accent text color, like the rest of the site's
+   highlights. */
+ul.starlight-sidebar-topics a:is(.starlight-sidebar-topics-current, :hover, :focus-visible) {
+  color: var(--sl-color-text-accent);
+}
+ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
+  background-color: var(--sl-color-accent-low);
+  border-radius: 0.25rem;
+}
