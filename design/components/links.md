@@ -13,7 +13,8 @@ them for the site:
   GitHub link at the repo's branch, since those aren't on the site.
 - A link to `https://hyperjump.io/...` becomes a site path. TypeDoc writes
   links to another package's API that way.
-- Anything else is left alone.
+- Anything else is left alone, including a link to a heading on the same
+  page (`#json-text`).
 
 ## Checking
 

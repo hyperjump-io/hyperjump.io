@@ -28,7 +28,9 @@ export default function siteLinks({ fileURL }) {
 
 function siteUrl(href, page, source) {
   if (href.startsWith(site)) return href.slice(site.length - 1);
-  const [url, hash = ""] = href.split(/(?=#)/);
+  const hashStart = href.includes("#") ? href.indexOf("#") : href.length;
+  const url = href.slice(0, hashStart);
+  const hash = href.slice(hashStart);
   const fromGithub = github.exec(url);
   if (fromGithub) {
     const target = sections.find(({ repo }) => repo === fromGithub[1]);
