@@ -26,7 +26,7 @@ sidebar of their own: all posts, recent posts, tags, and RSS. The plugin
 is after `starlight-sidebar-topics` in `astro.config.mjs`, so its sidebar
 replaces the one Starlight builds for pages that aren't in a topic. On
 small screens, where the header has no room for the "Blog" link, it's at
-the end of each topic's list of sections.
+the end of the list of topics.
 
 Rejected: a blog on a site of its own. Its posts wouldn't be in the docs'
 search, and its links into the docs wouldn't be checked.

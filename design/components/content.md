@@ -2,8 +2,8 @@
 
 ## One site
 
-json-schema, hjlint, and browser have one site, with a section each, and not
-a site each. Their users move between them: lint rules are json-schema's, but
+json-schema, hjlint, browser, and the other packages have one site, and
+not a site each. Their users move between them: lint rules are json-schema's, but
 they're run from code with `lint` and from the command line with hjlint, and
 both packages rest on browser's retrieval. One site has one search, one
 navigation, and links between packages that are checked.
@@ -12,10 +12,8 @@ The site presents JSON Schema tools and the components they're built from,
 each of which works on its own, like browser. See
 [Landing page](landing-page.md).
 
-A tool gets a section. A component without much to say, like uri or pact,
-will get a page in one "Components" section instead, so the sidebar's list
-of sections stays short. A component with a lot to say, like browser, keeps
-a section of its own.
+Each package's pages are at `/<repo>/`. The sidebar groups packages by
+where they're used, not one topic each (see [Sidebar](sidebar.md)).
 
 ## Which repo documents what
 
@@ -51,17 +49,17 @@ GitHub. `scripts/fetch-content.js` gets them for each repo in `sources.js`:
 - With `LOCAL_REPOS` set, from checkouts in that directory, to preview docs
   before they're pushed.
 
-It copies them to `src/content/docs/<section>/`. `README.md` becomes
+It copies them to `src/content/docs/<repo>/`. `README.md` becomes
 `index.md`, and the page's H1 moves into frontmatter as its title, since
 Starlight requires one. A title is plain text, so backticks in the H1 are
 dropped. A page that doesn't start with an H1 is an error.
 
 Its frontmatter also gets an `editUrl`, so Starlight shows "Edit page"
 under it, linking to its file in its repo's `website/` on GitHub, at the
-branch the site builds from (`sources.js`). The site is three repos, so
+branch the site builds from (`sources.js`). The site is many repos, so
 which one a page comes from isn't obvious from the site. The landing, 404,
-and [Reading schemas](highlighting.md#legend) pages are this repo's, and
-have no edit link.
+and [Reading schemas](highlighting.md#legend) pages, and the front pages of
+topics with more than one package, are this repo's, and have no edit link.
 
 The fetch step deletes Astro's content caches (`.astro/data-store.json`
 and `node_modules/.astro/data-store.json`) before every start and build.

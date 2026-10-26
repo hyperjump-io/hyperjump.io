@@ -14,54 +14,10 @@ hero:
       variant: minimal
 ---
 
-import PackageCard from "../../components/PackageCard.astro";
+import PackageGroups from "../../components/PackageGroups.astro";
 import RecentPosts from "../../components/RecentPosts.astro";
 
-<div class="groups">
-<div class="group">
-
-## In your code
-
-Libraries for Node.js and browsers.
-
-<div class="packages not-content">
-  <PackageCard title="JSON Schema" href="/json-schema/" command="npm install @hyperjump/json-schema">
-    A validator and linter for every dialect from draft-04 to 2020-12, and
-    JSON Schema v1. Errors with positions in the JSON text, and annotations.
-  </PackageCard>
-</div>
-
-</div>
-<div class="group">
-
-## On the command line
-
-In your terminal and in CI.
-
-<div class="packages not-content">
-  <PackageCard title="hjlint" href="/hjlint/" command="npx hjlint .">
-    Lints schemas and validates JSON files against them, with the same rules
-    as the library.
-  </PackageCard>
-</div>
-
-</div>
-<div class="group">
-
-## Components
-
-Build your own JSON Schema and hypermedia tools from the libraries ours are
-built from.
-
-<div class="packages not-content">
-  <PackageCard title="Browser" href="/browser/" command="npm install @hyperjump/browser">
-    A client for JSON documents that reference each other, over HTTP or from
-    files, that follows references for you.
-  </PackageCard>
-</div>
-
-</div>
-</div>
+<PackageGroups />
 
 <p><small>Using version 1.x of <code>@hyperjump/json-schema</code>? Its docs are in
 the <a href="https://github.com/hyperjump-io/json-schema/tree/v1#readme">1.x README</a>.</small></p>

@@ -1,0 +1,59 @@
+---
+// A card for a topic of many packages, like Components: a list of links to
+// them, each with its summary, and a link to the topic's front page at the
+// bottom, where a package's card has its command. It isn't one link, like
+// a package's card, since it has links in it.
+import { sources } from "../../sources.js";
+
+interface Props {
+  topic: { id: string; list: string };
+}
+
+const { topic } = Astro.props;
+const packages = sources.filter((source) => source.topic === topic.id);
+---
+
+<div class="package-list">
+  <ul>
+    {packages.map((source) => (
+      <li><a href={`/${source.repo}/`}>{source.label}</a>{source.summary && <span> — {source.summary}</span>}</li>
+    ))}
+  </ul>
+  <a class="all" href={`/${topic.id}/`}>{topic.list} →</a>
+</div>
+
+<style>
+  .package-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-2);
+  }
+  ul {
+    flex-grow: 1;
+    margin: 0;
+    padding-inline-start: 1.25rem;
+    list-style: disc;
+  }
+  li + li {
+    margin-top: 0.25rem;
+  }
+  a {
+    color: var(--sl-color-white);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--sl-color-text-accent);
+  }
+  span {
+    color: var(--sl-color-gray-3);
+  }
+  .all {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-text-accent);
+  }
+</style>

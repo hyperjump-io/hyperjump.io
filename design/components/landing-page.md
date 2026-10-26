@@ -29,25 +29,51 @@ way in that needs no install, and there's no one package to start with.
 
 ## Groups
 
-Packages are grouped by where they're used: "In your code", "On the command
-line", and "Components". Later, "In your editor" for the language server
+Packages are grouped by where they're used: "In your code", "In your
+terminal", and "Components". Later, "In your editor" for the language server
 and extensions, and "In your tests" for coverage. Each group has a heading,
-one line on what's in it, and a card for each package.
+one line on what's in it, and a card for each package, or one card with
+a list of links.
+
+The groups are the sidebar's topics (see [Sidebar](sidebar.md)).
+`src/components/PackageGroups.astro` builds them from the topics and
+packages in `sources.js`, which has each group's line and each card's
+text, so a new package is one entry there, and the page and the sidebar
+can't disagree. Rejected: groups written in the page's MDX. A group's
+heading had to match its topic's label by hand.
+
+"In your terminal", not "On the command line": it's where you are, like
+the other groups' names, and not what you're using.
 
 The groups are columns, side by side when there's room. Each one's
 heading, description, and cards are rows of a subgrid, so cards line up
-across groups whose headings or descriptions wrap differently. When
-Components outgrows a column, it goes below the others, full width.
+across groups whose headings or descriptions wrap differently.
 
 A card, `src/components/PackageCard.astro`, is one link to the package's
 docs, with what it is and the command that installs or runs it. Formats a
 tool reads, like JSONC or YAML, go on its card, not in a group of their
 own, since they're true of many tools.
 
-Components are the libraries the tools are built from: browser, and later
-uri, uri-template, json-pointer, json, pact, and others. Pact has nothing
-to do with JSON Schema, and fits here because each component stands alone.
-Browser is one, though it has a section of its own.
+Components are the libraries the tools are built from: browser,
+json-pointer, and later uri, uri-template, json, pact, and others. Pact
+has nothing to do with JSON Schema, and fits here because each component
+stands alone. Browser is one.
+
+There will be a dozen or more, so Components has one card,
+`src/components/PackageListCard.astro`, with a list of links, each with a
+few words beside it, its `summary` in `sources.js`, short enough not to
+wrap. At the bottom, where a package's card has its command, is a link to
+the Components page, which has a card for each
+(`src/components/Packages.astro`). The card isn't one link, like a
+package's card, since it has links in it. A topic gets a card like this
+with `list` in `sources.js`. Rejected:
+- A card for each component. The group would be longer than the rest of
+  the page, and uri-template would look as important as the language
+  server.
+- A list of links without a card. It didn't line up with the other
+  groups' cards.
+- One "All components" card, naming them. It said too little to choose
+  from, and its list of names would get long.
 
 The 1.x docs of `@hyperjump/json-schema` are linked below the groups,
 called "1.x" and not "v1" so it isn't confused with the JSON Schema v1

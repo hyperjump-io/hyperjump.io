@@ -141,8 +141,7 @@
 
 /* The landing page's groups of packages, side by side when there's room.
    Each group's heading, description, and cards are rows of a subgrid, so
-   cards line up across groups whose descriptions wrap differently. When
-   Components outgrows a column, it goes below the others, full width. */
+   cards line up across groups whose descriptions wrap differently. */
 .groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
@@ -174,6 +173,11 @@
 .packages {
   display: grid;
   gap: 1rem;
+}
+/* On a topic's front page, like Components, the cards are in columns, since
+   there can be many of them. */
+.sl-markdown-content > .packages {
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 
 /* The sidebar's list of sections. The current one has a tinted background,
@@ -238,15 +242,20 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
   }
 }
 
-/* A section's version, beside its name in the list of sections. It's for
-   reference, so it's quieter than the name: small, regular weight, and gray,
-   not the accent. */
-ul.starlight-sidebar-topics .starlight-sidebar-topics-badge {
+/* A package's version, beside its name in the sidebar. It's for reference,
+   so it's quieter than the name: small, regular weight, and gray, not the
+   accent. On the current page, whose item has the accent's background,
+   gray is hard to read, so it's the item's text color there. */
+.sidebar-content .sl-badge {
   font-size: var(--sl-text-2xs);
   font-weight: 400;
   color: var(--sl-color-gray-3);
   background: none;
   border-color: var(--sl-color-gray-5);
+}
+.sidebar-content a[aria-current="page"] .sl-badge {
+  color: inherit;
+  border-color: currentColor;
 }
 
 /* Reporter output, like hjlint's, colored like it is in a terminal

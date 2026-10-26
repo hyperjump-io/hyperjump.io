@@ -2,10 +2,11 @@
 
 The documentation site for Hyperjump's JSON Schema tools:
 [json-schema](https://github.com/hyperjump-io/json-schema),
-[hjlint](https://github.com/hyperjump-io/hjlint), and
-[browser](https://github.com/hyperjump-io/browser). The docs themselves live
-in each repo's `website/` directory. This repo gets them, and builds and
-deploys the site with [Starlight](https://starlight.astro.build/).
+[hjlint](https://github.com/hyperjump-io/hjlint),
+[browser](https://github.com/hyperjump-io/browser), and components like
+[json-pointer](https://github.com/hyperjump-io/json-pointer). The docs
+themselves live in each repo's `website/` directory. This repo gets them,
+and builds and deploys the site with [Starlight](https://starlight.astro.build/).
 
 ## Running it
 
@@ -27,8 +28,11 @@ rest.
 
 - Each page starts with an H1. It becomes the page's title.
 - `website/README.md` lists the pages, as a nested list under a `Contents`
-  heading. That list is the section's sidebar, in the same order. Without
-  the heading, it's the first list on the page.
+  heading. That list is the package's sidebar, in the same order. Without
+  the heading, the package has one page.
+- A new package goes in `sources.js`, with the topic it's listed in. A
+  topic with more than one package has a front page here, at
+  `src/content/docs/<topic>/index.mdx`.
 - Link to other pages with relative links (`../guides/validating.md`). Link to
   another repo's docs with a GitHub link into its `website/`
   (`https://github.com/hyperjump-io/hjlint/blob/main/website/README.md`). A

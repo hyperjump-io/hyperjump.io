@@ -13,7 +13,7 @@ export default function siteLinks({ fileURL }) {
   if (!fileURL) return null;
   const path = fileURLToPath(fileURL);
   const page = path.slice(path.indexOf(docsRoot) + docsRoot.length);
-  const source = sources.find(({ section }) => page.startsWith(`${section}/`));
+  const source = sources.find(({ repo }) => page.startsWith(`${repo}/`));
   if (!source) return null;
 
   const rewrite = (node, ctx) => {
@@ -30,13 +30,13 @@ function siteUrl(href, page, source) {
   const fromGithub = github.exec(url);
   if (fromGithub) {
     const target = sources.find(({ repo }) => repo === fromGithub[1]);
-    return target ? toSlug(posix.join(target.section, fromGithub[2])) + hash : href;
+    return target ? toSlug(posix.join(target.repo, fromGithub[2])) + hash : href;
   }
   if (url === "" || /^[a-z][a-z0-9+.-]*:|^\//i.test(url)) return href;
 
   const resolved = posix.join(posix.dirname(page), url);
-  if (resolved.startsWith(`${source.section}/`)) return toSlug(resolved) + hash;
-  const inRepo = posix.join("website", posix.relative(source.section, resolved));
+  if (resolved.startsWith(`${source.repo}/`)) return toSlug(resolved) + hash;
+  const inRepo = posix.join("website", posix.relative(source.repo, resolved));
   const kind = posix.extname(inRepo) ? "blob" : "tree";
   return `https://github.com/hyperjump-io/${source.repo}/${kind}/${source.ref}/${inRepo}${hash}`;
 }

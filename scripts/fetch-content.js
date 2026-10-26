@@ -1,4 +1,4 @@
-// Gets each repo, and copies its website/ into src/content/docs/<section>/.
+// Gets each repo, and copies its website/ into src/content/docs/<repo>/.
 // README.md becomes index.md, and the first H1 moves into frontmatter as the
 // title, which Starlight requires. The frontmatter also gets the page's edit
 // link, to its file on GitHub, since it's in another repo. With LOCAL_REPOS, the checkouts are used
@@ -30,11 +30,11 @@ for (const source of sources) {
     throw Error(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/ directory`);
   }
 
-  await rm(join(out, source.section), { recursive: true, force: true });
+  await rm(join(out, source.repo), { recursive: true, force: true });
   for (const file of await readdir(dir, { recursive: true, withFileTypes: true })) {
     if (!file.isFile()) continue;
     const from = join(file.parentPath, file.name);
-    const to = join(out, source.section, relative(dir, from).replace(/(^|\/)README\.md$/, "$1index.md"));
+    const to = join(out, source.repo, relative(dir, from).replace(/(^|\/)README\.md$/, "$1index.md"));
     await mkdir(dirname(to), { recursive: true });
     if (from.endsWith(".md")) {
       const editUrl = `https://github.com/hyperjump-io/${source.repo}/edit/${source.ref}/website/${relative(dir, from)}`;

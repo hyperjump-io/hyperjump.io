@@ -16,10 +16,11 @@ repo's `website/` and builds it with Astro Starlight.
 ## Development
 
 - `npm run build:local` builds from the sibling checkouts `../json-schema`,
-  `../hjlint`, and `../browser`. `npm run build` clones from GitHub.
-- Don't edit `src/content/docs/<section>/`. It's copied from the repos on
-  every build. Fix docs in their repo. `src/content/docs/blog/` is this
-  repo's.
+  `../hjlint`, `../browser`, and `../json-pointer`. `npm run build` clones
+  from GitHub.
+- Don't edit `src/content/docs/<repo>/`. It's copied from the repos on
+  every build. Fix docs in their repo. `src/content/docs/blog/` and topic
+  front pages, like `src/content/docs/components/`, are this repo's.
 
 ## Working agreements
 
