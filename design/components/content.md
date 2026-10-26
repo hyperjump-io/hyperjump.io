@@ -59,8 +59,9 @@ dropped. A page that doesn't start with an H1 is an error.
 Its frontmatter also gets an `editUrl`, so Starlight shows "Edit page"
 under it, linking to its file in its repo's `website/` on GitHub, at the
 branch the site builds from (`sources.js`). The site is three repos, so
-which one a page comes from isn't obvious from the site. The landing and
-404 pages are this repo's, and have no edit link.
+which one a page comes from isn't obvious from the site. The landing, 404,
+and [Reading schemas](highlighting.md#legend) pages are this repo's, and
+have no edit link.
 
 The fetch step deletes Astro's content caches (`.astro/data-store.json`
 and `node_modules/.astro/data-store.json`) before every start and build.

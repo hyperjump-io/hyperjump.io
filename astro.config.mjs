@@ -63,8 +63,9 @@ export default defineConfig({
         "./src/styles/custom.css"
       ],
       plugins: [
-        // The landing page and the 404 page aren't a package's.
-        starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/", "/404"] }),
+        // The landing page, the 404 page, and the legend for schema examples
+        // aren't a package's.
+        starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/", "/404", "/reading-schemas"] }),
         starlightLinksValidator()
       ]
     })

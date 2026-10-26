@@ -1,0 +1,68 @@
+---
+title: Reading schemas
+description: What the styling in this site's JSON Schema examples means.
+template: splash
+editUrl: false
+---
+
+In this site's JSON Schema examples, how a property looks says what it is
+to its schema's dialect.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/person",
+  "$comment": "A person, with their address",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "nickname": { "type": "string", "maxLenght": 20 },
+    "address": { "$ref": "#/$defs/address" }
+  },
+  "$defs": {
+    "address": { "$anchor": "address", "type": "string" }
+  }
+}
+```
+
+In draft-04 through draft-07, a `$ref` replaces the schema it's in, so the
+whole object is the reference, and the rest of it has no effect.
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": { "name": { "type": "string" } },
+  "properties": {
+    "name": { "$ref": "#/definitions/name", "minLength": 1 }
+  }
+}
+```
+
+In v1, a property that starts with `x-` is an annotation, not an unknown
+keyword.
+
+```json
+{
+  "$schema": "https://json-schema.org/v1",
+  "type": "string",
+  "x-deprecated": true
+}
+```
+
+| Looks like | Means | In the examples |
+| --- | --- | --- |
+| Bold name | A keyword | `type`, `properties` |
+| Bold, italic name | A core keyword, which identifies, references, or holds schemas | `$schema`, `$id`, `$ref`, `$defs` |
+| Bold value | The dialect, from `$schema` | `https://json-schema.org/draft/2020-12/schema` |
+| Dotted underline | An identifier | The values of `$id` and `$anchor` |
+| Underline | A reference | `#/$defs/address`, and all of the draft-07 object with `$ref` |
+| Gray, italic | Has no effect, like a comment | `$comment`, the misspelled `maxLenght`, and `minLength` next to the draft-07 `$ref` |
+| Italic name | An annotation in v1 | `x-deprecated` |
+| Plain name | Not a keyword | `name`, `nickname`, `address` |
+
+On a [lint rule's page](/json-schema/linting/rules/), what the rule reports
+also has a wavy underline, orange for a warning and red for an error, with
+its message after the example.
+
+Each example's header says what it is: JSON Schema and its dialect, or JSON
+that isn't a schema.

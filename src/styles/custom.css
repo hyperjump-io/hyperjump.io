@@ -294,3 +294,13 @@ ul.starlight-sidebar-topics .starlight-sidebar-topics-badge {
   color: var(--sl-color-gray-3);
   padding-block: 0.3rem;
 }
+/* A schema's title links to what its styling means. It stays a caption,
+   with a dotted underline to show it's a link. */
+.expressive-code .frame.has-title .header .title a {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 0.2em;
+}
+.expressive-code .frame.has-title .header .title a:hover {
+  color: var(--sl-color-text-accent);
+}

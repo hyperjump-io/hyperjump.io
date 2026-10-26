@@ -16,7 +16,9 @@ has `$schema`, or its fence gives the dialect it's loaded with.
 | text | Output, since the docs show what's printed in a `text` block |
 
 A block with a title of its own, from `title` in its fence, keeps it. The
-docs don't change, so they read the same on GitHub.
+docs don't change, so they read the same on GitHub. A schema's title links
+to the [legend](highlighting.md#legend) for its styling, and is underlined
+with dots to show it.
 
 - The title is a caption, not an editor's tab, which reads as a file name:
   the header is the code's background, over a hairline, and the title is

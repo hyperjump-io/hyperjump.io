@@ -1,7 +1,7 @@
 # Landing page
 
-`src/content/docs/index.mdx`, the one page written here, and in MDX for
-its components. It's a splash page, without a sidebar.
+`src/content/docs/index.mdx`, one of the few pages written here, and in
+MDX for its components. It's a splash page, without a sidebar.
 
 ## What it says
 

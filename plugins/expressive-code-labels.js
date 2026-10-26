@@ -4,6 +4,12 @@
 // is a schema if it has `$schema`, or if its fence gives the dialect it's
 // loaded with, like the highlighting plugin's. A block with a title of its
 // own keeps it. The docs don't change, so they read the same on GitHub.
+//
+// A schema's title links to the page that says what its styling means.
+import { h } from "@expressive-code/core/hast";
+
+const legend = "/reading-schemas/";
+
 const dialects = {
   "https://json-schema.org/v1": "v1",
   "https://json-schema.org/draft/2020-12/schema": "2020-12",
@@ -26,6 +32,7 @@ const languages = {
 };
 
 export default function pluginLabels() {
+  const schemas = new WeakSet();
   return {
     name: "labels",
     hooks: {
@@ -35,10 +42,30 @@ export default function pluginLabels() {
           if (label) {
             codeBlock.props.title = label;
           }
+          if (label?.startsWith("JSON Schema")) {
+            schemas.add(codeBlock);
+          }
+        }
+      },
+      // After the frame is rendered, with its title
+      postprocessRenderedBlock: ({ codeBlock, renderData }) => {
+        const title = schemas.has(codeBlock) && findTitle(renderData.blockAst);
+        if (title) {
+          title.children = [h("a", { href: legend, title: "What the styling means" }, title.children)];
         }
       }
     }
   };
+}
+
+function findTitle(node) {
+  if (node.type === "element" && [].concat(node.properties?.className ?? []).includes("title")) {
+    return node;
+  }
+  for (const child of node.children ?? []) {
+    const title = findTitle(child);
+    if (title) return title;
+  }
 }
 
 function labelOf(codeBlock) {

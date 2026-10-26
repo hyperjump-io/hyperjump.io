@@ -152,6 +152,26 @@ every page matched its rule.
   messages that name the document, like `reference-without-target`'s. Each
   block has a session of its own, so they can share it.
 
+## Legend
+
+`src/content/docs/reading-schemas.mdx`, at `/reading-schemas/`, says what
+the styling means: three short schemas that show every style between them,
+and a table of what each looks like, what it means, and where it is in the
+examples. Every schema block's title, like "JSON Schema · 2020-12", links
+to it ([Code block labels](code-labels.md)), so it's where a reader wonders
+why something is italic or gray.
+
+It's this repo's page, not a section's. The styling is the site's, and the
+docs repos' markdown is read on GitHub too, where there's none. It's a
+splash page without a hero, like the landing page without its logo, since
+it isn't a package's and has no sidebar. When a style changes, the page
+changes with it.
+
+Rejected: a title on each styled property, shown on hover, which nothing
+tells a reader to look for, a phone can't show, and lint underlines already
+use for their messages; and a legend on the rules index, which only helps
+a reader who starts there.
+
 ## Known limitations
 
 - A schema without `$schema` isn't highlighted unless its fence gives its
