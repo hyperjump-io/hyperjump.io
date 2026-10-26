@@ -12,15 +12,12 @@
 //   schema (`$id`, `$anchor`, `$dynamicAnchor`, ...), and
 //   `json-schema-identifier-value` on its value
 // - `json-schema-comment` on all of `$comment`
-// - `json-schema-reference` on the name of a `$ref` that replaces the schema
-//   (draft-04 through draft-07), `json-schema-reference-uri` on its value, and
-//   on the object it's in, which isn't a schema or plain JSON,
-//   `json-schema-reference-object` on all of it and
-//   `json-schema-reference-brace` on its braces
-// - `json-schema-reference-uri` and `json-schema-reference-value` on the
-//   value of a keyword that references a schema (`$ref`, `$dynamicRef`,
-//   `$recursiveRef`)
-// - `json-schema-keyword` on the name of any other keyword
+// - `json-schema-reference-value` on the value of a keyword that references
+//   a schema (`$ref`, `$dynamicRef`, `$recursiveRef`), and
+//   `json-schema-reference-object` on all of the object a `$ref` replaces
+//   (draft-04 through draft-07), since the whole object is the reference
+// - `json-schema-keyword` on the name of any other keyword, including a `$ref`
+//   that replaces the schema it's in
 // - `json-schema-ignored` on all of a property of a schema that has no
 //   effect: one that isn't a keyword in its dialect, or a sibling of a `$ref`
 //   that replaces the schema
@@ -44,7 +41,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { ExpressiveCodeAnnotation, PluginStyleSettings, setAlpha } from "@expressive-code/core";
+import { ExpressiveCodeAnnotation, PluginStyleSettings } from "@expressive-code/core";
 import { h } from "@expressive-code/core/hast";
 import { javascriptSchemas } from "./javascript-schemas.js";
 import { sources, repoDir } from "../sources.js";
@@ -60,15 +57,13 @@ const identifierKeyword = /^https:\/\/json-schema\.org\/keyword\/(?:draft-[^/]+\
 export default function pluginJsonSchema() {
   return {
     name: "json-schema",
-    // Colors from each code theme, so any theme works: its color for
-    // comments, for what's styled like one, and a tint of its color for
-    // strings, for a reference, since it is one. CSS gets them as
-    // `--ec-jsonSchema-*`.
+    // A color from each code theme, so any theme works: its color for
+    // comments, for what's styled like one. CSS gets it as
+    // `--ec-jsonSchema-comment`.
     styleSettings: new PluginStyleSettings({
       defaultValues: {
         jsonSchema: {
-          comment: ({ theme }) => tokenColor(theme, "comment"),
-          referenceTint: ({ theme }) => setAlpha(tokenColor(theme, "string"), theme.type === "dark" ? 0.18 : 0.12)
+          comment: ({ theme }) => tokenColor(theme, "comment")
         }
       }
     }),
@@ -128,11 +123,8 @@ function highlight(codeBlock, schema, toBlock) {
   for (const reference of referenceObjects(schema)) {
     const position = toBlock(reference.position);
     if (position) {
-      const { start, end } = position;
       // It wraps everything else in the object, so it renders last.
       annotate(codeBlock, position, "json-schema-reference-object", "later");
-      annotate(codeBlock, { start, end: { ...start, column: start.column + 1 } }, "json-schema-reference-brace");
-      annotate(codeBlock, { start: { ...end, column: end.column - 1 }, end }, "json-schema-reference-brace");
     }
   }
 }
@@ -229,14 +221,8 @@ class ClassAnnotation extends ExpressiveCodeAnnotation {
     this.properties = properties;
   }
 
-  // Each token is wrapped separately, so the first and last of a line's are
-  // marked, for CSS that styles the ends, like rounded corners.
   render({ nodesToTransform }) {
-    const last = nodesToTransform.length - 1;
-    return nodesToTransform.map((node, index) => {
-      const ends = [index === 0 && "json-schema-start", index === last && "json-schema-end"].filter(Boolean);
-      return h("span", { ...this.properties, class: [this.className, ...ends] }, node);
-    });
+    return nodesToTransform.map((node) => h("span", { ...this.properties, class: this.className }, node));
   }
 }
 
@@ -310,14 +296,12 @@ function* propertyMarks(property, object) {
     }
   } else if (referenceKeyword.test(keywordUri)) {
     yield [name, "json-schema-keyword"];
-    yield [value, "json-schema-reference-uri"];
     yield [value, "json-schema-reference-value"];
   } else if (keywordUri) {
     yield [name, "json-schema-keyword"];
   } else if (object.type === "reference" && name.value === "$ref") {
     yield [name, "json-schema-core"];
-    yield [name, "json-schema-reference"];
-    yield [value, "json-schema-reference-uri"];
+    yield [name, "json-schema-keyword"];
   } else if (object.type === "reference") {
     yield [property, "json-schema-ignored"];
   } else {

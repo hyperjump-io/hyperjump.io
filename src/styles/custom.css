@@ -60,14 +60,14 @@
    property names, or a little darker in the light theme. It's a filter, so
    no color is set, and it follows the code theme. Only comments, and what
    has no effect, get a color of their own. */
-.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference, .json-schema-reference-brace) {
+.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier) {
   filter: brightness(1.15);
 }
-:root[data-theme="light"] .expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference, .json-schema-reference-brace) {
+:root[data-theme="light"] .expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier) {
   filter: brightness(0.85);
 }
-.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference),
-.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier, .json-schema-reference) span {
+.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier),
+.expressive-code :is(.json-schema-keyword, .json-schema-dialect, .json-schema-identifier) span {
   font-weight: 600;
 }
 /* Core keywords ($schema, $id, $ref, $defs, ...) are italic, so the
@@ -84,41 +84,20 @@
   font-weight: 600;
 }
 
-/* An identifier's value is underlined with dots, and a reference's is
-   underlined like a link. A reference also gets a faint tint of the code
-   theme's color for strings, since it is one (--ec-jsonSchema-referenceTint,
-   from the highlighting plugin): behind its value, or, for a $ref that
-   replaces the schema it's in, behind the whole object, which isn't a schema
-   or plain JSON, with its braces bold, made stronger like a keyword. That
-   $ref's value is bold too. Expressive Code wraps each token separately, so
-   only the ends of a line's run of a tint are rounded, and the pieces in
-   between join. */
+/* An identifier's value is underlined with dots, and a reference is
+   underlined like a link: its value, or, for a $ref that replaces the
+   schema it's in, the whole object, since all of it is the reference.
+   Expressive Code wraps each token separately, and a browser's underline
+   follows each one's color and weight, so a reference's is set to one
+   color and thickness, without gaps, to run evenly under all of it. */
 .expressive-code .json-schema-identifier-value {
   text-decoration: underline dotted;
   text-underline-offset: 0.2em;
 }
-.expressive-code .json-schema-reference-uri {
-  text-decoration: underline;
+.expressive-code :is(.json-schema-reference-value, .json-schema-reference-object) {
+  text-decoration: underline 1px var(--ec-codeFg);
+  text-decoration-skip-ink: none;
   text-underline-offset: 0.2em;
-}
-.expressive-code :is(.json-schema-reference-object, .json-schema-reference-value) {
-  background: var(--ec-jsonSchema-referenceTint);
-}
-.expressive-code :is(.json-schema-reference-object, .json-schema-reference-value).json-schema-start {
-  border-start-start-radius: 0.25rem;
-  border-end-start-radius: 0.25rem;
-}
-.expressive-code :is(.json-schema-reference-object, .json-schema-reference-value).json-schema-end {
-  border-start-end-radius: 0.25rem;
-  border-end-end-radius: 0.25rem;
-}
-.expressive-code .json-schema-reference-brace,
-.expressive-code .json-schema-reference-brace span {
-  font-weight: 700;
-}
-.expressive-code .json-schema-reference-object .json-schema-reference-uri,
-.expressive-code .json-schema-reference-object .json-schema-reference-uri span {
-  font-weight: 600;
 }
 
 /* $comment is a comment, like one in code, in the code theme's color for

@@ -12,26 +12,35 @@ classes, which `src/styles/custom.css` styles.
 | A core keyword (`$schema`, `$id`, `$ref`, `$defs`, ...) | like a keyword, and italic | the theme's |
 | `$schema` | like a core keyword | bold |
 | An identifier (`$id`, `id`, `$anchor`, `$dynamicAnchor`, `$recursiveAnchor`) | like a core keyword | dotted underline |
-| `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link, on a faint tint of the theme's string color, with rounded ends |
-| A `$ref` that replaces its schema (draft-04 through draft-07) | like a core keyword | bold, and underlined like a link |
-| The object a replacing `$ref` is in | a faint tint of the theme's string color behind all of it, with rounded ends, and its braces bold and made stronger like a keyword, since it's neither a schema nor plain JSON | |
+| `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link |
+| A `$ref` that replaces its schema (draft-04 through draft-07) | like a core keyword | the theme's |
+| The object a replacing `$ref` is in | underlined like a link, all of it, since the whole object is the reference | |
 | An `x-` keyword in v1, an annotation | italic | the theme's |
 | `$comment`, an unknown keyword, or a sibling of a `$ref` that replaces its schema | gray and italic, like a comment in code, for all of it | |
 | Any other property, like a name in `properties` | the theme's | the theme's |
 
-- A reference's tint is the code theme's color for strings, since a
-  reference is a string, and what's styled like a comment is in the theme's
-  color for comments. The plugin gets them from each theme as Expressive
-  Code style settings, so CSS has them as `--ec-jsonSchema-referenceTint`
-  and `--ec-jsonSchema-comment` for whichever theme is showing. Neither is
-  a color of the site's: the tint was the site's accent at first, which only
-  matched JSON when its property names were that green, and comments were
-  Starlight's gray. A replacing `$ref`'s braces were in the accent too, and
-  now are only bold and stronger, the same in JSON and JavaScript.
-- Expressive Code wraps each token separately, so the plugin marks the first
-  and last token of each line's run (`json-schema-start`, `json-schema-end`)
-  and only those corners of a tint are rounded. Rounding every token's made
-  a row of chips.
+- What's styled like a comment is in the code theme's color for comments.
+  The plugin gets it from each theme as an Expressive Code style setting,
+  so CSS has it as `--ec-jsonSchema-comment` for whichever theme is
+  showing. It isn't a color of the site's: comments were Starlight's gray
+  at first.
+- A reference's underline is one color (the theme's text color), 1px, and
+  doesn't skip around letters. Expressive Code wraps each token
+  separately, and an underline followed each one's color and weight, so it
+  changed under the parts of a reference. Rejected: a border instead of an
+  underline, which nothing inside can change, but which sits below the
+  descenders, unlike a link's underline.
+- A reference is marked only by its underline. Its keyword is like any
+  core keyword, `$schema`'s included, whether it replaces its schema or
+  not. A replacing `$ref`'s object is underlined from brace to brace, so a
+  one-line object is one line under all of it. An object over several
+  lines is underlined line by line, braces included, and a sibling the
+  `$ref` makes ignored has the reference's underline above the lint
+  rule's wavy one. Rejected: a faint tint of the theme's string color
+  behind the reference, with rounded ends, and the replacing `$ref`'s
+  braces and value bold. It was more styling than the underline for the
+  same thing. The tint was the site's accent at first, which only matched
+  JSON when its property names were that green.
 - Everything but comments keeps the code theme's colors (see
   [Look](look.md)), and stands apart by weight, slant, and underline, so
   any code theme works without restyling. A keyword is a little brighter
