@@ -1,6 +1,7 @@
 // Gets each repo, and copies its website/ into src/content/docs/<section>/.
 // README.md becomes index.md, and the first H1 moves into frontmatter as the
-// title, which Starlight requires. With LOCAL_REPOS, the checkouts are used
+// title, which Starlight requires. The frontmatter also gets the page's edit
+// link, to its file on GitHub, since it's in another repo. With LOCAL_REPOS, the checkouts are used
 // as they are.
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -36,7 +37,8 @@ for (const source of sources) {
     const to = join(out, source.section, relative(dir, from).replace(/(^|\/)README\.md$/, "$1index.md"));
     await mkdir(dirname(to), { recursive: true });
     if (from.endsWith(".md")) {
-      await writeFile(to, withTitle(await readFile(from, "utf8"), from));
+      const editUrl = `https://github.com/hyperjump-io/${source.repo}/edit/${source.ref}/website/${relative(dir, from)}`;
+      await writeFile(to, withFrontmatter(await readFile(from, "utf8"), from, editUrl));
     } else {
       await cp(from, to);
     }
@@ -65,7 +67,7 @@ function run(command, ...args) {
   }
 }
 
-function withTitle(markdown, path) {
+function withFrontmatter(markdown, path, editUrl) {
   const match = /^# (.+)\n+/m.exec(markdown);
   if (!match || markdown.slice(0, match.index).trim() !== "") {
     throw Error(`${path}: the page must start with an H1`);
@@ -74,5 +76,5 @@ function withTitle(markdown, path) {
   // A title is plain text, so code in the heading (`ignored-ref-siblings`)
   // loses its backticks.
   const title = match[1].replaceAll("`", "");
-  return `---\ntitle: ${JSON.stringify(title)}\n---\n\n${body}`;
+  return `---\ntitle: ${JSON.stringify(title)}\neditUrl: ${JSON.stringify(editUrl)}\n---\n\n${body}`;
 }

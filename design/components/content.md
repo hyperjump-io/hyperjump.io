@@ -56,6 +56,12 @@ It copies them to `src/content/docs/<section>/`. `README.md` becomes
 Starlight requires one. A title is plain text, so backticks in the H1 are
 dropped. A page that doesn't start with an H1 is an error.
 
+Its frontmatter also gets an `editUrl`, so Starlight shows "Edit page"
+under it, linking to its file in its repo's `website/` on GitHub, at the
+branch the site builds from (`sources.js`). The site is three repos, so
+which one a page comes from isn't obvious from the site. The landing and
+404 pages are this repo's, and have no edit link.
+
 The fetch step deletes Astro's content caches (`.astro/data-store.json`
 and `node_modules/.astro/data-store.json`) before every start and build.
 Astro keeps each page's rendered HTML and reuses it while the page's
