@@ -37,6 +37,11 @@ rest.
   broken link fails the build.
 - When a page moves or is merged into another, add its old path to
   `redirects.js` here, so links to it keep working.
+- Show a short return value in a comment on its line
+  (`validator.validate(value); // true`). Show anything longer after the
+  code block, in a block of its own: what's printed in a `text` block, and
+  data in a `json` block or a table, with only the properties that matter
+  to the example.
 - Mark a feature that isn't released with `*Coming soon*` on its own line
   under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
