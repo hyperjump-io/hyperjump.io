@@ -110,17 +110,22 @@
   font-style: italic;
 }
 
-/* On a lint rule's page, what each message is about is underlined like a
-   problem in an editor, by the rule's severity. The message is its title.
-   A warning is Starlight's orange, except in the light theme, where that's
-   1.7:1 against the page. A darker orange there is 3.8:1, and 3.7:1 on a
-   code block, over the 3:1 a mark that isn't text needs. Red is 3.7:1. */
+/* The colors of an error and a warning, for lint messages and reporter
+   output. They're text in reporter output, so they're 4.5:1 or more
+   against a code block: Starlight's red and orange in the dark theme (5.4:1
+   and 10.3:1), and darker ones in the light theme (5.7:1 and 5.2:1), where
+   Starlight's are 3.4:1 and 1.7:1. */
 :root {
-  --lint-warning-color: var(--sl-color-orange);
+  --severity-error: var(--sl-color-red);
+  --severity-warning: var(--sl-color-orange);
 }
 :root[data-theme="light"] {
-  --lint-warning-color: hsl(36, 90%, 38%);
+  --severity-error: hsl(339, 80%, 42%);
+  --severity-warning: hsl(33, 90%, 32%);
 }
+
+/* On a lint rule's page, what each message is about is underlined like a
+   problem in an editor, by the rule's severity. The message is its title. */
 .expressive-code :is(.json-schema-lint-warn, .json-schema-lint-error) {
   text-decoration: underline wavy;
   text-decoration-skip-ink: none;
@@ -128,10 +133,10 @@
   cursor: help;
 }
 .expressive-code .json-schema-lint-warn {
-  text-decoration-color: var(--lint-warning-color);
+  text-decoration-color: var(--severity-warning);
 }
 .expressive-code .json-schema-lint-error {
-  text-decoration-color: var(--sl-color-red);
+  text-decoration-color: var(--severity-error);
 }
 
 /* The landing page's groups of packages, side by side when there's room.
@@ -201,10 +206,10 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
   border-inline-start: 2px solid var(--lint-color);
 }
 .lint-messages-warning {
-  --lint-color: var(--lint-warning-color);
+  --lint-color: var(--severity-warning);
 }
 .lint-messages-error {
-  --lint-color: var(--sl-color-red);
+  --lint-color: var(--severity-error);
 }
 /* The icon is the size of the text, and doesn't shrink beside a long
    message. */
@@ -242,4 +247,41 @@ ul.starlight-sidebar-topics .starlight-sidebar-topics-badge {
   color: var(--sl-color-gray-3);
   background: none;
   border-color: var(--sl-color-gray-5);
+}
+
+/* Reporter output, like hjlint's, colored like it is in a terminal
+   (plugins/expressive-code-reporter.js). A file's name is underlined in the
+   color of its worst message, or the accent if it has none. */
+.expressive-code :is(.reporter-error, .reporter-error span) {
+  color: var(--severity-error);
+}
+.expressive-code :is(.reporter-warning, .reporter-warning span) {
+  color: var(--severity-warning);
+}
+.expressive-code :is(.reporter-ok, .reporter-ok span) {
+  color: var(--sl-color-accent);
+}
+.expressive-code .reporter-file {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.expressive-code :is(.reporter-reason, .reporter-reason span) {
+  font-weight: 600;
+}
+/* An icon in place of ✖ or ⚠, which the code font doesn't have. The
+   character stays, transparent, under the icon, so it's copied. */
+.expressive-code .reporter-icon {
+  position: relative;
+  display: inline-block;
+  width: 1.2em;
+}
+.expressive-code .reporter-icon svg {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.1em;
+  height: 1.1em;
+}
+.expressive-code :is(.reporter-icon-character, .reporter-icon-character span) {
+  color: transparent;
 }

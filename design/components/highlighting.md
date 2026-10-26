@@ -124,9 +124,8 @@ lines, not the object).
 
 On a lint rule's page, each example is linted with that rule while it's
 resolved, and what each message is about gets a wavy underline, orange for a
-warning and red for an error (in the light theme, a darker orange than
-Starlight's, which is 1.7:1 against the page; this one is 3.8:1, over the 3:1
-a mark that isn't text needs), with the message as its title, like a problem
+warning and red for an error (the site's severity colors, see
+[Reporter output](reporter-output.md#colors)), with the message as its title, like a problem
 in an editor. The severity is the rule's in `recommended`, which the page
 says ("In `recommended`, as a warning"). The page's markdown doesn't change:
 the rule decides where the underlines go.

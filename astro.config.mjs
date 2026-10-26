@@ -7,6 +7,7 @@ import siteLinks from "./plugins/site-links.js";
 import versionMarkers from "./plugins/version-markers.js";
 import lintMessages from "./plugins/lint-messages.js";
 import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
+import pluginReporter from "./plugins/expressive-code-reporter.js";
 import { topics, topicPages } from "./sidebar.js";
 import { redirects } from "./redirects.js";
 
@@ -22,7 +23,7 @@ export default defineConfig({
       components: { SiteTitle: "./src/components/SiteTitle.astro" },
       routeMiddleware: "./src/route-data.js",
       expressiveCode: {
-        plugins: [pluginJsonSchema()],
+        plugins: [pluginJsonSchema(), pluginReporter()],
         // Stock themes, so any could be swapped in without restyling
         themes: ["kanagawa-dragon", "ayu-light"],
         // What a program prints, like messages and reporter output, can't
