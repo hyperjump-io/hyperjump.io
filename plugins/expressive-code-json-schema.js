@@ -41,8 +41,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
-import { ExpressiveCodeAnnotation, PluginStyleSettings } from "@expressive-code/core";
-import { h } from "@expressive-code/core/hast";
+import { PluginStyleSettings } from "@expressive-code/core";
+import { ClassAnnotation } from "./class-annotation.js";
 import { javascriptSchemas } from "./javascript-schemas.js";
 import { sources, repoDir } from "../sources.js";
 
@@ -208,21 +208,6 @@ function annotate(codeBlock, { start, end }, className, renderPhase = "earlier",
       columnStart: line === start.line ? start.column - 1 : indentation,
       columnEnd: line === end.line ? end.column - 1 : code.text.length
     }));
-  }
-}
-
-// Wraps the code it covers in a span with a class, for the site's CSS. It
-// renders after syntax highlighting, so it wraps the highlighted tokens, and
-// one that renders later wraps the others.
-class ClassAnnotation extends ExpressiveCodeAnnotation {
-  constructor(className, renderPhase, properties, inlineRange) {
-    super({ inlineRange, renderPhase });
-    this.className = className;
-    this.properties = properties;
-  }
-
-  render({ nodesToTransform }) {
-    return nodesToTransform.map((node) => h("span", { ...this.properties, class: this.className }, node));
   }
 }
 
