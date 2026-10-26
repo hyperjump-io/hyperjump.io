@@ -42,6 +42,10 @@ rest.
   code block, in a block of its own: what's printed in a `text` block, and
   data in a `json` block or a table, with only the properties that matter
   to the example.
+- Keep lines in code blocks to 76 characters, so they fit without
+  scrolling. `text` blocks wrap, so printed output can be as long as it
+  is. For a value that can't be broken, like a long URI in JSON, add `wrap`
+  to the fence (```` ```json wrap ````).
 - Mark a feature that isn't released with `*Coming soon*` on its own line
   under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.

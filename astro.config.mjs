@@ -24,7 +24,15 @@ export default defineConfig({
       expressiveCode: {
         plugins: [pluginJsonSchema()],
         // Stock themes, so any could be swapped in without restyling
-        themes: ["github-dark", "github-light"]
+        themes: ["github-dark", "github-light"],
+        // What a program prints, like messages and reporter output, can't
+        // be reformatted for a narrow code block the way code can, so it
+        // wraps instead of scrolling
+        defaultProps: {
+          overridesByLang: {
+            "text,plaintext,txt": { wrap: true, hangingIndent: 4 }
+          }
+        }
       },
       favicon: "/favicon.svg",
       social: [{ icon: "github", label: "GitHub", href: "https://github.com/hyperjump-io" }],
