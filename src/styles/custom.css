@@ -1,6 +1,9 @@
-/* Forest green. Starlight's text uses accent-high in the dark theme and
-   accent in the light one, so those are the shades that need contrast with
-   the background. */
+/* Forest green. Starlight's accent text, for links and filled highlights
+   like the current page and the main button, is accent-high in its dark
+   theme. That's a pale mint here, which made links hard to tell from text
+   and highlights the brightest things on the page, so the dark theme uses
+   accent, the logo's bolt, like the light theme does. Accent needs contrast
+   with the background, and with accent-low, the text on its fills. */
 :root {
   --sl-font: "IBM Plex Sans", system-ui, sans-serif;
   --sl-font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -8,6 +11,7 @@
   --sl-color-accent-low: #0f2a1a;
   --sl-color-accent: #5bb37a;
   --sl-color-accent-high: #c4ebd1;
+  --sl-color-text-accent: var(--sl-color-accent);
 }
 
 /* The logo is inline, from src/assets/logo.svg, so it follows the theme. */

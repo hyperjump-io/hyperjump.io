@@ -13,11 +13,17 @@ Starlight changes, for little gain on a docs site.
   favicon, `public/favicon.svg`, can't take the page's CSS, so its colors are
   fixed, following only the system's color scheme.
 - **Color.** Forest green, as Starlight's accent in `src/styles/custom.css`.
-  Starlight's text uses `accent-high` in the dark theme and `accent` in the
-  light one, so those are the shades checked for contrast against the
-  background. "Coming soon" markers are blue, so they don't look like "Added
-  in" ones. It was picked by flipping through options on the site with a
-  temporary toggle.
+  Starlight's accent text, for links and filled highlights like the current
+  page and the main button, is `accent` in both themes. Starlight's dark
+  theme uses `accent-high`, a pale mint here, which made links hard to tell
+  from text and highlights the brightest things on the page. In the dark
+  theme, `accent` (#5bb37a, the logo's bolt) is 6.9:1 against the
+  background, and `accent-low`, the text on its fills, is 6.0:1 against
+  it. "Coming soon" markers are blue, so they don't look like "Added in"
+  ones. It was picked by flipping through options on the site with a
+  temporary toggle. Rejected: making only the fills the bolt's green, which
+  left links pale, and needed a rule for each place Starlight uses the
+  color.
 - **Code theme.** GitHub's dark and light themes, stock. Any code theme
   should be able to replace them without restyling anything, so nothing
   here, including JSON Schema highlighting, sets a color of its own for
