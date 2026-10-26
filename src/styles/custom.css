@@ -229,3 +229,12 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
   padding: 0;
   margin: 0;
 }
+
+/* A table's first column names things, like rules, which shouldn't break at
+   a hyphen. On a narrower screen they do, since a name on one line takes
+   so much of the width that the next column is a sliver. */
+@media (min-width: 64rem) {
+  .sl-markdown-content td:first-child code {
+    white-space: nowrap;
+  }
+}

@@ -67,6 +67,9 @@ Starlight changes, for little gain on a docs site.
   is harder to read than code formatted to fit.
 - **Code in headings.** Set apart by its font, without the background
   inline code has, which made a block of gray as big as the heading.
+- **Tables.** Code in a table's first column, which names things like lint
+  rules, doesn't break at hyphens, from 64rem wide. On a narrower screen it
+  does, since a name on one line left the next column a sliver.
 - **404 page.** `src/content/docs/404.md`, a splash page like the landing
   page, with links to each package's docs. Without it, Starlight warns on
   every build that it has no 404 entry and uses its own.
