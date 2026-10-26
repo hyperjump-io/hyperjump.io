@@ -22,6 +22,25 @@ italics.
 
 Rejected: "unreleased" in place of "Coming soon".
 
+## The current version
+
+Each section shows its package's version beside its name in the sidebar's
+list of sections, from its repo's `package.json` (`sidebar.js`). It's what
+a reader compares markers against: a feature "Added in v2.1.0" is in it if
+it's v2.1.0 or later. `npm version` bumps it at each release, so between
+releases it's the last release, and what's newer is marked "Coming soon".
+A prerelease, like `2.1.0-dev.0`, is shown as it is: its features are
+marked "Coming soon", not in a stable release, and the version says these
+are the docs for one in progress. It's small, regular weight, and gray,
+since it's for reference, not navigation. Rejected:
+- No version for a prerelease. A reader couldn't tell whether they were
+  reading about a stable release or something newer.
+- A prerelease's version without its suffix. `2.1.0-dev.0` would be
+  "v2.1.0" while its features were still "Coming soon".
+- The last stable release, from npm or tags. It needs the network or full
+  clones, and before a major release it would be a version the docs don't
+  describe.
+
 ## Releasing
 
 Each repo's `version` script, `scripts/version-docs.js`, replaces

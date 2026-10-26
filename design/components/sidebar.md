@@ -13,7 +13,8 @@ green text. The icons are Starlight's built-in ones: `{ }` for JSON Schema,
 `$` for hjlint, and a link for browser, which follows references. A
 "Components" section would get the puzzle piece. A list of more than six
 or so sections would push the page links down, and need a dropdown
-instead.
+instead. Beside each section's name is its package's version (see
+[Version markers](version-markers.md#the-current-version)).
 
 A section's sidebar is the nested list in its `website/README.md`, in the
 same order, so a repo decides its own navigation in the same commit as its

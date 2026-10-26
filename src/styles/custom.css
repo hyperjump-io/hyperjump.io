@@ -217,3 +217,14 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
     white-space: nowrap;
   }
 }
+
+/* A section's version, beside its name in the list of sections. It's for
+   reference, so it's quieter than the name: small, regular weight, and gray,
+   not the accent. */
+ul.starlight-sidebar-topics .starlight-sidebar-topics-badge {
+  font-size: var(--sl-text-2xs);
+  font-weight: 400;
+  color: var(--sl-color-gray-3);
+  background: none;
+  border-color: var(--sl-color-gray-5);
+}

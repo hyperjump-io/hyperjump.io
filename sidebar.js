@@ -1,11 +1,12 @@
 // Each section is a sidebar topic, with a sidebar of its own built from the
 // nested list in its website/README.md. A linked item with children becomes a
 // group that starts with its own page. Every page under a section is in its
-// topic, listed or not.
+// topic, listed or not. A topic's badge is its package's version, which
+// features marked "Added in" a later one are newer than.
 import { readFileSync } from "node:fs";
 import { posix } from "node:path";
 import { markdownToMdast } from "satteri";
-import { sources, websiteDir } from "./sources.js";
+import { sources, repoDir, websiteDir } from "./sources.js";
 
 export const topics = sources.map((source) => {
   const { section, label, icon } = source;
@@ -16,6 +17,7 @@ export const topics = sources.map((source) => {
     id: section,
     label,
     icon,
+    badge: versionBadge(source),
     link: `/${section}/`,
     items: [
       { label: "Overview", link: `/${section}/` },
@@ -50,4 +52,9 @@ function toString(node) {
 
 function toSlug(path) {
   return "/" + path.replace(/(^|\/)README\.md$/, "$1").replace(/\.md$/, "/");
+}
+
+function versionBadge(source) {
+  const { version } = JSON.parse(readFileSync(`${repoDir(source)}/package.json`, "utf8"));
+  return { text: `v${version}`, variant: "default" };
 }
