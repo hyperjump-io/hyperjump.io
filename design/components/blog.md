@@ -3,7 +3,8 @@
 Posts are in `src/content/docs/blog/`, written here, not copied from a
 repo. `starlight-blog` makes the post list, tag and author pages, and an
 RSS feed at `/blog/rss.xml`. It adds a "Blog" link to the header, and an
-RSS icon beside GitHub's.
+RSS icon beside GitHub's. The newest posts are on the
+[landing page](landing-page.md#recent-posts).
 
 ## Docs and posts
 

@@ -65,3 +65,12 @@ Rejected:
   them.
 - **"Get started" to json-schema.** People who came for hjlint had to find
   their own way.
+
+## Recent posts
+
+Below the groups, and the 1.x link, are the three newest
+[blog posts](blog.md), a card each, with the date, title, and excerpt,
+and a link to all posts. `src/components/RecentPosts.astro` gets them from
+`starlight-blog`. They're last, so the packages, which the page is for,
+come first. They use the groups' columns, so they line up with the
+package cards. Without posts, there's no section.

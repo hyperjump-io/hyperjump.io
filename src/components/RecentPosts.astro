@@ -1,0 +1,79 @@
+---
+// The landing page's newest blog posts, a card each, like the packages'
+// cards: the whole card links to the post. Without posts, it's not shown.
+const count = 3;
+
+const posts = Astro.locals.starlightBlog.posts.slice(0, count);
+const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" });
+---
+
+{posts.length > 0 && (
+  <section class="recent-posts not-content">
+    <div class="heading">
+      <h2>From the blog</h2>
+      <a href="/blog/">All posts</a>
+    </div>
+    <div class="posts">
+      {posts.map((post) => (
+        <a class="post" href={post.href}>
+          <time datetime={post.createdAt.toISOString().slice(0, 10)}>{date.format(post.createdAt)}</time>
+          <span class="title">{post.title}</span>
+          {post.entry.data.excerpt && <span class="excerpt">{post.entry.data.excerpt}</span>}
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .recent-posts {
+    margin-top: 3rem;
+  }
+  .heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: var(--sl-text-h3);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .heading a {
+    color: var(--sl-color-text-accent);
+  }
+  /* The same columns as the groups of packages above, so the cards line up
+     with theirs. */
+  .posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1rem 2rem;
+  }
+  .post {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+  }
+  .post:hover {
+    border-color: var(--sl-color-accent);
+  }
+  time {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .title {
+    font-size: var(--sl-text-h4);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .post:hover .title {
+    color: var(--sl-color-text-accent);
+  }
+</style>
