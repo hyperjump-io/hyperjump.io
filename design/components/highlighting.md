@@ -39,7 +39,8 @@ classes, which `src/styles/custom.css` styles.
   a little darker in the light theme (`0.85`), so it matches the names that
   aren't keywords without blending in. A filter sets no color. Picked on a
   temporary page with the options side by side. Rejected: a stronger filter
-  (`1.35`), which turned GitHub's blue cyan, since its blue channel is
+  (`1.35`), which turned the blue of GitHub's theme, the code theme then,
+  cyan, since its blue channel is
   already at the maximum and only red and green can rise; a relative color
   (`oklch(from var(--0) …)`) that keeps the hue exactly, since it sets a
   color; and bold alone, which wasn't enough.

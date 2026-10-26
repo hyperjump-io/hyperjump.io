@@ -23,7 +23,7 @@ export default defineConfig({
       expressiveCode: {
         plugins: [pluginJsonSchema()],
         // Stock themes, so any could be swapped in without restyling
-        themes: ["github-dark", "github-light"],
+        themes: ["kanagawa-dragon", "ayu-light"],
         // What a program prints, like messages and reporter output, can't
         // be reformatted for a narrow code block the way code can, so it
         // wraps instead of scrolling
