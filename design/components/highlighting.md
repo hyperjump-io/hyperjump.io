@@ -131,11 +131,14 @@ the rule decides where the underlines go.
 
 The messages a page lists after an example, as a blockquote with one per
 line, are shown as the linter's output by `plugins/lint-messages.js`: each
-verbatim, in monospace, marked with its severity like hjlint marks it (⚠ a
-warning, ✖ an error) in the color of the underlines. They're taken from the
-page's source, since a blockquote's text gets typographic quotes, and the
-linter prints straight ones. Rejected: leaving them as blockquotes, which
-read as quotations, not output, and showed text the linter never prints.
+verbatim, in monospace, marked with its severity's icon (Starlight's
+warning and error icons, the ones its caution and danger asides use) in
+the color of the underlines. They're taken from the page's source, since a
+blockquote's text gets typographic quotes, and the linter prints straight
+ones. Rejected: leaving them as blockquotes, which read as quotations, not
+output, and showed text the linter never prints; and marking them with ⚠
+and ✖, like hjlint does, since the code font doesn't have them, so each
+system drew them with a font of its own, and they came out squished.
 
 If the rule's messages for an example aren't the ones the page lists after
 it, the build fails. The rule pages were generated once from the rules'

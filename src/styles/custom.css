@@ -197,7 +197,13 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
 .lint-messages-error {
   --lint-color: var(--sl-color-red);
 }
+/* The icon is the size of the text, and doesn't shrink beside a long
+   message. */
 .lint-severity {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  margin-top: 0.2em;
   color: var(--lint-color);
 }
 
