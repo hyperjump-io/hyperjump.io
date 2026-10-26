@@ -65,6 +65,8 @@ Starlight changes, for little gain on a docs site.
   ones. A block with a value that can't be broken, like a long URI in JSON,
   wraps with `wrap` in its fence. Rejected: wrapping all code. Wrapped code
   is harder to read than code formatted to fit.
+- **Code in headings.** Set apart by its font, without the background
+  inline code has, which made a block of gray as big as the heading.
 - **404 page.** `src/content/docs/404.md`, a splash page like the landing
   page, with links to each package's docs. Without it, Starlight warns on
   every build that it has no 404 entry and uses its own.

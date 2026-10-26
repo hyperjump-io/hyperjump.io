@@ -221,3 +221,11 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
 .lint-severity {
   color: var(--lint-color);
 }
+
+/* Code in a heading is set apart by its font, not a background, which made
+   a block of gray as big as the heading. */
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) code {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
