@@ -9,8 +9,8 @@ Hyperjump is JSON Schema tools, and the components they're built from,
 each of which installs and works on its own. It's the framing of Symfony,
 "a set of reusable components and a framework". JSON Schema is the focus,
 so it leads: the heading is "JSON Schema tools", and the tagline says what
-they do, then "Use the whole toolkit, or just the pieces you need." The header already says Hyperjump, so the hero doesn't
-repeat it.
+they do, then "Use the whole toolkit, or just the pieces you need." The
+header already says Hyperjump, so the hero doesn't repeat it.
 
 The page has two audiences. First, people who want to validate or lint
 schemas today, who the hero is for. Second, people building their own
