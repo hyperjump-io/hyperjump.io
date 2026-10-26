@@ -16,6 +16,17 @@ them for the site:
 - Anything else is left alone, including a link to a heading on the same
   page (`#json-text`).
 
+## Redirects
+
+A page that moves or is merged into another keeps working at its old path.
+`redirects.js` maps old paths to where their content is now, and Astro
+builds a page at each old path that redirects there. It's in this repo, not
+the docs repos, because the site's paths are this repo's: a repo moving a
+page changes its own docs, and the redirect is a change to the site.
+
+Rejected: leaving old paths to 404. Links to them from other sites, search
+results, and bookmarks would break with every reorganization.
+
 ## Checking
 
 `starlight-links-validator` fails the build on a link to a page or heading
@@ -25,3 +36,6 @@ place all three are put together, so it's where those are caught.
 
 It doesn't check a heading anchor in a link from a generated API page. See
 [API reference](api.md).
+
+It doesn't check where a redirect in `redirects.js` goes, either. A
+redirect to a page that's later moved again has to be updated by hand.

@@ -8,9 +8,11 @@ import versionMarkers from "./plugins/version-markers.js";
 import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
 import { apis } from "./api.js";
 import { topics, topicPages } from "./sidebar.js";
+import { redirects } from "./redirects.js";
 
 export default defineConfig({
   site: "https://hyperjump.io",
+  redirects,
   markdown: {
     processor: satteri({ mdastPlugins: [siteLinks, versionMarkers] })
   },

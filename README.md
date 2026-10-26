@@ -35,6 +35,8 @@ rest.
   another repo's docs with a GitHub link into its `website/`
   (`https://github.com/hyperjump-io/hjlint/blob/main/website/README.md`). A
   broken link fails the build.
+- When a page moves or is merged into another, add its old path to
+  `redirects.js` here, so links to it keep working.
 - Mark a feature that isn't released with `*Coming soon*` on its own line
   under its heading. `npm version` replaces it with `*Added in vX.Y.Z*`.
   `*Changed in vX.Y.Z*` and `*Deprecated in vX.Y.Z*` work the same way.
