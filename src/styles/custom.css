@@ -111,7 +111,16 @@
 }
 
 /* On a lint rule's page, what each message is about is underlined like a
-   problem in an editor, by the rule's severity. The message is its title. */
+   problem in an editor, by the rule's severity. The message is its title.
+   A warning is Starlight's orange, except in the light theme, where that's
+   1.7:1 against the page. A darker orange there is 3.8:1, and 3.7:1 on a
+   code block, over the 3:1 a mark that isn't text needs. Red is 3.7:1. */
+:root {
+  --lint-warning-color: var(--sl-color-orange);
+}
+:root[data-theme="light"] {
+  --lint-warning-color: hsl(36, 90%, 38%);
+}
 .expressive-code :is(.json-schema-lint-warn, .json-schema-lint-error) {
   text-decoration: underline wavy;
   text-decoration-skip-ink: none;
@@ -119,7 +128,7 @@
   cursor: help;
 }
 .expressive-code .json-schema-lint-warn {
-  text-decoration-color: var(--sl-color-orange);
+  text-decoration-color: var(--lint-warning-color);
 }
 .expressive-code .json-schema-lint-error {
   text-decoration-color: var(--sl-color-red);
@@ -192,7 +201,7 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
   border-inline-start: 2px solid var(--lint-color);
 }
 .lint-messages-warning {
-  --lint-color: var(--sl-color-orange);
+  --lint-color: var(--lint-warning-color);
 }
 .lint-messages-error {
   --lint-color: var(--sl-color-red);
