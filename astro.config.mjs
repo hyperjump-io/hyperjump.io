@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import { satteri } from "@astrojs/markdown-satteri";
 import starlight from "@astrojs/starlight";
+import starlightBlog from "starlight-blog";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import siteLinks from "./plugins/site-links.js";
@@ -63,9 +64,15 @@ export default defineConfig({
         "./src/styles/custom.css"
       ],
       plugins: [
-        // The landing page, the 404 page, and the legend for schema examples
-        // aren't a package's.
-        starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/", "/404", "/reading-schemas"] }),
+        // The landing page, the 404 page, the legend for schema examples, and
+        // the blog aren't a package's.
+        starlightSidebarTopics(topics, {
+          topics: topicPages,
+          exclude: ["/", "/404", "/reading-schemas", "/blog", "/blog/**"]
+        }),
+        // After sidebar topics, so the blog's sidebar replaces the one
+        // Starlight builds for excluded pages
+        starlightBlog(),
         starlightLinksValidator()
       ]
     })

@@ -57,6 +57,15 @@ rest.
   what each message is about is underlined. The build fails if the messages
   aren't the ones the page lists after the example.
 
+## Writing a post
+
+Posts are in `src/content/docs/blog/`, one markdown file each, written here.
+The file name is the post's URL (`blog/<file name>/`). Its frontmatter has
+a `title`, a `date`, `authors`, and optionally `tags` and an `excerpt` for
+the post list. Everything under "Writing docs" works in posts too. A post
+links to the docs for how things work, and isn't updated after it's
+published.
+
 ## Rebuilding when docs change
 
 The site deploys on a push here, on a manual run, and when a repo sends a

@@ -5,4 +5,6 @@ dist/
 TODO*
 
 # Copied from the repos by scripts/fetch-content.js
-src/content/docs/*/
+src/content/docs/json-schema/
+src/content/docs/hjlint/
+src/content/docs/browser/

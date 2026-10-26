@@ -21,6 +21,8 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
   like "JSON Schema · 2020-12"
 - [Reporter output](components/reporter-output.md): hjlint's output,
   colored like it is in a terminal
+- [Blog](components/blog.md): dated posts, written here, beside docs
+  that are always current
 - [Tooling](components/tooling.md): Starlight, and Astro's markdown processor
 - [Deployment](components/deployment.md): GitHub Pages, and rebuilding when
   docs change
