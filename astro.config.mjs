@@ -33,7 +33,9 @@ export default defineConfig({
         styleOverrides: {
           frames: {
             editorTabBarBackground: ({ resolveSetting }) => resolveSetting("codeBackground"),
-            editorActiveTabBackground: ({ resolveSetting }) => resolveSetting("codeBackground"),
+            // Transparent, since the hairline is the header's background,
+            // under the title
+            editorActiveTabBackground: "transparent",
             editorActiveTabBorderColor: "transparent",
             editorActiveTabIndicatorTopColor: "transparent",
             editorActiveTabIndicatorBottomColor: "transparent",
