@@ -18,9 +18,7 @@ npm run preview      # or preview:local; serves dist/
 ```
 
 Use the local scripts to preview docs changes before they're pushed. The docs
-are copied when the site starts, so restart it to see later changes. The local
-scripts use the checkouts as they are, so their dependencies need to be
-installed for the API pages.
+are copied when the site starts, so restart it to see later changes.
 
 ## Writing docs
 
@@ -58,9 +56,6 @@ rest.
 - On a lint rule's page, each schema example is linted with the rule, and
   what each message is about is underlined. The build fails if the messages
   aren't the ones the page lists after the example.
-- API pages come from the declaration files and the repo's `typedoc.json`.
-  Link to another package's API with `https://hyperjump.io/<section>/api/...`
-  in `externalSymbolLinkMappings`.
 
 ## Rebuilding when docs change
 

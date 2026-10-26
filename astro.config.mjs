@@ -6,7 +6,6 @@ import starlightSidebarTopics from "starlight-sidebar-topics";
 import siteLinks from "./plugins/site-links.js";
 import versionMarkers from "./plugins/version-markers.js";
 import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
-import { apis } from "./api.js";
 import { topics, topicPages } from "./sidebar.js";
 import { redirects } from "./redirects.js";
 
@@ -45,8 +44,6 @@ export default defineConfig({
       plugins: [
         // The landing page and the 404 page aren't a package's.
         starlightSidebarTopics(topics, { topics: topicPages, exclude: ["/", "/404"] }),
-        // After the topics, which make the sidebar the API groups go in.
-        ...apis.map((api) => api.plugin),
         starlightLinksValidator()
       ]
     })

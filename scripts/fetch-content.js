@@ -1,23 +1,18 @@
 // Gets each repo, and copies its website/ into src/content/docs/<section>/.
 // README.md becomes index.md, and the first H1 moves into frontmatter as the
-// title, which Starlight requires. A repo with API pages gets its
-// dependencies installed, for TypeDoc. With LOCAL_REPOS, the checkouts are
-// used as they are.
+// title, which Starlight requires. With LOCAL_REPOS, the checkouts are used
+// as they are.
 import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join, dirname, relative } from "node:path";
-import { sources, sections, localRepos, repoUrl, repoDir, websiteDir, needsWholeRepo } from "../sources.js";
+import { sources, localRepos, repoUrl, repoDir, websiteDir } from "../sources.js";
 
 const out = "src/content/docs";
 
 if (!localRepos) {
   for (const source of sources) {
     checkout(source);
-  }
-  for (const source of sources.filter(needsWholeRepo)) {
-    // Not `npm ci`, since a dependency-only repo might not have a lockfile.
-    run("npm", "install", "--ignore-scripts", "--no-audit", "--no-fund", "--prefix", repoDir(source));
   }
 }
 
@@ -28,7 +23,7 @@ if (!localRepos) {
 await rm(".astro/data-store.json", { force: true });
 await rm("node_modules/.astro/data-store.json", { force: true });
 
-for (const source of sections) {
+for (const source of sources) {
   const dir = websiteDir(source);
   if (!existsSync(dir)) {
     throw Error(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/ directory`);
@@ -48,8 +43,7 @@ for (const source of sections) {
   }
 }
 
-// A shallow clone, updated in place on later runs. It's sparse, with only
-// website/, unless the whole repo is needed.
+// A shallow, sparse clone of website/, updated in place on later runs.
 function checkout(source) {
   const dir = repoDir(source);
   if (!existsSync(dir)) {
@@ -58,11 +52,7 @@ function checkout(source) {
     run("git", "-C", dir, "fetch", "--depth", "1", "origin", source.ref);
     run("git", "-C", dir, "checkout", "--detach", "FETCH_HEAD");
   }
-  if (needsWholeRepo(source)) {
-    run("git", "-C", dir, "sparse-checkout", "disable");
-  } else {
-    run("git", "-C", dir, "sparse-checkout", "set", "website");
-  }
+  run("git", "-C", dir, "sparse-checkout", "set", "website");
 }
 
 // The command's own error is clear enough, so a failure exits without a

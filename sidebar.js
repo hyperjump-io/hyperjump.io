@@ -1,14 +1,13 @@
 // Each section is a sidebar topic, with a sidebar of its own built from the
 // nested list in its website/README.md. A linked item with children becomes a
-// group that starts with its own page. A section with API pages ends with
-// their group. Every page under a section is in its topic, listed or not.
+// group that starts with its own page. Every page under a section is in its
+// topic, listed or not.
 import { readFileSync } from "node:fs";
 import { posix } from "node:path";
 import { markdownToMdast } from "satteri";
-import { apis } from "./api.js";
-import { sections, websiteDir } from "./sources.js";
+import { sources, websiteDir } from "./sources.js";
 
-export const topics = sections.map((source) => {
+export const topics = sources.map((source) => {
   const { section, label } = source;
   const tree = markdownToMdast(readFileSync(`${websiteDir(source)}/README.md`, "utf8"));
   const list = contentsList(tree) ?? tree.children.find((node) => node.type === "list");
@@ -19,8 +18,7 @@ export const topics = sections.map((source) => {
     link: `/${section}/`,
     items: [
       { label: "Overview", link: `/${section}/` },
-      ...list.children.map((item) => toItem(item, section)),
-      ...apis.filter((api) => api.section === section).map((api) => api.sidebarGroup)
+      ...list.children.map((item) => toItem(item, section))
     ]
   };
 });
@@ -33,7 +31,7 @@ function contentsList(tree) {
   return tree.children.slice(heading + 1).find((node) => node.type === "list");
 }
 
-export const topicPages =Object.fromEntries(sections.map(({ section }) => [section, [`/${section}/**/*`]]));
+export const topicPages =Object.fromEntries(sources.map(({ section }) => [section, [`/${section}/**/*`]]));
 
 function toItem(listItem, section) {
   const [paragraph, sublist] = listItem.children;

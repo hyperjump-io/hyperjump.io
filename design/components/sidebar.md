@@ -19,10 +19,5 @@ list:
 - A linked item with children is a group that starts with its own page, as
   "Overview", since a Starlight group can't be a link.
 
-A section with [API pages](api.md) ends with their group. The topics plugin
-has to come before the TypeDoc plugins in `astro.config.mjs`. It makes the
-sidebar that their groups are put in, and the other way around, the groups
-are left out.
-
 Rejected: one sidebar with every package. It's long, and someone reading
 json-schema's docs rarely needs browser's pages next to them.

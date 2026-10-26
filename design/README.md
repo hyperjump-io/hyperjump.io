@@ -11,8 +11,6 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 - [Links](components/links.md): links written for GitHub, and checking them
 - [Version markers](components/version-markers.md): when a feature was added
 - [Sidebar](components/sidebar.md): built from each section's README
-- [API reference](components/api.md): TypeDoc pages for json-schema and
-  browser
 - [Look](components/look.md): Starlight with Hyperjump's logo, forest green, and a
   landing page
 - [JSON Schema highlighting](components/highlighting.md): keywords and
