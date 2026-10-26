@@ -8,8 +8,14 @@ they're run from code with `lint` and from the command line with hjlint, and
 both packages rest on browser's retrieval. One site has one search, one
 navigation, and links between packages that are checked.
 
-The site presents a set of tools, not a JSON Schema site, because browser is
-useful without JSON Schema.
+The site presents JSON Schema tools and the components they're built from,
+each of which works on its own, like browser. See
+[Landing page](landing-page.md).
+
+A tool gets a section. A component without much to say, like uri or pact,
+will get a page in one "Components" section instead, so the sidebar's list
+of sections stays short. A component with a lot to say, like browser, keeps
+a section of its own.
 
 ## Which repo documents what
 

@@ -13,6 +13,8 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 - [Sidebar](components/sidebar.md): built from each section's README
 - [Look](components/look.md): Starlight with Hyperjump's logo, forest green, and a
   landing page
+- [Landing page](components/landing-page.md): JSON Schema tools, and the
+  components they're built from
 - [JSON Schema highlighting](components/highlighting.md): keywords and
   property names in schema examples
 - [Tooling](components/tooling.md): Starlight, and Astro's markdown processor

@@ -43,11 +43,8 @@ Starlight changes, for little gain on a docs site.
   every build that it has no 404 entry and uses its own.
 - **Fonts.** IBM Plex Sans and IBM Plex Mono, from `@fontsource`, served with
   the site.
-- **Landing page.** `src/content/docs/index.mdx`, the one page written here
-  and in MDX, for Starlight's components: a hero, a card for each package,
-  with a link to its docs. The JSON Schema card also links to the docs
-  for version 1.x of the library, called "1.x" and not "v1" so it isn't
-  confused with the JSON Schema v1 dialect. It has no sidebar.
+- **Landing page.** See [Landing page](landing-page.md). Its logo is
+  smaller than Starlight's hero image, since the header shows it too.
 
 Rejected colors: amber, which was the first choice, after the bolt in the
 original logo; orange, coral, rust, red, yellow, rose, fuchsia, grape,

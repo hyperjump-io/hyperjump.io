@@ -1,0 +1,53 @@
+---
+// A landing page card for a package: the whole card links to its docs, and
+// it ends with the command that installs or runs it.
+interface Props {
+  title: string;
+  href: string;
+  command: string;
+}
+
+const { title, href, command } = Astro.props;
+---
+
+<a class="package" href={href}>
+  <span class="title">{title}</span>
+  <span class="description"><slot /></span>
+  <code>{command}</code>
+</a>
+
+<style>
+  .package {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+  }
+  .package:hover {
+    border-color: var(--sl-color-accent);
+  }
+  .title {
+    font-size: var(--sl-text-h4);
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .package:hover .title {
+    color: var(--sl-color-text-accent);
+  }
+  .description {
+    flex-grow: 1;
+  }
+  /* The command sits at the bottom of each card, so they line up. */
+  code {
+    font-family: var(--sl-font-mono);
+    font-size: var(--sl-text-xs);
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.25rem;
+    background: var(--sl-color-gray-6);
+    color: var(--sl-color-white);
+  }
+</style>

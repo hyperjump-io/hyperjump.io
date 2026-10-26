@@ -1,44 +1,66 @@
 ---
-# The tab says what the site is, after the hero's "Hyperjump".
-title: Tools for JSON Schema and JSON hypermedia
-description: Tools for JSON Schema and JSON hypermedia, from validating and linting schemas to following references across documents.
+title: JSON Schema tools
+description: Validate, annotate, and lint JSON Schemas from code or the command line. Use the whole toolkit, or just the pieces you need.
 template: splash
 hero:
-  title: Hyperjump
-  tagline: Tools for JSON Schema and JSON hypermedia. Validate, annotate, and lint schemas, from code or the command line.
+  tagline: Validate, annotate, and lint JSON Schemas from code or the command line. Use the whole toolkit, or just the pieces you need.
   actions:
-    - text: Get started
-      link: /json-schema/getting-started/
-      icon: right-arrow
+    - text: Try it online
+      link: https://json-schema.hyperjump.io
+      icon: external
     - text: GitHub
       link: https://github.com/hyperjump-io
       icon: github
       variant: minimal
 ---
 
-import { Card } from "@astrojs/starlight/components";
+import PackageCard from "../../components/PackageCard.astro";
 
-<div class="packages">
-  <Card title="JSON Schema">
+<div class="groups">
+<div class="group">
+
+## In your code
+
+Libraries for Node.js and browsers.
+
+<div class="packages not-content">
+  <PackageCard title="JSON Schema" href="/json-schema/" command="npm install @hyperjump/json-schema">
     A validator and linter for every dialect from draft-04 to 2020-12, and
     JSON Schema v1. Errors with positions in the JSON text, and annotations.
+  </PackageCard>
+</div>
 
-    <small>Using version 1.x of the library? Its docs are in the
-    [1.x README](https://github.com/hyperjump-io/json-schema/tree/v1#readme).</small>
+</div>
+<div class="group">
 
-    [Read the docs](/json-schema/) ·
-    [Try it in the browser](https://json-schema.hyperjump.io)
-  </Card>
-  <Card title="hjlint">
-    The command line tool. Lints schemas and validates JSON files against
-    them, with the same rules as the library.
+## On the command line
 
-    [Read the docs](/hjlint/)
-  </Card>
-  <Card title="Browser">
+In your terminal and in CI.
+
+<div class="packages not-content">
+  <PackageCard title="hjlint" href="/hjlint/" command="npx hjlint .">
+    Lints schemas and validates JSON files against them, with the same rules
+    as the library.
+  </PackageCard>
+</div>
+
+</div>
+<div class="group">
+
+## Components
+
+The libraries the tools are built from. Each one installs and works on its
+own.
+
+<div class="packages not-content">
+  <PackageCard title="Browser" href="/browser/" command="npm install @hyperjump/browser">
     A client for JSON documents that reference each other, over HTTP or from
     files, that follows references for you.
-
-    [Read the docs](/browser/)
-  </Card>
+  </PackageCard>
 </div>
+
+</div>
+</div>
+
+<p><small>Using version 1.x of <code>@hyperjump/json-schema</code>? Its docs are in
+the <a href="https://github.com/hyperjump-io/json-schema/tree/v1#readme">1.x README</a>.</small></p>

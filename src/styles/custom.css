@@ -36,9 +36,17 @@
 .version-marker-coming-soon { background: var(--sl-color-blue-low); color: var(--sl-color-blue-high); }
 .version-marker-deprecated { background: var(--sl-color-red-low); color: var(--sl-color-red-high); }
 
+/* The landing page's logo, smaller than Starlight's hero image, since the
+   header shows it too. */
 .hero-html .logo {
   width: 100%;
+  max-width: 16rem;
   height: auto;
+}
+@media (max-width: 50rem) {
+  .hero-html .logo {
+    max-width: 10rem;
+  }
 }
 
 /* Properties in JSON Schema code blocks. See
@@ -134,23 +142,39 @@
   text-decoration-color: var(--sl-color-red);
 }
 
-/* The landing page's package cards, side by side when there's room. */
-.packages {
+/* The landing page's groups of packages, side by side when there's room.
+   Each group's heading, description, and cards are rows of a subgrid, so
+   cards line up across groups whose descriptions wrap differently. When
+   Components outgrows a column, it goes below the others, full width. */
+.groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  column-gap: 2rem;
 }
-.packages > * {
+.group {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
+}
+/* Starlight's content spacing would push every group after the first one
+   down, so it's replaced here. */
+.sl-markdown-content :is(.group, .group > *) {
   margin: 0;
 }
-.packages .body {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+/* Starlight wraps each heading, for its anchor link. */
+.sl-markdown-content .group h2 {
+  font-size: var(--sl-text-h3);
 }
-/* The docs link sits at the bottom of each card, so they line up. */
-.packages .body > p:last-child {
-  margin-top: auto;
-  padding-top: 0.75rem;
-  font-weight: 600;
+.sl-markdown-content .group > p {
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  color: var(--sl-color-gray-3);
+}
+/* The cards in a group, one above the other, stretched so the last ones
+   end together across groups. */
+.packages {
+  display: grid;
+  gap: 1rem;
 }
