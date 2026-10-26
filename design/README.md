@@ -11,7 +11,7 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 - [Links](components/links.md): links written for GitHub, and checking them
 - [Version markers](components/version-markers.md): when a feature was added
 - [Sidebar](components/sidebar.md): built from each section's README
-- [Look](components/look.md): Starlight with Hyperjump's logo, forest green, and a
+- [Look](components/look.md): Starlight with Hyperjump's logo, sage-olive green, and a
   landing page
 - [Landing page](components/landing-page.md): JSON Schema tools, and the
   components they're built from

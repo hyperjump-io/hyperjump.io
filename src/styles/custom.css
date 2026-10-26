@@ -1,4 +1,4 @@
-/* Forest green. Starlight's accent text, for links and filled highlights
+/* Sage-olive green. Starlight's accent text, for links and filled highlights
    like the current page and the main button, is accent-high in its dark
    theme. That's a pale mint here, which made links hard to tell from text
    and highlights the brightest things on the page, so the dark theme uses
@@ -8,9 +8,9 @@
   --sl-font: "IBM Plex Sans", system-ui, sans-serif;
   --sl-font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-  --sl-color-accent-low: #0f2a1a;
-  --sl-color-accent: #5bb37a;
-  --sl-color-accent-high: #c4ebd1;
+  --sl-color-accent-low: #1a290f;
+  --sl-color-accent: #87af6a;
+  --sl-color-accent-high: #d8ebc9;
   --sl-color-text-accent: var(--sl-color-accent);
 }
 
@@ -23,9 +23,9 @@
 }
 
 :root[data-theme="light"] {
-  --sl-color-accent-low: #e2f4e8;
-  --sl-color-accent: #2f6f45;
-  --sl-color-accent-high: #1d4a2d;
+  --sl-color-accent-low: #e9f4e1;
+  --sl-color-accent: #3f6b1f;
+  --sl-color-accent-high: #2a4714;
 }
 
 .version-marker {

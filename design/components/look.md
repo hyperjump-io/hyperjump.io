@@ -12,18 +12,25 @@ Starlight changes, for little gain on a docs site.
   `<use href="/logo.svg#logo">` was tried first and didn't render. The
   favicon, `public/favicon.svg`, can't take the page's CSS, so its colors are
   fixed, following only the system's color scheme.
-- **Color.** Forest green, as Starlight's accent in `src/styles/custom.css`.
-  Starlight's accent text, for links and filled highlights like the current
-  page and the main button, is `accent` in both themes. Starlight's dark
-  theme uses `accent-high`, a pale mint here, which made links hard to tell
-  from text and highlights the brightest things on the page. In the dark
-  theme, `accent` (#5bb37a, the logo's bolt) is 6.9:1 against the
-  background, and `accent-low`, the text on its fills, is 6.0:1 against
-  it. "Coming soon" markers are blue, so they don't look like "Added in"
-  ones. It was picked by flipping through options on the site with a
-  temporary toggle. Rejected: making only the fills the bolt's green, which
-  left links pale, and needed a rule for each place Starlight uses the
-  color.
+- **Color.** Sage-olive green (hue 95°), as Starlight's accent in
+  `src/styles/custom.css`: `#87af6a` in the dark theme and `#3f6b1f` in the
+  light one. It's near the green of the code themes' strings, Dragon's sage
+  and Ayu Light's olive, and warm and muted like them. Starlight's accent
+  text, for links and filled highlights like the current page and the main
+  button, is `accent` in both themes. Starlight's dark theme uses
+  `accent-high`, which made links hard to tell from text and highlights the
+  brightest things on the page. `accent` is 7.1:1 against the background
+  in the dark theme and 6.3:1 in the light one, and `accent-low`, the text
+  on its fills, is 6.1:1 and 5.6:1 against it. "Coming soon" markers are
+  blue, so they don't look like "Added in" ones. Picked by flipping through
+  options on the site with a temporary toggle, first among named colors and
+  later among greens, next to the code themes. Rejected:
+  - Forest green (`#5bb37a`, hue 141°), the color before this one. It was bluer
+    than the code themes' greens, and cool next to them.
+  - A pure green (120°), generic, and no closer to the code, and one
+    between forest and sage-olive (115°).
+  - Making only the fills the accent in the dark theme, which left links
+    pale, and needed a rule for each place Starlight uses the color.
 - **Code theme.** Kanagawa Dragon in the dark theme and Ayu Light in the
   light one, stock. Both are warm and muted, with green strings near the
   site's green. They needn't be from one family, only look like one site.
@@ -46,7 +53,7 @@ Starlight changes, for little gain on a docs site.
     Dark+ and Light+, Ayu Dark and Mirage, Material, Gruvbox, Rosé Pine,
     Min, Solarized, Night Owl, and the other GitHub themes, side by side
     in the switcher.
-  - Adjusting GitHub's: JSON property names in the site's forest green or
+  - Adjusting GitHub's: JSON property names in the site's green or
     in the theme's own green, a gray background and medium blue strings in
     the light theme. Each looked better, but was a color chosen for one
     theme, which another theme would need chosen again.
