@@ -120,6 +120,14 @@ in an editor. The severity is the rule's in `recommended`, which the page
 says ("In `recommended`, as a warning"). The page's markdown doesn't change:
 the rule decides where the underlines go.
 
+The messages a page lists after an example, as a blockquote with one per
+line, are shown as the linter's output by `plugins/lint-messages.js`: each
+verbatim, in monospace, marked with its severity like hjlint marks it (⚠ a
+warning, ✖ an error) in the color of the underlines. They're taken from the
+page's source, since a blockquote's text gets typographic quotes, and the
+linter prints straight ones. Rejected: leaving them as blockquotes, which
+read as quotations, not output, and showed text the linter never prints.
+
 If the rule's messages for an example aren't the ones the page lists after
 it, the build fails. The rule pages were generated once from the rules'
 tests, and this keeps them from drifting apart. It was a warning until

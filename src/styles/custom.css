@@ -194,3 +194,30 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
   background-color: var(--sl-color-accent-low);
   border-radius: 0.25rem;
 }
+
+/* On a lint rule's page, what the rule reports for an example, after it
+   (plugins/lint-messages.js). It's the linter's output, so it's monospace,
+   and each message is marked with its severity in the color of the
+   example's underlines. */
+.sl-markdown-content .lint-messages {
+  list-style: none;
+  padding: 0;
+  font-family: var(--sl-font-mono);
+  font-size: var(--sl-text-code-sm);
+}
+.sl-markdown-content .lint-messages li {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.25rem 0.75rem;
+  border-inline-start: 2px solid var(--lint-color);
+}
+.lint-messages-warning {
+  --lint-color: var(--sl-color-orange);
+}
+.lint-messages-error {
+  --lint-color: var(--sl-color-red);
+}
+.lint-severity {
+  color: var(--lint-color);
+}

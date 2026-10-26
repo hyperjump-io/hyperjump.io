@@ -5,6 +5,7 @@ import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import siteLinks from "./plugins/site-links.js";
 import versionMarkers from "./plugins/version-markers.js";
+import lintMessages from "./plugins/lint-messages.js";
 import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
 import { topics, topicPages } from "./sidebar.js";
 import { redirects } from "./redirects.js";
@@ -13,7 +14,7 @@ export default defineConfig({
   site: "https://hyperjump.io",
   redirects,
   markdown: {
-    processor: satteri({ mdastPlugins: [siteLinks, versionMarkers] })
+    processor: satteri({ mdastPlugins: [siteLinks, versionMarkers, lintMessages] })
   },
   integrations: [
     starlight({
