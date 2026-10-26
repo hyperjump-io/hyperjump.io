@@ -12,6 +12,15 @@ so it leads: the heading is "JSON Schema tools", and the tagline says what
 they do, then "Use the whole toolkit, or just the pieces you need." The header already says Hyperjump, so the hero doesn't
 repeat it.
 
+The page has two audiences. First, people who want to validate or lint
+schemas today, who the hero is for. Second, people building their own
+JSON Schema and hypermedia tools, who the Components group is for: its
+description offers them the libraries Hyperjump's tools are built from.
+"Tools for building tools" isn't in the hero. It's abstract, and would
+leave the first audience wondering whether the site is for them.
+"Hypermedia" is in the Components group, next to browser, an example of
+it, and not in the hero, where it would be jargon.
+
 The tagline claims only what's on the site. Editors, test coverage, and
 JSONC and YAML go in it when they're documented here.
 
