@@ -8,6 +8,7 @@ import versionMarkers from "./plugins/version-markers.js";
 import lintMessages from "./plugins/lint-messages.js";
 import pluginJsonSchema from "./plugins/expressive-code-json-schema.js";
 import pluginReporter from "./plugins/expressive-code-reporter.js";
+import pluginLabels from "./plugins/expressive-code-labels.js";
 import { topics, topicPages } from "./sidebar.js";
 import { redirects } from "./redirects.js";
 
@@ -23,15 +24,31 @@ export default defineConfig({
       components: { SiteTitle: "./src/components/SiteTitle.astro" },
       routeMiddleware: "./src/route-data.js",
       expressiveCode: {
-        plugins: [pluginJsonSchema(), pluginReporter()],
+        plugins: [pluginLabels(), pluginJsonSchema(), pluginReporter()],
         // Stock themes, so any could be swapped in without restyling
         themes: ["kanagawa-dragon", "ayu-light"],
+        // A block's title says what it is (plugins/expressive-code-labels.js),
+        // so its header is a caption in the code's background, over a
+        // hairline, not an editor's tab bar, which reads as a file name
+        styleOverrides: {
+          frames: {
+            editorTabBarBackground: ({ resolveSetting }) => resolveSetting("codeBackground"),
+            editorActiveTabBackground: ({ resolveSetting }) => resolveSetting("codeBackground"),
+            editorActiveTabBorderColor: "transparent",
+            editorActiveTabIndicatorTopColor: "transparent",
+            editorActiveTabIndicatorBottomColor: "transparent",
+            editorTabBarBorderBottomColor: ({ resolveSetting }) => resolveSetting("borderColor")
+          }
+        },
         // What a program prints, like messages and reporter output, can't
         // be reformatted for a narrow code block the way code can, so it
         // wraps instead of scrolling
         defaultProps: {
           overridesByLang: {
-            "text,plaintext,txt": { wrap: true, hangingIndent: 4 }
+            "text,plaintext,txt": { wrap: true, hangingIndent: 4 },
+            // A command has the same frame as other code, titled
+            // "Terminal", not a terminal window's, with its three dots
+            "bash,sh,shell": { frame: "code" }
           }
         }
       },

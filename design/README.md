@@ -17,6 +17,8 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
   components they're built from
 - [JSON Schema highlighting](components/highlighting.md): keywords and
   property names in schema examples
+- [Code block labels](components/code-labels.md): what each block is,
+  like "JSON Schema · 2020-12"
 - [Reporter output](components/reporter-output.md): hjlint's output,
   colored like it is in a terminal
 - [Tooling](components/tooling.md): Starlight, and Astro's markdown processor

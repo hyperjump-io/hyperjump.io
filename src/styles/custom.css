@@ -285,3 +285,12 @@ ul.starlight-sidebar-topics .starlight-sidebar-topics-badge {
 .expressive-code :is(.reporter-icon-character, .reporter-icon-character span) {
   color: transparent;
 }
+
+/* A code block's title, which says what it is, like "JSON Schema ·
+   2020-12" (plugins/expressive-code-labels.js). It's a caption, small and
+   muted, not a file's tab. */
+.expressive-code .frame.has-title .header .title {
+  font-size: var(--sl-text-xs);
+  color: var(--sl-color-gray-3);
+  padding-block: 0.3rem;
+}
