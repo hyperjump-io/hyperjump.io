@@ -4,7 +4,8 @@ The documentation site for Hyperjump's JSON Schema tools:
 [json-schema](https://github.com/hyperjump-io/json-schema),
 [hjlint](https://github.com/hyperjump-io/hjlint),
 [browser](https://github.com/hyperjump-io/browser), and components like
-[json-pointer](https://github.com/hyperjump-io/json-pointer). The docs
+[json-pointer](https://github.com/hyperjump-io/json-pointer) and
+[pact](https://github.com/hyperjump-io/pact). The docs
 themselves live in each repo's `website/` directory. This repo gets them,
 and builds and deploys the site with [Starlight](https://starlight.astro.build/).
 

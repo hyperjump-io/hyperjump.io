@@ -70,6 +70,15 @@ export const sources = [
     summary: "RFC 6901 pointers",
     description: "Get, set, and remove values in a JSON document by RFC 6901 JSON Pointer.",
     command: "npm install @hyperjump/json-pointer"
+  },
+  {
+    repo: "pact",
+    ref: "v2",
+    topic: "components",
+    label: "Pact",
+    summary: "Iterator pipelines",
+    description: "Higher order functions for iterators and async iterators, as steps in a pipeline, with the native Iterator helpers' names.",
+    command: "npm install @hyperjump/pact"
   }
 ];
 

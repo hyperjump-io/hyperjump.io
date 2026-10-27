@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches: [main]
-  # Sent by the json-schema, hjlint, and browser repos when their website/
+  # Sent by each repo in sources.js when its website/
   # changes. See "Rebuilding when docs change" in README.md.
   repository_dispatch:
     types: [docs-changed]
