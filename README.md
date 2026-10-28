@@ -3,6 +3,7 @@
 The documentation site for Hyperjump's JSON Schema tools:
 [json-schema](https://github.com/hyperjump-io/json-schema),
 [hjlint](https://github.com/hyperjump-io/hjlint),
+[json-schema-coverage](https://github.com/hyperjump-io/json-schema-coverage),
 [browser](https://github.com/hyperjump-io/browser), and components like
 [json-pointer](https://github.com/hyperjump-io/json-pointer) and
 [pact](https://github.com/hyperjump-io/pact). The docs

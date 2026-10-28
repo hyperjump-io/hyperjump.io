@@ -21,8 +21,9 @@ leave the first audience wondering whether the site is for them.
 "Hypermedia" is in the Components group, next to browser, an example of
 it, and not in the hero, where it would be jargon.
 
-The tagline claims only what's on the site. Editors, test coverage, and
-JSONC and YAML go in it when they're documented here.
+The tagline claims only what's on the site. "Test" is in it for
+json-schema-coverage. Editors, and JSONC and YAML, go in it when they're
+documented here.
 
 "Try it online", the playground, is the hero's main action. It's the one
 way in that needs no install, and there's no one package to start with.
@@ -30,8 +31,8 @@ way in that needs no install, and there's no one package to start with.
 ## Groups
 
 Packages are grouped by where they're used: "In your code", "In your
-terminal", and "Components". Later, "In your editor" for the language server
-and extensions, and "In your tests" for coverage. Each group has a heading,
+terminal", "In your tests" for json-schema-coverage, and "Components".
+Later, "In your editor" for the language server and extensions. Each group has a heading,
 one line on what's in it, and a card for each package, or one card with
 a list of links.
 

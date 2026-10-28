@@ -2,7 +2,7 @@
 
 The sidebar's topics are where packages are used, the same groups as the
 [landing page](landing-page.md): "In your code", "In your terminal",
-"Components", and later "In your editor" and "In your tests". Each topic
+"In your tests", "Components", and later "In your editor". Each topic
 has a sidebar of its own. `starlight-sidebar-topics` puts links to the
 topics at the top of the sidebar to switch between them. The landing page
 isn't in a topic. It's a splash page, without a sidebar.
@@ -24,7 +24,7 @@ Each topic has an icon in the list of topics, set in `sources.js`, and the
 current topic has a tinted background. Without them, the list looked like
 more page links, and in the light theme, the current topic was only green
 text. The icons are Starlight's built-in ones: `{ }` for code, `$` for the
-terminal, and the puzzle piece for components.
+terminal, a check mark for tests, and the puzzle piece for components.
 
 ## A topic's sidebar
 

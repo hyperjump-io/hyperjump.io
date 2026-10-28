@@ -21,6 +21,12 @@ export const topics = [
     description: "On your machine and in CI."
   },
   {
+    id: "tests",
+    label: "In your tests",
+    icon: "approve-check-circle",
+    description: "See which parts of your schemas your tests reach."
+  },
+  {
     id: "components",
     label: "Components",
     icon: "puzzle",
@@ -52,6 +58,14 @@ export const sources = [
     label: "hjlint",
     description: "Lints schemas and validates JSON files against them, with the same rules as the library.",
     command: "npx hjlint ."
+  },
+  {
+    repo: "json-schema-coverage",
+    ref: "main",
+    topic: "tests",
+    label: "JSON Schema Coverage",
+    description: "Vitest matchers for schemas, and coverage reports for the keywords, branches, and subschemas your tests reach.",
+    command: "npm install --save-dev @hyperjump/json-schema-coverage"
   },
   {
     repo: "browser",
