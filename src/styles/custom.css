@@ -141,11 +141,14 @@
 
 /* The landing page's groups of packages, side by side when there's room.
    Each group's heading, description, and cards are rows of a subgrid, so
-   cards line up across groups whose descriptions wrap differently. */
+   cards line up across groups whose descriptions wrap differently. When
+   they wrap, rows of groups are as far apart as the recent posts are from
+   the groups. A group's subgrid has its own row gap, so this one is only
+   between groups. */
 .groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-  column-gap: 2rem;
+  gap: 3rem 2rem;
 }
 .group {
   display: grid;
