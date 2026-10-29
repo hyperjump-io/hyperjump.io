@@ -79,9 +79,12 @@ published.
 
 The site deploys on a push here, on a manual run, and when a repo sends a
 `docs-changed` event. Each docs repo's `.github/workflows/docs-changed.yml`
-sends it when `website/` changes on the branch the site builds from. They
-need a `SITE_DISPATCH_TOKEN` secret, a token that can dispatch to this repo
-(a fine-grained token with Contents read and write on hyperjump.io).
+sends it when `website/` changes on the branch the site builds from, with
+a token from the org's docs dispatch app: a GitHub App with Contents read
+and write, installed only on hyperjump.io. Each docs repo needs the app's
+client ID as a `SITE_DISPATCH_CLIENT_ID` variable and its private key as a
+`SITE_DISPATCH_APP_KEY` secret, both set for the org and shared with the
+docs repos.
 
 ## Contributing
 
