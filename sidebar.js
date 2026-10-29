@@ -10,10 +10,12 @@
 // repo's, and each package is an item with its version as its badge: a
 // group of its pages, or a link if it has one page.
 // Features marked "Added in" a later version than a badge are newer than it.
+// A package without docs yet has only its placeholder front page, with
+// "Coming soon" as its badge.
 import { readFileSync } from "node:fs";
 import { posix } from "node:path";
 import { markdownToMdast } from "satteri";
-import { topics as topicList, sources, repoDir, websiteDir } from "./sources.js";
+import { topics as topicList, sources, repoDir, websiteDir, hasDocs } from "./sources.js";
 
 const packagesOf = (topic) => sources.filter((source) => source.topic === topic.id);
 
@@ -59,6 +61,7 @@ export const topicPages = Object.fromEntries(topicList.map((topic) => {
 // before it, like a list of features. Without one, the package has only its
 // front page.
 function pages(source) {
+  if (!hasDocs(source)) return [];
   const tree = markdownToMdast(readFileSync(`${websiteDir(source)}/README.md`, "utf8"));
   const heading = tree.children.findIndex((node) => node.type === "heading" && toString(node).trim() === "Contents");
   if (heading === -1) return [];
@@ -85,6 +88,7 @@ function toSlug(path) {
 }
 
 function versionBadge(source) {
+  if (!hasDocs(source)) return { text: "Coming soon", variant: "default" };
   const { version } = JSON.parse(readFileSync(`${repoDir(source)}/package.json`, "utf8"));
   return { text: `v${version}`, variant: "default" };
 }

@@ -2,14 +2,19 @@
 // README.md becomes index.md, and the first H1 moves into frontmatter as the
 // title, which Starlight requires. The frontmatter also gets the page's edit
 // link, to its file on GitHub, since it's in another repo. With LOCAL_REPOS, the checkouts are used
-// as they are.
-import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
+// as they are. A repo without website/ yet, on its branch or because the
+// repo or branch isn't on GitHub yet, gets a placeholder front page.
+import { execFileSync, spawnSync } from "node:child_process";
+import { existsSync, rmSync } from "node:fs";
 import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join, dirname, relative } from "node:path";
-import { sources, localRepos, repoUrl, repoDir, websiteDir } from "../sources.js";
+import { sources, localRepos, repoUrl, repoDir, websiteDir, hasDocs } from "../sources.js";
 
 const out = "src/content/docs";
+
+// Repos GitHub doesn't show without signing in: private, or not created yet.
+// Their placeholders don't link to them.
+const hidden = new Set();
 
 if (!localRepos) {
   for (const source of sources) {
@@ -25,12 +30,16 @@ await rm(".astro/data-store.json", { force: true });
 await rm("node_modules/.astro/data-store.json", { force: true });
 
 for (const source of sources) {
-  const dir = websiteDir(source);
-  if (!existsSync(dir)) {
-    throw Error(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/ directory`);
+  await rm(join(out, source.repo), { recursive: true, force: true });
+
+  if (!hasDocs(source)) {
+    console.warn(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/, so its docs are coming soon`);
+    await mkdir(join(out, source.repo), { recursive: true });
+    await writeFile(join(out, source.repo, "index.md"), placeholder(source));
+    continue;
   }
 
-  await rm(join(out, source.repo), { recursive: true, force: true });
+  const dir = websiteDir(source);
   for (const file of await readdir(dir, { recursive: true, withFileTypes: true })) {
     if (!file.isFile()) continue;
     const from = join(file.parentPath, file.name);
@@ -45,9 +54,27 @@ for (const source of sources) {
   }
 }
 
-// A shallow, sparse clone of website/, updated in place on later runs.
+// A shallow, sparse clone of website/, updated in place on later runs. A
+// repo or branch that isn't on GitHub has no clone, and so no website/.
 function checkout(source) {
   const dir = repoDir(source);
+  const found = spawnSync("git", ["ls-remote", "--exit-code", "--heads", repoUrl(source), source.ref], {
+    env: { ...process.env, GIT_TERMINAL_PROMPT: "0" },
+    encoding: "utf8"
+  });
+  // 2 is a repo without the branch. A repo that needs signing in to see is
+  // private or doesn't exist. Anything else, like no network, is an error,
+  // so a deploy doesn't replace every package's docs with a placeholder.
+  const hiddenRepo = /could not read Username|Repository not found/.test(found.stderr);
+  if (found.status === 2 || hiddenRepo) {
+    if (hiddenRepo) hidden.add(source.repo);
+    rmSync(dir, { recursive: true, force: true });
+    return;
+  }
+  if (found.status !== 0) {
+    process.stderr.write(found.stderr);
+    process.exit(1);
+  }
   if (!existsSync(dir)) {
     run("git", "clone", "--depth", "1", "--branch", source.ref, "--filter=blob:none", "--sparse", repoUrl(source), dir);
   } else {
@@ -55,6 +82,12 @@ function checkout(source) {
     run("git", "-C", dir, "checkout", "--detach", "FETCH_HEAD");
   }
   run("git", "-C", dir, "sparse-checkout", "set", "website");
+  // Before its docs, the branch may be an older major version, which
+  // the build doesn't run.
+  if (source.install && hasDocs(source)) {
+    run("git", "-C", dir, "sparse-checkout", "disable");
+    run("npm", "ci", "--prefix", dir, "--omit=dev", "--ignore-scripts", "--no-audit", "--no-fund");
+  }
 }
 
 // The command's own error is clear enough, so a failure exits without a
@@ -77,4 +110,13 @@ function withFrontmatter(markdown, path, editUrl) {
   // loses its backticks.
   const title = match[1].replaceAll("`", "");
   return `---\ntitle: ${JSON.stringify(title)}\neditUrl: ${JSON.stringify(editUrl)}\n---\n\n${body}`;
+}
+
+// The package's front page until its docs are on its branch: what its card
+// on the landing page says, and where it is on GitHub.
+function placeholder(source) {
+  const github = hidden.has(source.repo)
+    ? ""
+    : ` Until then, see [${source.repo} on GitHub](https://github.com/hyperjump-io/${source.repo}).`;
+  return `---\ntitle: ${JSON.stringify(source.label)}\n---\n\n${source.description}\n\nDocs are coming soon.${github}\n`;
 }

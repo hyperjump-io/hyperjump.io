@@ -316,3 +316,10 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
 .expressive-code .frame.has-title .header .title a:hover {
   color: var(--sl-color-text-accent);
 }
+
+/* The blog before its first post. starlight-blog renders an empty list,
+   so the message goes away by itself when there's a post. */
+.sl-blog-posts:empty::before {
+  content: "Posts are coming soon.";
+  color: var(--sl-color-gray-2);
+}

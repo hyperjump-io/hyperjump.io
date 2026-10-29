@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 
 // Where packages are used: the sidebar's topics and the landing page's
@@ -39,13 +40,16 @@ export const topics = [
 // the head of `ref`. `topic` is the topic it's listed in. `description` and
 // `command`, which installs or runs it, are for its card. `summary` is for
 // a topic with `list`: a few words beside its link, short enough not to
-// wrap. Set
+// wrap. `install` checks out the whole repo and installs its dependencies,
+// not just website/, for a package the build runs, like json-schema for
+// the schema highlighter. Set
 // LOCAL_REPOS to a directory holding checkouts of the repos to build from
 // those instead.
 export const sources = [
   {
     repo: "json-schema",
-    ref: "v2",
+    ref: "main",
+    install: true,
     topic: "code",
     label: "JSON Schema",
     description: "A validator and linter for every dialect from draft-04 to 2020-12, and JSON Schema v1. Errors with positions in the JSON text, and annotations.",
@@ -69,7 +73,7 @@ export const sources = [
   },
   {
     repo: "browser",
-    ref: "v2",
+    ref: "main",
     topic: "components",
     label: "Browser",
     summary: "JRef hypermedia browser",
@@ -87,7 +91,7 @@ export const sources = [
   },
   {
     repo: "pact",
-    ref: "v2",
+    ref: "main",
     topic: "components",
     label: "Pact",
     summary: "Iterator pipelines",
@@ -105,3 +109,7 @@ export const repoDir = (source) => localRepos
   : resolve(".cache/repos", source.repo);
 
 export const websiteDir = (source) => resolve(repoDir(source), "website");
+
+// A repo whose branch has no website/ yet, or that isn't on GitHub yet, has
+// a placeholder page that says its docs are coming soon.
+export const hasDocs = (source) => existsSync(resolve(websiteDir(source), "README.md"));

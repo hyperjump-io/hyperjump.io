@@ -32,7 +32,8 @@ rest.
 - `website/README.md` lists the pages, as a nested list under a `Contents`
   heading. That list is the package's sidebar, in the same order. Without
   the heading, the package has one page.
-- A new package goes in `sources.js`, with the topic it's listed in. A
+- A new package goes in `sources.js`, with the topic it's listed in.
+  Until its branch has `website/`, its page says its docs are coming soon. A
   topic with more than one package has a front page here, at
   `src/content/docs/<topic>/index.mdx`.
 - Link to other pages with relative links (`../guides/validating.md`). Link to

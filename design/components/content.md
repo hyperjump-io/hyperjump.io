@@ -54,12 +54,28 @@ It copies them to `src/content/docs/<repo>/`. `README.md` becomes
 Starlight requires one. A title is plain text, so backticks in the H1 are
 dropped. A page that doesn't start with an H1 is an error.
 
+A package goes on the site before it has docs, so the site can go up
+before every package's release. A repo whose branch has no
+`website/README.md`, or whose repo or branch isn't on GitHub yet, gets a
+placeholder front page instead: its description from `sources.js`, and
+that its docs are coming soon, with a link to the repo on GitHub unless
+GitHub needs a sign-in to see it, since it's private or doesn't exist.
+`git ls-remote` tells the cases apart. Any other failure, like no network,
+is still an error, so a deploy doesn't replace every package's docs with a
+placeholder. Its card on the landing page and its place in the sidebar
+stay the same, with "Coming soon" in place of its version. When the
+package's docs land on its branch, they replace the placeholder, with no
+change here. Rejected: leaving the package out of `sources.js` until it
+has docs. Each release would be a change here, and the landing page
+would be missing its main packages until they ship.
+
 Its frontmatter also gets an `editUrl`, so Starlight shows "Edit page"
 under it, linking to its file in its repo's `website/` on GitHub, at the
 branch the site builds from (`sources.js`). The site is many repos, so
 which one a page comes from isn't obvious from the site. The landing, 404,
 and [Reading schemas](highlighting.md#legend) pages, and the front pages of
 topics with more than one package, are this repo's, and have no edit link.
+Neither does a placeholder.
 
 The fetch step deletes Astro's content caches (`.astro/data-store.json`
 and `node_modules/.astro/data-store.json`) before every start and build.
@@ -70,7 +86,11 @@ the cache the dev server uses.
 
 ## One version, from branch heads
 
-The site is built from the head of each repo's branch, not from release tags.
+The site is built from the head of each repo's `main`, not from release tags.
+A major version in progress, like json-schema's v2, is on a branch of its
+own, and its docs come with it when it's released and merged to `main`.
+Until then, the docs are its [placeholder](#where-pages-come-from) if `main`
+has none.
 Improvements to the docs should show up right away, for everyone, and not
 wait for a release. There's one version of the docs, and
 [version markers](version-markers.md) say when a feature was added, or that

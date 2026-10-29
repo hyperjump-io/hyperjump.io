@@ -1,19 +1,23 @@
 ---
 // A card for a package: the whole card links to its docs, and it ends with
-// the command that installs or runs it.
+// the command that installs or runs it, if it has one. A package that isn't
+// released ends with "Coming soon", like a version marker, instead.
 interface Props {
   title: string;
   href: string;
-  command: string;
+  command?: string;
+  comingSoon?: boolean;
 }
 
-const { title, href, command } = Astro.props;
+const { title, href, command, comingSoon } = Astro.props;
 ---
 
 <a class="package" href={href}>
   <span class="title">{title}</span>
   <span class="description"><slot /></span>
-  <code>{command}</code>
+  {comingSoon
+    ? <span class="version-marker version-marker-coming-soon">Coming soon</span>
+    : command && <code>{command}</code>}
 </a>
 
 <style>
@@ -40,6 +44,9 @@ const { title, href, command } = Astro.props;
   }
   .description {
     flex-grow: 1;
+  }
+  .version-marker {
+    align-self: flex-start;
   }
   /* The command sits at the bottom of each card, so they line up. */
   code {

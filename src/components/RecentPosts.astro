@@ -1,29 +1,36 @@
 ---
 // The landing page's newest blog posts, a card each, like the packages'
-// cards: the whole card links to the post. Without posts, it's not shown.
+// cards: the whole card links to the post. Before the first post, it's one
+// card that says posts are coming soon, which isn't a link, since the blog
+// has nothing more to show.
 const count = 3;
 
 const posts = Astro.locals.starlightBlog.posts.slice(0, count);
 const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" });
 ---
 
-{posts.length > 0 && (
-  <section class="recent-posts not-content">
-    <div class="heading">
-      <h2>From the blog</h2>
-      <a href="/blog/">All posts</a>
-    </div>
-    <div class="posts">
-      {posts.map((post) => (
-        <a class="post" href={post.href}>
-          <time datetime={post.createdAt.toISOString().slice(0, 10)}>{date.format(post.createdAt)}</time>
-          <span class="title">{post.title}</span>
-          {post.entry.data.excerpt && <span class="excerpt">{post.entry.data.excerpt}</span>}
-        </a>
-      ))}
-    </div>
-  </section>
-)}
+<section class="recent-posts not-content">
+  <div class="heading">
+    <h2>From the blog</h2>
+    {posts.length > 0 && <a href="/blog/">All posts</a>}
+  </div>
+  <div class="posts">
+    {posts.length === 0 && (
+      <div class="post">
+        <span class="version-marker version-marker-coming-soon">Coming soon</span>
+        <span class="title">Posts are on the way</span>
+        <span class="excerpt">Releases, design decisions, and how they went.</span>
+      </div>
+    )}
+    {posts.map((post) => (
+      <a class="post" href={post.href}>
+        <time datetime={post.createdAt.toISOString().slice(0, 10)}>{date.format(post.createdAt)}</time>
+        <span class="title">{post.title}</span>
+        {post.entry.data.excerpt && <span class="excerpt">{post.entry.data.excerpt}</span>}
+      </a>
+    ))}
+  </div>
+</section>
 
 <style>
   .recent-posts {
@@ -45,10 +52,11 @@ const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" 
     color: var(--sl-color-text-accent);
   }
   /* The same columns as the groups of packages above, so the cards line up
-     with theirs. */
+     with theirs. Empty columns are kept, so one post, or the placeholder
+     before the first, is a column wide, not the page. */
   .posts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
     gap: 1rem 2rem;
   }
   .post {
@@ -61,8 +69,11 @@ const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" 
     color: var(--sl-color-gray-2);
     text-decoration: none;
   }
-  .post:hover {
+  a.post:hover {
     border-color: var(--sl-color-accent);
+  }
+  .post .version-marker {
+    align-self: flex-start;
   }
   time {
     font-size: var(--sl-text-sm);
@@ -73,7 +84,7 @@ const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" 
     font-weight: 600;
     color: var(--sl-color-white);
   }
-  .post:hover .title {
+  a.post:hover .title {
     color: var(--sl-color-text-accent);
   }
 </style>

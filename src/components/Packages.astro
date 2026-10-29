@@ -1,7 +1,8 @@
 ---
-// A card for each package in a topic, from sources.js
+// A card for each package in a topic, from sources.js. A package whose docs
+// are coming soon isn't released, so its card says so.
 import PackageCard from "./PackageCard.astro";
-import { sources } from "../../sources.js";
+import { sources, hasDocs } from "../../sources.js";
 
 interface Props {
   topic: string;
@@ -12,7 +13,7 @@ const { topic } = Astro.props;
 
 <div class="packages not-content">
   {sources.filter((source) => source.topic === topic).map((source) => (
-    <PackageCard title={source.label} href={`/${source.repo}/`} command={source.command}>
+    <PackageCard title={source.label} href={`/${source.repo}/`} command={source.command} comingSoon={!hasDocs(source)}>
       {source.description}
     </PackageCard>
   ))}

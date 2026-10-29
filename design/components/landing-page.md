@@ -53,7 +53,10 @@ across groups whose headings or descriptions wrap differently.
 A card, `src/components/PackageCard.astro`, is one link to the package's
 docs, with what it is and the command that installs or runs it. Formats a
 tool reads, like JSONC or YAML, go on its card, not in a group of their
-own, since they're true of many tools.
+own, since they're true of many tools. A package whose docs are
+[coming soon](content.md#where-pages-come-from) isn't released, so its
+card ends with "Coming soon", like a version marker, in place of a
+command that wouldn't work yet.
 
 Components are the libraries the tools are built from: browser,
 json-pointer, and later uri, uri-template, json, pact, and others. Pact
@@ -97,9 +100,13 @@ Rejected:
 
 ## Recent posts
 
-Below the groups are the three newest
-[blog posts](blog.md), a card each, with the date, title, and excerpt,
-and a link to all posts. `src/components/RecentPosts.astro` gets them from
-`starlight-blog`. They're last, so the packages, which the page is for,
-come first. They use the groups' columns, so they line up with the
-package cards. Without posts, there's no section.
+Below the groups are the three newest [blog posts](blog.md), a card
+each, with the date, title, and excerpt, and a link to all posts.
+`src/components/RecentPosts.astro` gets them from `starlight-blog`.
+They're last, so the packages, which the page is for, come first. They
+use the groups' columns, so they line up with the package cards.
+
+Before the first post, the section is one card that says posts are
+coming soon, like a package's card before its docs, so the page doesn't
+change shape when the blog starts. It isn't a link, and there's no "All
+posts" link, since the blog has nothing more to show.

@@ -44,7 +44,7 @@ import { pathToFileURL } from "node:url";
 import { PluginStyleSettings } from "@expressive-code/core";
 import { ClassAnnotation } from "./class-annotation.js";
 import { javascriptSchemas } from "./javascript-schemas.js";
-import { sources, repoDir } from "../sources.js";
+import { sources, repoDir, hasDocs } from "../sources.js";
 
 const unknownKeyword = "https://json-schema.org/keyword/unknown#";
 const dialectKeyword = "https://json-schema.org/keyword/schema";
@@ -217,7 +217,9 @@ function annotate(codeBlock, { start, end }, className, renderPhase = "earlier",
 // retrieve anything, so a `$schema` that isn't a built-in dialect has no
 // keywords.
 async function resolve(code, dialectUri, rule) {
-  const { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = await library();
+  const lib = await library();
+  if (!lib) return undefined;
+  const { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = lib;
   const processor = unified()
     .use(rejsonParse, { accept: "recovered" })
     .use(jsonSchemaResolve, {
@@ -296,11 +298,15 @@ function* propertyMarks(property, object) {
 
 // @hyperjump/json-schema v2 isn't published, so it's loaded from the repo the
 // site is built from, with every dialect. unified and browser's JSON parser
-// come from the same place, so they're the copies it uses.
+// come from the same place, so they're the copies it uses. Until json-schema
+// has docs, its branch is v1, which isn't loaded, and examples aren't
+// highlighted.
 let loading;
 function library() {
   loading ??= (async () => {
-    const dir = repoDir(sources.find(({ repo }) => repo === "json-schema"));
+    const source = sources.find(({ repo }) => repo === "json-schema");
+    if (!hasDocs(source)) return undefined;
+    const dir = repoDir(source);
     const { JsonSchema, jsonSchemaResolve } = await importExport(dir, ".");
     const jsonSchema = new JsonSchema();
     const dialects = {

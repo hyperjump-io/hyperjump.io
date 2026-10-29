@@ -14,6 +14,12 @@ them for the site:
 - Anything else is left alone, including a link to a heading on the same
   page (`#json-text`).
 
+A link into a package whose docs are [coming soon](content.md#where-pages-come-from)
+goes to its placeholder, its only page, on any page, this repo's too. So
+a package's docs can link to another's before that one has docs, and
+neither a reader nor the link check finds a missing page. The heading in
+the link is dropped, since the placeholder doesn't have it.
+
 ## Redirects
 
 A page that moves or is merged into another keeps working at its old path.

@@ -6,6 +6,13 @@ RSS feed at `/blog/rss.xml`. It adds a "Blog" link to the header, and an
 RSS icon beside GitHub's. The newest posts are on the
 [landing page](landing-page.md#recent-posts).
 
+Before the first post, `/blog/` says posts are coming soon, so the
+header's "Blog" link doesn't go to an empty page. starlight-blog renders
+an empty list then, and a CSS rule in `src/styles/custom.css` fills it
+(`.sl-blog-posts:empty`), so the message goes away with the first post,
+without a change here. Rejected: hiding the "Blog" link until there's a
+post, which needs an override of starlight-blog's header.
+
 ## Docs and posts
 
 The docs say how things work now, and they're edited as that changes.
