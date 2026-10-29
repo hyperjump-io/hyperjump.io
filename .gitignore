@@ -11,3 +11,8 @@ src/content/docs/browser/
 src/content/docs/json-pointer/
 src/content/docs/pact/
 src/content/docs/json-schema-coverage/
+src/content/docs/json-schema-errors/
+src/content/docs/json-language-server/
+src/content/docs/json-schema-formats/
+src/content/docs/uri/
+src/content/docs/uri-template/

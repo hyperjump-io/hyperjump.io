@@ -3,7 +3,7 @@
 // cards: the whole card links to the post. Before the first post, it's one
 // card that says posts are coming soon, which isn't a link, since the blog
 // has nothing more to show.
-const count = 3;
+const count = 2;
 
 const posts = Astro.locals.starlightBlog.posts.slice(0, count);
 const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" });
@@ -51,12 +51,12 @@ const date = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" 
   .heading a {
     color: var(--sl-color-text-accent);
   }
-  /* The same columns as the groups of packages above, so the cards line up
-     with theirs. Empty columns are kept, so one post, or the placeholder
-     before the first, is a column wide, not the page. */
+  /* The same two columns as the groups of packages above, so the cards
+     line up with theirs. Empty columns are kept, so one post, or the
+     placeholder before the first, is a column wide, not the page. */
   .posts {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(max(18rem, (100% - 2rem) / 2), 1fr));
     gap: 1rem 2rem;
   }
   .post {

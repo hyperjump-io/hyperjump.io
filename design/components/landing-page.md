@@ -31,10 +31,10 @@ way in that needs no install, and there's no one package to start with.
 ## Groups
 
 Packages are grouped by where they're used: "In your code", "In your
-terminal", "In your tests" for json-schema-coverage, and "Components".
-Later, "In your editor" for the language server and extensions. Each group has a heading,
-one line on what's in it, and a card for each package, or one card with
-a list of links.
+terminal", "In your editor" for the language server and its editor
+extensions, "In your tests" for json-schema-coverage, and "Components".
+Each group has a heading, one line on what's in it, and a card for each
+package, or one card with a list of links.
 
 The groups are the sidebar's topics (see [Sidebar](sidebar.md)).
 `src/components/PackageGroups.astro` builds them from the topics and
@@ -46,9 +46,14 @@ heading had to match its topic's label by hand.
 "In your terminal", not "On the command line": it's where you are, like
 the other groups' names, and not what you're using.
 
-The groups are columns, side by side when there's room. Each one's
+The groups are two columns, side by side when there's room. Each one's
 heading, description, and cards are rows of a subgrid, so cards line up
-across groups whose headings or descriptions wrap differently.
+across groups whose headings or descriptions wrap differently. Cards
+stretch so the groups in a row end together. Components, the group with
+a list card, is a row of its own after the others, the page's width,
+with its list in two columns. Rejected: as many columns as fit, three on
+a laptop. With five groups, the fourth sat beside Components, and its
+card stretched to the list's height.
 
 A card, `src/components/PackageCard.astro`, is one link to the package's
 docs, with what it is and the command that installs or runs it. Formats a
@@ -59,7 +64,11 @@ card ends with "Coming soon", like a version marker, in place of a
 command that wouldn't work yet.
 
 Components are the libraries the tools are built from: browser,
-json-pointer, and later uri, uri-template, json, pact, and others. Pact
+json-pointer, json-schema-errors, json-schema-formats, pact, uri,
+uri-template, and later json and others. json-schema-errors is used
+next to any validator, not only ours, so it stands alone like the rest.
+Rejected: json-schema-errors in "In your code". The group had two cards,
+and the single cards beside it stretched to their height. Pact
 has nothing to do with JSON Schema, and fits here because each component
 stands alone. Browser is one.
 
@@ -100,11 +109,12 @@ Rejected:
 
 ## Recent posts
 
-Below the groups are the three newest [blog posts](blog.md), a card
-each, with the date, title, and excerpt, and a link to all posts.
+Below the groups are the two newest [blog posts](blog.md), a card each,
+with the date, title, and excerpt, and a link to all posts.
 `src/components/RecentPosts.astro` gets them from `starlight-blog`.
-They're last, so the packages, which the page is for, come first. They
-use the groups' columns, so they line up with the package cards.
+They're last, so the packages, which the page is for, come first. They're
+in the groups' two columns, so their cards line up with the package
+cards, in one row. Rejected: three, which wrapped to two and one.
 
 Before the first post, the section is one card that says posts are
 coming soon, like a package's card before its docs, so the page doesn't

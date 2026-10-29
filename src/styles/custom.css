@@ -139,7 +139,9 @@
   text-decoration-color: var(--severity-error);
 }
 
-/* The landing page's groups of packages, side by side when there's room.
+/* The landing page's groups of packages, two side by side when there's
+   room. A group with a list card, like Components, is a row of its own,
+   so a single card isn't stretched to the list's height beside it.
    Each group's heading, description, and cards are rows of a subgrid, so
    cards line up across groups whose descriptions wrap differently. When
    they wrap, rows of groups are as far apart as the recent posts are from
@@ -147,8 +149,11 @@
    between groups. */
 .groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(max(18rem, (100% - 2rem) / 2), 1fr));
   gap: 3rem 2rem;
+}
+.group.list {
+  grid-column: 1 / -1;
 }
 .group {
   display: grid;

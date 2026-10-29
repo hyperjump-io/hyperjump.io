@@ -2,7 +2,7 @@
 // The landing page's groups of packages, from the topics and packages in
 // sources.js, so they're the same as the sidebar's topics. A topic with
 // `list` has one card with a list of links, instead of a card for each
-// package.
+// package, and is the whole width of the page, after the others.
 import Packages from "./Packages.astro";
 import PackageListCard from "./PackageListCard.astro";
 import { topics } from "../../sources.js";
@@ -10,7 +10,7 @@ import { topics } from "../../sources.js";
 
 <div class="groups">
   {topics.map((topic) => (
-    <div class="group">
+    <div class={topic.list ? "group list" : "group"}>
       <h2 id={topic.id}>{topic.label}</h2>
       <p>{topic.description}</p>
       {topic.list

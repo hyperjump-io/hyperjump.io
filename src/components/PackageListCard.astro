@@ -32,14 +32,19 @@ const packages = sources.filter((source) => source.topic === topic.id);
     border-radius: 0.5rem;
     color: var(--sl-color-gray-2);
   }
+  /* Two columns, since the card is the page's width, and a summary is
+     short enough not to wrap in one. */
   ul {
     flex-grow: 1;
     margin: 0;
     padding-inline-start: 1.25rem;
     list-style: disc;
+    columns: 2 22rem;
+    column-gap: 3rem;
   }
-  li + li {
-    margin-top: 0.25rem;
+  li {
+    break-inside: avoid;
+    margin-bottom: 0.25rem;
   }
   a {
     color: var(--sl-color-white);
