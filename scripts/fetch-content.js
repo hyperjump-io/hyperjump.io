@@ -3,7 +3,8 @@
 // title, which Starlight requires. The frontmatter also gets the page's edit
 // link, to its file on GitHub, since it's in another repo. With LOCAL_REPOS, the checkouts are used
 // as they are. A repo without website/ yet, on its branch or because the
-// repo or branch isn't on GitHub yet, gets a placeholder front page.
+// repo or branch isn't on GitHub yet, gets a placeholder front page. Pages
+// of a repo that's no longer in sources.js are removed.
 import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, rmSync } from "node:fs";
 import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -11,6 +12,10 @@ import { join, dirname, relative } from "node:path";
 import { sources, localRepos, repoUrl, repoDir, websiteDir, hasDocs } from "../sources.js";
 
 const out = "src/content/docs";
+// In each repo's directory, so a directory left by a repo that's been taken
+// out of sources.js can be told apart from this repo's pages, like
+// components/, and removed. Starlight only reads .md and .mdx files.
+const marker = ".fetched";
 
 // Repos GitHub doesn't show without signing in: private, or not created yet.
 // Their placeholders don't link to them.
@@ -29,12 +34,21 @@ if (!localRepos) {
 await rm(".astro/data-store.json", { force: true });
 await rm("node_modules/.astro/data-store.json", { force: true });
 
+for (const entry of await readdir(out, { withFileTypes: true })) {
+  const dir = join(out, entry.name);
+  if (entry.isDirectory() && existsSync(join(dir, marker)) && !sources.some(({ repo }) => repo === entry.name)) {
+    console.warn(`${entry.name} isn't in sources.js, so its pages are removed`);
+    await rm(dir, { recursive: true });
+  }
+}
+
 for (const source of sources) {
   await rm(join(out, source.repo), { recursive: true, force: true });
+  await mkdir(join(out, source.repo), { recursive: true });
+  await writeFile(join(out, source.repo, marker), "");
 
   if (!hasDocs(source)) {
     console.warn(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/, so its docs are coming soon`);
-    await mkdir(join(out, source.repo), { recursive: true });
     await writeFile(join(out, source.repo, "index.md"), placeholder(source));
     continue;
   }

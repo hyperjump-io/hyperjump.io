@@ -54,6 +54,13 @@ It copies them to `src/content/docs/<repo>/`. `README.md` becomes
 Starlight requires one. A title is plain text, so backticks in the H1 are
 dropped. A page that doesn't start with an H1 is an error.
 
+Each repo's directory there gets an empty `.fetched` file, so the fetch
+can tell what it copied from this repo's own pages, like `components/`.
+A directory with one whose repo is no longer in `sources.js` is removed,
+so a package taken off the site doesn't leave pages behind. Rejected: a
+list of what was copied, kept outside `src/content/docs/`. It could be
+lost or disagree with what's there.
+
 A package goes on the site before it has docs, so the site can go up
 before every package's release. A repo whose branch has no
 `website/README.md`, or whose repo or branch isn't on GitHub yet, gets a
