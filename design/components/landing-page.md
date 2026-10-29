@@ -76,10 +76,10 @@ with `list` in `sources.js`. Rejected:
 - One "All components" card, naming them. It said too little to choose
   from, and its list of names would get long.
 
-The 1.x docs of `@hyperjump/json-schema` are linked below the groups,
-called "1.x" and not "v1" so it isn't confused with the JSON Schema v1
-dialect. The package goes by its npm name, not "the JSON Schema library",
-which could be any of them.
+A package's older major versions aren't on the landing page. Its
+overview links them, like json-schema's link to its 1.x README, since
+that's where people using it look, and the landing page would need a
+line for each package with one.
 
 Rejected:
 
@@ -92,10 +92,12 @@ Rejected:
   them.
 - **"Get started" to json-schema.** People who came for hjlint had to find
   their own way.
+- **The 1.x docs of `@hyperjump/json-schema` linked below the groups.**
+  It was one package's line on a page about all of them.
 
 ## Recent posts
 
-Below the groups, and the 1.x link, are the three newest
+Below the groups are the three newest
 [blog posts](blog.md), a card each, with the date, title, and excerpt,
 and a link to all posts. `src/components/RecentPosts.astro` gets them from
 `starlight-blog`. They're last, so the packages, which the page is for,
