@@ -26,8 +26,8 @@
 // - `json-schema-property` on the name of any other property, like a name in
 //   `properties`
 //
-// A `javascript` or `js` block is highlighted too, in each object literal
-// with `$schema` (see javascript-schemas.js).
+// A `javascript`, `js`, `typescript`, or `ts` block is highlighted too, in
+// each object literal with `$schema` (see javascript-schemas.js).
 //
 // The name of a core keyword (`$schema`, `$id`, `$ref`, `$defs`, ... the core
 // vocabulary of 2019-09 and 2020-12, and the same keywords in other dialects)
@@ -73,6 +73,8 @@ export default function pluginJsonSchema() {
           await highlightJson(codeBlock);
         } else if (["javascript", "js"].includes(codeBlock.language) && codeBlock.code.includes("$schema")) {
           await highlightJavaScript(codeBlock);
+        } else if (["typescript", "ts"].includes(codeBlock.language) && codeBlock.code.includes("$schema")) {
+          await highlightJavaScript(codeBlock, { typescript: true });
         }
       }
     }
@@ -98,9 +100,9 @@ async function highlightJson(codeBlock) {
 
 // Each schema is resolved as JSON, and what's marked in the JSON is marked
 // where it came from in the code.
-async function highlightJavaScript(codeBlock) {
+async function highlightJavaScript(codeBlock, options) {
   const { code } = codeBlock;
-  for (const { json, sourceRange } of javascriptSchemas(code)) {
+  for (const { json, sourceRange } of javascriptSchemas(code, options)) {
     const resolved = await resolve(json);
     if (!resolved) {
       continue;

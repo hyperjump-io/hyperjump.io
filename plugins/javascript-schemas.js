@@ -5,12 +5,17 @@
 // marked in the code. A value that isn't a literal, like a variable, is
 // `null` in the JSON. A schema nested in one that's found is the resolver's
 // to find, as an embedded resource.
+//
+// TypeScript is JavaScript once its types are stripped. Node replaces them
+// with spaces, so every range is the same in both.
+import { stripTypeScriptTypes } from "node:module";
 import { parse } from "acorn";
 
-export function javascriptSchemas(code) {
+export function javascriptSchemas(code, { typescript = false } = {}) {
   let program;
   try {
-    program = parse(code, { ecmaVersion: "latest", sourceType: "module" });
+    const javascript = typescript ? stripTypeScriptTypes(code) : code;
+    program = parse(javascript, { ecmaVersion: "latest", sourceType: "module" });
   } catch {
     return [];
   }

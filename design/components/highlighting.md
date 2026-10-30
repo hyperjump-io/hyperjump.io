@@ -91,6 +91,13 @@ the text color, not the JSON property names' green, and a keyword stands
 out from it by weight and brightness. Recoloring every object key to match
 JSON was tried, and clashed with the rest of the JavaScript.
 
+A `typescript` or `ts` block is highlighted the same way, after Node's
+`stripTypeScriptTypes` from `node:module` turns it into JavaScript. It
+replaces each type with spaces, so every range is the same in the
+TypeScript as in the JavaScript, and nothing has to be mapped back. It's
+experimental in Node 22, so a build prints one `ExperimentalWarning`.
+Rejected: an acorn plugin for TypeScript, a dependency for what Node does.
+
 Resolving it, not matching patterns, is what makes it right: whether a name
 is a keyword depends on where it is (`"type"` in `properties` is a property
 name) and on the dialect. A TextMate grammar, which is what Shiki uses,
