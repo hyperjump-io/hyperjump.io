@@ -131,9 +131,17 @@ function withFrontmatter(markdown, path, editUrl) {
 // README there is its docs until then.
 function placeholder(source) {
   const url = `https://github.com/hyperjump-io/${source.repo}`;
-  const command = source.command && !source.unreleased ? `\`\`\`sh\n${source.command}\n\`\`\`\n\n` : "";
+  const command = source.unreleased ? "" : commands(source.command);
   const docs = source.unreleased
     ? `Docs are coming soon.${hidden.has(source.repo) ? "" : ` Until then, see [${source.repo} on GitHub](${url}).`}`
     : `Its docs aren't on this site yet. See [its README on GitHub](${url}#readme).`;
   return `---\ntitle: ${JSON.stringify(source.label)}\n---\n\n${source.description}\n\n${command}${docs}\n`;
+}
+
+// A command for each editor, like Neovim's, isn't always a shell command,
+// so those aren't highlighted as one.
+function commands(command) {
+  if (!command) return "";
+  if (typeof command === "string") return `\`\`\`sh\n${command}\n\`\`\`\n\n`;
+  return command.map(({ label, command }) => `${label}:\n\n\`\`\`\n${command}\n\`\`\`\n\n`).join("");
 }

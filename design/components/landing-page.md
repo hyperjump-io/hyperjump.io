@@ -64,6 +64,12 @@ soon", like a version marker, in place of a command that wouldn't work
 yet. A released package without docs here has its command, like any
 other.
 
+The language server is installed differently in each editor, so its card
+has a command for each, labeled with the editor: VS Code's extension and
+Neovim's Mason package. People choose by their editor, not by the server,
+and installing the server from npm is only for wiring up another editor.
+Rejected: a card for each editor. They'd all link to the same docs.
+
 Components are the libraries the tools are built from: browser,
 json-pointer, json-schema-errors, json-schema-formats, pact, uri,
 uri-template, and later json and others. json-schema-errors is used

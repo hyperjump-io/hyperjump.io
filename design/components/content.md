@@ -68,10 +68,11 @@ placeholder front page instead, with its description from `sources.js`.
 Most packages without docs here are released, with docs in their READMEs,
 so their placeholder has their command and a link to the README on
 GitHub, and their card and sidebar badge have their command and version,
-as with docs. A package marked `unreleased` in `sources.js`, like hjlint,
-isn't on npm yet: its placeholder says its docs are coming soon, with a
-link to the repo on GitHub unless GitHub needs a sign-in to see it, since
-it's private or doesn't exist, and its card and badge say "Coming soon"
+as with docs. A package marked `unreleased` in `sources.js`, like hjlint
+or the language server, isn't released yet: its placeholder says its docs
+are coming soon, with a link to the repo on GitHub unless GitHub needs a
+sign-in to see it, since it's private or doesn't exist, and its card and
+badge say "Coming soon"
 in place of its command and version. That's whether or not it has docs,
 since its docs can land before its release. `git ls-remote` tells the
 cases apart. Any other failure, like no network, is still an error, so a

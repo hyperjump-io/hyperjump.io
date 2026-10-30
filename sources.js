@@ -44,12 +44,14 @@ export const topics = [
 
 // Each repo's website/ becomes a package's pages, at /<repo>/, built from
 // the head of `ref`. `topic` is the topic it's listed in. `description` and
-// `command`, which installs or runs it, are for its card. A package
-// without a command, like an editor's, has none on its card. `summary` is for
+// `command`, which installs or runs it, are for its card. A package that's
+// installed differently in each editor has a list of commands, each with
+// the editor as its label. A package without a command has none on its
+// card. `summary` is for
 // a topic with `list`: a few words beside its link, short enough not to
 // wrap. `install` checks out the whole repo and installs its dependencies,
 // not just website/, for a package the build runs, like json-schema for
-// the schema highlighter. `unreleased` is for a package that isn't on npm
+// the schema highlighter. `unreleased` is for a package that isn't released
 // yet: its card and badge say "Coming soon" in place of its command and
 // version. Set
 // LOCAL_REPOS to a directory holding checkouts of the repos to build from
@@ -76,9 +78,14 @@ export const sources = [
   {
     repo: "json-language-server",
     ref: "main",
+    unreleased: true,
     topic: "editor",
     label: "JSON Language Server",
-    description: "Completion, hover, diagnostics, and formatting for JSON and JSON Schema, for every dialect."
+    description: "Completion, hover, diagnostics, and formatting for JSON and JSON Schema, for every dialect.",
+    command: [
+      { label: "VS Code", command: "code --install-extension hyperjump.hyperjump-json-language-server" },
+      { label: "Neovim", command: ":MasonInstall hyperjump-json-language-server" }
+    ]
   },
   {
     repo: "json-schema-coverage",

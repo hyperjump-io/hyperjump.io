@@ -1,11 +1,12 @@
 ---
 // A card for a package: the whole card links to its docs, and it ends with
-// the command that installs or runs it, if it has one. A package that isn't
-// released ends with "Coming soon", like a version marker, instead.
+// the command that installs or runs it, if it has one, or a labeled command
+// for each editor. A package that isn't released ends with "Coming soon",
+// like a version marker, instead.
 interface Props {
   title: string;
   href: string;
-  command?: string;
+  command?: string | { label: string; command: string }[];
   comingSoon?: boolean;
 }
 
@@ -17,7 +18,18 @@ const { title, href, command, comingSoon } = Astro.props;
   <span class="description"><slot /></span>
   {comingSoon
     ? <span class="version-marker version-marker-coming-soon">Coming soon</span>
-    : command && <code>{command}</code>}
+    : typeof command === "string"
+      ? <code>{command}</code>
+      : command && (
+        <dl class="commands">
+          {command.map(({ label, command }) => (
+            <>
+              <dt>{label}</dt>
+              <dd><code>{command}</code></dd>
+            </>
+          ))}
+        </dl>
+      )}
 </a>
 
 <style>
@@ -47,6 +59,26 @@ const { title, href, command, comingSoon } = Astro.props;
   }
   .version-marker {
     align-self: flex-start;
+  }
+  /* Each editor's label beside its command, the commands lined up. */
+  .commands {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin: 0;
+  }
+  .commands dt {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .commands dd {
+    display: flex;
+    margin: 0;
+  }
+  .commands code {
+    flex-grow: 1;
+    overflow-wrap: anywhere;
   }
   /* The command sits at the bottom of each card, so they line up. */
   code {
