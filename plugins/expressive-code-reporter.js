@@ -1,5 +1,5 @@
 // An Expressive Code plugin that colors what unified's reporter
-// (vfile-reporter) prints, like hjlint's output, the way it's colored in a
+// (vfile-reporter) prints, like the CLI's output, the way it's colored in a
 // terminal. A `text` block is a report if a line is a message, like
 // `1:27-1:29 error ...`, or the summary, like `2 messages (✖ 1 error, ...)`.
 // The docs stay plain text, so they read the same on GitHub.

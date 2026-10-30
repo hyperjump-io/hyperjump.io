@@ -2,7 +2,7 @@
 
 The documentation site for Hyperjump's JSON Schema tools:
 [json-schema](https://github.com/hyperjump-io/json-schema),
-[hjlint](https://github.com/hyperjump-io/hjlint),
+[cli](https://github.com/hyperjump-io/cli),
 [json-schema-coverage](https://github.com/hyperjump-io/json-schema-coverage),
 [json-schema-errors](https://github.com/hyperjump-io/json-schema-errors),
 [json-language-server](https://github.com/hyperjump-io/json-language-server),
@@ -41,7 +41,7 @@ rest.
   `src/content/docs/<topic>/index.mdx`.
 - Link to other pages with relative links (`../guides/validating.md`). Link to
   another repo's docs with a GitHub link into its `website/`
-  (`https://github.com/hyperjump-io/hjlint/blob/main/website/README.md`). A
+  (`https://github.com/hyperjump-io/cli/blob/main/website/README.md`). A
   broken link fails the build.
 - When a page moves or is merged into another, add its old path to
   `redirects.js` here, so links to it keep working.

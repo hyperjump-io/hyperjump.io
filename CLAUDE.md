@@ -1,6 +1,6 @@
 # hyperjump.io
 
-The documentation site for json-schema, hjlint, and browser. It gets each
+The documentation site for json-schema, cli, and browser. It gets each
 repo's `website/` and builds it with Astro Starlight.
 
 ## Docs
@@ -16,7 +16,7 @@ repo's `website/` and builds it with Astro Starlight.
 ## Development
 
 - `npm run build:local` builds from the sibling checkouts of the repos in
-  `sources.js`, like `../json-schema` and `../hjlint`. `npm run build`
+  `sources.js`, like `../json-schema` and `../cli`. `npm run build`
   clones from GitHub.
 - Don't edit `src/content/docs/<repo>/`. It's copied from the repos on
   every build. Fix docs in their repo. `src/content/docs/blog/` and topic

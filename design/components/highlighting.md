@@ -143,7 +143,7 @@ the color of the underlines. They're taken from the page's source, since a
 blockquote's text gets typographic quotes, and the linter prints straight
 ones. Rejected: leaving them as blockquotes, which read as quotations, not
 output, and showed text the linter never prints; and marking them with ⚠
-and ✖, like hjlint does, since the code font doesn't have them, so each
+and ✖, like the CLI does, since the code font doesn't have them, so each
 system drew them with a font of its own, and they came out squished.
 
 If the rule's messages for an example aren't the ones the page lists after

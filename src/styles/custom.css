@@ -266,7 +266,7 @@ ul.starlight-sidebar-topics a.starlight-sidebar-topics-current {
   border-color: currentColor;
 }
 
-/* Reporter output, like hjlint's, colored like it is in a terminal
+/* Reporter output, like the CLI's, colored like it is in a terminal
    (plugins/expressive-code-reporter.js). A file's name is underlined in the
    color of its worst message, or the accent if it has none. */
 .expressive-code :is(.reporter-error, .reporter-error span) {

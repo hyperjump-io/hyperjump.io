@@ -63,7 +63,7 @@ Starlight changes, for little gain on a docs site.
   messages and reporter output, can't be reformatted like code, so `text`
   blocks wrap, with continued lines indented so they don't read as new
   ones. A block with a value that can't be broken, like a long URI in JSON,
-  wraps with `wrap` in its fence. Output that's a table, like hjlint's,
+  wraps with `wrap` in its fence. Output that's a table, like the CLI's,
   doesn't wrap (`wrap=false` in its fence), and scrolls, since wrapping
   breaks its columns apart. Rejected: wrapping all code. Wrapped code is
   harder to read than code formatted to fit.

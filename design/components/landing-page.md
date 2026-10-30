@@ -106,10 +106,10 @@ Rejected:
   would look as important as the language server.
 - **A group for each format.** JSONC and YAML would be lists of links to
   other groups.
-- **The hjlint output as the hero's picture.** It shows linting,
+- **The CLI's output as the hero's picture.** It shows linting,
   validation, and positions at once, but makes one tool the face of all of
   them.
-- **"Get started" to json-schema.** People who came for hjlint had to find
+- **"Get started" to json-schema.** People who came for the CLI had to find
   their own way.
 - **The 1.x docs of `@hyperjump/json-schema` linked below the groups.**
   It was one package's line on a page about all of them.

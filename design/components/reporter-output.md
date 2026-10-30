@@ -1,6 +1,6 @@
 # Reporter output
 
-What unified's reporter (vfile-reporter) prints, like hjlint's output, is
+What unified's reporter (vfile-reporter) prints, like the CLI's output, is
 colored the way it is in a terminal. `plugins/expressive-code-reporter.js`
 finds it in a `text` block, by a line that's a message
 (`1:27-1:29 error ...`) or the summary (`2 messages (✖ 1 error, ...)`), and

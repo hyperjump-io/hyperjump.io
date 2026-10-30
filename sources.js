@@ -67,13 +67,13 @@ export const sources = [
     command: "npm install @hyperjump/json-schema"
   },
   {
-    repo: "hjlint",
+    repo: "cli",
     ref: "main",
     unreleased: true,
     topic: "terminal",
-    label: "hjlint",
+    label: "Hyperjump CLI",
     description: "Lints schemas and validates JSON files against them, with the same rules as the library.",
-    command: "npx hjlint ."
+    command: "npx @hyperjump/cli ."
   },
   {
     repo: "json-language-server",

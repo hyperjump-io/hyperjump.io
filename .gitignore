@@ -6,7 +6,7 @@ TODO*
 
 # Copied from the repos by scripts/fetch-content.js
 src/content/docs/json-schema/
-src/content/docs/hjlint/
+src/content/docs/cli/
 src/content/docs/browser/
 src/content/docs/json-pointer/
 src/content/docs/pact/

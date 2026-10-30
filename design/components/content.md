@@ -2,9 +2,9 @@
 
 ## One site
 
-json-schema, hjlint, browser, and the other packages have one site, and
+json-schema, cli, browser, and the other packages have one site, and
 not a site each. Their users move between them: lint rules are json-schema's, but
-they're run from code with `lint` and from the command line with hjlint, and
+they're run from code with `lint` and from the command line with `hyperjump`, and
 both packages rest on browser's retrieval. One site has one search, one
 navigation, and links between packages that are checked.
 
@@ -23,7 +23,7 @@ Each topic has one home, and the others link to it.
 |---|---|
 | Validation, dialects, keywords, custom keywords, output | json-schema |
 | Lint rules (a page each), presets, rule settings, configuration comments, the `lint` method | json-schema |
-| The CLI, `.hyperjumprc` and its settings, rule packages | hjlint |
+| The CLI, `.hyperjumprc` and its settings, rule packages | cli |
 | Retrieval, URLs, media types, caching, `allowRetrieval` | browser |
 | How json-schema uses retrieval | json-schema, linking to browser |
 
@@ -68,7 +68,7 @@ placeholder front page instead, with its description from `sources.js`.
 Most packages without docs here are released, with docs in their READMEs,
 so their placeholder has their command and a link to the README on
 GitHub, and their card and sidebar badge have their command and version,
-as with docs. A package marked `unreleased` in `sources.js`, like hjlint
+as with docs. A package marked `unreleased` in `sources.js`, like the CLI
 or the language server, isn't released yet: its placeholder says its docs
 are coming soon, with a link to the repo on GitHub unless GitHub needs a
 sign-in to see it, since it's private or doesn't exist, and its card and

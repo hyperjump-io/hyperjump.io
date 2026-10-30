@@ -1,6 +1,6 @@
 # Design
 
-One site for json-schema, hjlint, browser, and the other packages. The docs stay in each repo's
+One site for json-schema, cli, browser, and the other packages. The docs stay in each repo's
 `website/`, so a change and its docs land in the same commit. This repo gets
 them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 
@@ -20,7 +20,7 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
   property names in schema examples
 - [Code block labels](components/code-labels.md): what each block is,
   like "JSON Schema · 2020-12"
-- [Reporter output](components/reporter-output.md): hjlint's output,
+- [Reporter output](components/reporter-output.md): the CLI's output,
   colored like it is in a terminal
 - [Blog](components/blog.md): dated posts, written here, beside docs
   that are always current
