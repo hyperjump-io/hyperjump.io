@@ -58,10 +58,11 @@ card stretched to the list's height.
 A card, `src/components/PackageCard.astro`, is one link to the package's
 docs, with what it is and the command that installs or runs it. Formats a
 tool reads, like JSONC or YAML, go on its card, not in a group of their
-own, since they're true of many tools. A package whose docs are
-[coming soon](content.md#where-pages-come-from) isn't released, so its
-card ends with "Coming soon", like a version marker, in place of a
-command that wouldn't work yet.
+own, since they're true of many tools. A package that
+[isn't released](content.md#where-pages-come-from) ends with "Coming
+soon", like a version marker, in place of a command that wouldn't work
+yet. A released package without docs here has its command, like any
+other.
 
 Components are the libraries the tools are built from: browser,
 json-pointer, json-schema-errors, json-schema-formats, pact, uri,

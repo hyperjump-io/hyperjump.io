@@ -48,7 +48,7 @@ for (const source of sources) {
   await writeFile(join(out, source.repo, marker), "");
 
   if (!hasDocs(source)) {
-    console.warn(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/, so its docs are coming soon`);
+    console.warn(`${source.repo}${localRepos ? "" : `@${source.ref}`} has no website/, so it has a placeholder`);
     await writeFile(join(out, source.repo, "index.md"), placeholder(source));
     continue;
   }
@@ -127,10 +127,13 @@ function withFrontmatter(markdown, path, editUrl) {
 }
 
 // The package's front page until its docs are on its branch: what its card
-// on the landing page says, and where it is on GitHub.
+// on the landing page says, and where it is on GitHub. A released package's
+// README there is its docs until then.
 function placeholder(source) {
-  const github = hidden.has(source.repo)
-    ? ""
-    : ` Until then, see [${source.repo} on GitHub](https://github.com/hyperjump-io/${source.repo}).`;
-  return `---\ntitle: ${JSON.stringify(source.label)}\n---\n\n${source.description}\n\nDocs are coming soon.${github}\n`;
+  const url = `https://github.com/hyperjump-io/${source.repo}`;
+  const command = source.command && !source.unreleased ? `\`\`\`sh\n${source.command}\n\`\`\`\n\n` : "";
+  const docs = source.unreleased
+    ? `Docs are coming soon.${hidden.has(source.repo) ? "" : ` Until then, see [${source.repo} on GitHub](${url}).`}`
+    : `Its docs aren't on this site yet. See [its README on GitHub](${url}#readme).`;
+  return `---\ntitle: ${JSON.stringify(source.label)}\n---\n\n${source.description}\n\n${command}${docs}\n`;
 }

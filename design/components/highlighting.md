@@ -106,8 +106,8 @@ name's class could move into the library for both.
   Its `install` in `sources.js` checks out the whole repo, not just
   `website/`, and runs `npm ci --omit=dev`, once its branch has docs.
   unified and browser's JSON parser come from that repo's `node_modules`, so
-  they're the copies it uses. While json-schema's docs are
-  [coming soon](content.md#where-pages-come-from), nothing is loaded,
+  they're the copies it uses. Until json-schema has docs
+  [here](content.md#where-pages-come-from), nothing is loaded,
   and examples aren't highlighted. They're only on json-schema's pages
   then, and on "Reading schemas", which nothing links to yet.
 - It's loaded with Node's own `import()`. Astro loads the config with Vite,

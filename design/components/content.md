@@ -64,15 +64,21 @@ lost or disagree with what's there.
 A package goes on the site before it has docs, so the site can go up
 before every package's release. A repo whose branch has no
 `website/README.md`, or whose repo or branch isn't on GitHub yet, gets a
-placeholder front page instead: its description from `sources.js`, and
-that its docs are coming soon, with a link to the repo on GitHub unless
-GitHub needs a sign-in to see it, since it's private or doesn't exist.
-`git ls-remote` tells the cases apart. Any other failure, like no network,
-is still an error, so a deploy doesn't replace every package's docs with a
-placeholder. Its card on the landing page and its place in the sidebar
-stay the same, with "Coming soon" in place of its version. When the
+placeholder front page instead, with its description from `sources.js`.
+Most packages without docs here are released, with docs in their READMEs,
+so their placeholder has their command and a link to the README on
+GitHub, and their card and sidebar badge have their command and version,
+as with docs. A package marked `unreleased` in `sources.js`, like hjlint,
+isn't on npm yet: its placeholder says its docs are coming soon, with a
+link to the repo on GitHub unless GitHub needs a sign-in to see it, since
+it's private or doesn't exist, and its card and badge say "Coming soon"
+in place of its command and version. That's whether or not it has docs,
+since its docs can land before its release. `git ls-remote` tells the
+cases apart. Any other failure, like no network, is still an error, so a
+deploy doesn't replace every package's docs with a placeholder. When the
 package's docs land on its branch, they replace the placeholder, with no
-change here. Rejected: leaving the package out of `sources.js` until it
+change here. Rejected: "Coming soon" for every package without docs. Most
+are released, and the landing page said they weren't. Rejected: leaving the package out of `sources.js` until it
 has docs. Each release would be a change here, and the landing page
 would be missing its main packages until they ship.
 

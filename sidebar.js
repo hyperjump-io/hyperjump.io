@@ -10,8 +10,8 @@
 // repo's, and each package is an item with its version as its badge: a
 // group of its pages, or a link if it has one page.
 // Features marked "Added in" a later version than a badge are newer than it.
-// A package without docs yet has only its placeholder front page, with
-// "Coming soon" as its badge.
+// A package without docs yet has only its placeholder front page. A package
+// that isn't released has "Coming soon" as its badge.
 import { readFileSync } from "node:fs";
 import { posix } from "node:path";
 import { markdownToMdast } from "satteri";
@@ -88,7 +88,7 @@ function toSlug(path) {
 }
 
 function versionBadge(source) {
-  if (!hasDocs(source)) return { text: "Coming soon", variant: "default" };
+  if (source.unreleased) return { text: "Coming soon", variant: "default" };
   const { version } = JSON.parse(readFileSync(`${repoDir(source)}/package.json`, "utf8"));
   return { text: `v${version}`, variant: "default" };
 }

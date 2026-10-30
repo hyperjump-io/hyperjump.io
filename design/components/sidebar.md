@@ -51,9 +51,10 @@ A package's pages are the nested list under the "Contents" heading of its
 navigation in the same commit as its pages. The heading lets a package's
 front page have lists of its own, like a list of features or its API,
 which aren't pages. Without the heading, the package has one page. A
-package whose docs are [coming soon](content.md#where-pages-come-from)
-has only its placeholder, with "Coming soon" as its badge, since its
-version on the branch isn't what the docs will describe. `sidebar.js`
+package without docs yet has only its
+[placeholder](content.md#where-pages-come-from). A package that isn't
+released has "Coming soon" as its badge, since its version on the branch
+isn't on npm. `sidebar.js`
 reads the list:
 
 - A linked item is a page.

@@ -49,7 +49,9 @@ export const topics = [
 // a topic with `list`: a few words beside its link, short enough not to
 // wrap. `install` checks out the whole repo and installs its dependencies,
 // not just website/, for a package the build runs, like json-schema for
-// the schema highlighter. Set
+// the schema highlighter. `unreleased` is for a package that isn't on npm
+// yet: its card and badge say "Coming soon" in place of its command and
+// version. Set
 // LOCAL_REPOS to a directory holding checkouts of the repos to build from
 // those instead.
 export const sources = [
@@ -65,6 +67,7 @@ export const sources = [
   {
     repo: "hjlint",
     ref: "main",
+    unreleased: true,
     topic: "terminal",
     label: "hjlint",
     description: "Lints schemas and validates JSON files against them, with the same rules as the library.",
@@ -161,5 +164,5 @@ export const repoDir = (source) => localRepos
 export const websiteDir = (source) => resolve(repoDir(source), "website");
 
 // A repo whose branch has no website/ yet, or that isn't on GitHub yet, has
-// a placeholder page that says its docs are coming soon.
+// a placeholder front page.
 export const hasDocs = (source) => existsSync(resolve(websiteDir(source), "README.md"));
