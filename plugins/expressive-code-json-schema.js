@@ -308,18 +308,19 @@ function library() {
     if (!hasDocs(source)) return undefined;
     const dir = repoDir(source);
     const { JsonSchema, jsonSchemaResolve } = await importExport(dir, ".");
-    const jsonSchema = new JsonSchema();
     const dialects = {
-      "./v1": "addV1",
-      "./draft-04": "addDraft04",
-      "./draft-06": "addDraft06",
-      "./draft-07": "addDraft07",
-      "./draft-2019-09": "addDraft201909",
-      "./draft-2020-12": "addDraft202012"
+      "./v1": "v1Dialect",
+      "./draft-04": "draft04Dialect",
+      "./draft-06": "draft06Dialect",
+      "./draft-07": "draft07Dialect",
+      "./draft-2019-09": "draft201909Dialect",
+      "./draft-2020-12": "draft202012Dialect"
     };
-    for (const [subpath, add] of Object.entries(dialects)) {
-      (await importExport(dir, subpath))[add](jsonSchema);
-    }
+    const jsonSchema = new JsonSchema({
+      dialects: await Promise.all(Object.entries(dialects).map(async ([subpath, name]) => {
+        return (await importExport(dir, subpath))[name];
+      }))
+    });
     const { unified } = await importExport(join(dir, "node_modules/unified"), ".");
     const { VFile } = await importExport(join(dir, "node_modules/vfile"), ".");
     const { rejsonParse } = await importExport(join(dir, "node_modules/@hyperjump/browser"), "./json");
