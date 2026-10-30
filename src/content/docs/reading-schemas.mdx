@@ -5,8 +5,8 @@ template: splash
 editUrl: false
 ---
 
-In this site's JSON Schema examples, how a property looks says what it is
-to its schema's dialect.
+In this site's JSON Schema examples, the styling of a property tells you
+what it means in the schema's dialect.
 
 ```json
 {
@@ -25,8 +25,8 @@ to its schema's dialect.
 }
 ```
 
-In draft-04 through draft-07, a `$ref` replaces the schema it's in, so the
-whole object is the reference, and the rest of it has no effect.
+In draft-04 through draft-07, a `$ref` replaces the schema it's in. The
+whole object is the reference and the rest of it has no effect.
 
 ```json
 {
@@ -52,17 +52,17 @@ keyword.
 | Looks like | Means | In the examples |
 | --- | --- | --- |
 | Bold name | A keyword | `type`, `properties` |
-| Bold, italic name | A core keyword, which identifies, references, or holds schemas | `$schema`, `$id`, `$ref`, `$defs` |
+| Bold italic name | A core keyword: one that identifies, references, or holds schemas | `$schema`, `$id`, `$ref`, `$defs` |
 | Bold value | The dialect, from `$schema` | `https://json-schema.org/draft/2020-12/schema` |
 | Dotted underline | An identifier | The values of `$id` and `$anchor` |
 | Underline | A reference | `#/$defs/address`, and all of the draft-07 object with `$ref` |
-| Gray, italic | Has no effect, like a comment | `$comment`, the misspelled `maxLenght`, and `minLength` next to the draft-07 `$ref` |
+| Gray italic | Has no effect, like a comment | `$comment`, the misspelled `maxLenght`, and `minLength` next to the draft-07 `$ref` |
 | Italic name | An annotation in v1 | `x-deprecated` |
 | Plain name | Not a keyword | `name`, `nickname`, `address` |
 
 On a [lint rule's page](/json-schema/linting/rules/), what the rule reports
-also has a wavy underline, orange for a warning and red for an error, with
-its message after the example.
+also has a wavy underline. It's orange for a warning and red for an error.
+The message follows the example.
 
-Each example's header says what it is: JSON Schema and its dialect, or JSON
-that isn't a schema.
+Each example's header says what it is: either JSON Schema and its dialect,
+or JSON that isn't a schema.

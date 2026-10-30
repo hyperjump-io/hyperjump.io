@@ -63,7 +63,7 @@ export const sources = [
     install: true,
     topic: "code",
     label: "JSON Schema",
-    description: "A validator and linter for every dialect from draft-04 to 2020-12, and JSON Schema v1. Errors with positions in the JSON text, and annotations.",
+    description: "A validator and linter for JSON Schema v1 and every dialect from draft-04 to 2020-12. It reports errors at their place in the JSON text and collects annotations.",
     command: "npm install @hyperjump/json-schema"
   },
   {
@@ -81,7 +81,7 @@ export const sources = [
     unreleased: true,
     topic: "editor",
     label: "JSON Language Server",
-    description: "Completion, hover, diagnostics, and formatting for JSON and JSON Schema, for every dialect.",
+    description: "Completion, hover, diagnostics, and formatting for JSON and JSON Schema in every dialect.",
     command: [
       { label: "VS Code", command: "code --install-extension hyperjump.hyperjump-json-language-server" },
       { label: "Neovim", command: ":MasonInstall hyperjump-json-language-server" }
@@ -92,7 +92,7 @@ export const sources = [
     ref: "main",
     topic: "tests",
     label: "JSON Schema Coverage",
-    description: "Vitest matchers for schemas, and coverage reports for the keywords, branches, and subschemas your tests reach.",
+    description: "Vitest matchers for schemas and coverage reports that show which keywords, branches, and subschemas your tests reach.",
     command: "npm install --save-dev @hyperjump/json-schema-coverage"
   },
   {
@@ -101,7 +101,7 @@ export const sources = [
     topic: "components",
     label: "Browser",
     summary: "JRef hypermedia browser",
-    description: "A client for JSON documents that reference each other, over HTTP or from files, that follows references for you.",
+    description: "A client for JSON documents that reference each other. It follows references for you over HTTP or in local files.",
     command: "npm install @hyperjump/browser"
   },
   {
@@ -137,7 +137,7 @@ export const sources = [
     topic: "components",
     label: "Pact",
     summary: "Iterator pipelines",
-    description: "Higher order functions for iterators and async iterators, as steps in a pipeline, with the native Iterator helpers' names.",
+    description: "Higher-order functions for iterators and async iterators. Chain them into pipelines using the same names as the native Iterator helpers.",
     command: "npm install @hyperjump/pact"
   },
   {
@@ -155,7 +155,7 @@ export const sources = [
     topic: "components",
     label: "URI Template",
     summary: "RFC 6570 templates",
-    description: "Parse and expand RFC 6570 URI Templates, up to Level 4, with detailed errors.",
+    description: "Parse and expand RFC 6570 URI Templates up to Level 4 with detailed errors.",
     command: "npm install @hyperjump/uri-template"
   }
 ];
