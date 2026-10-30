@@ -39,6 +39,12 @@ the site and crowded search results. Their signatures were split into
 pieces of inline code, which were hard to read, and they needed the whole
 repo and `npm install` for every build, not just `website/`.
 
+The docs are TypeScript first. Examples are written the way a TypeScript
+user writes them, and a type is explained where the thing it types is, not
+in a section of its own. Rejected: untyped examples with "In TypeScript"
+asides. They made types look optional, and the untyped examples didn't
+always type-check, so they didn't show TypeScript users what to write.
+
 ## Where pages come from
 
 The docs stay in each repo's `website/`, as plain markdown that reads well on

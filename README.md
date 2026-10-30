@@ -45,6 +45,11 @@ rest.
   broken link fails the build.
 - When a page moves or is merged into another, add its old path to
   `redirects.js` here, so links to it keep working.
+- Write examples in TypeScript, in `typescript` blocks, as a TypeScript
+  user would: `satisfies` for an object that has to fit a type, like a
+  keyword, and types on parameters that aren't inferred. Explain a type
+  where its thing is explained, not in an "In TypeScript" section. Check
+  that a typed example compiles.
 - Show a short return value in a comment on its line
   (`validator.validate(value); // true`). Show anything longer after the
   code block, in a block of its own: what's printed in a `text` block, and

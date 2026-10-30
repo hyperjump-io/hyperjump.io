@@ -3,5 +3,6 @@
 // is a site path without its trailing slash, like
 // "/json-schema/usage/modes": "/json-schema/guides/validating/".
 export const redirects = {
-  "/hjlint": "/cli/"
+  "/hjlint": "/cli/",
+  "/json-schema/guides/typescript": "/json-schema/guides/schema-types/"
 };
