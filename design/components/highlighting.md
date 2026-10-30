@@ -98,6 +98,20 @@ TypeScript as in the JavaScript, and nothing has to be mapped back. It's
 experimental in Node 22, so a build prints one `ExperimentalWarning`.
 Rejected: an acorn plugin for TypeScript, a dependency for what Node does.
 
+A `jref` block is a [JRef](https://github.com/hyperjump-io/json-reference/blob/main/spec.md)
+document, and each reference in it looks like a `$ref` that replaces its
+schema: `$ref` is a core keyword, the object is underlined like a link,
+and its other properties are gray and italic, since a reference is
+replaced by what it refers to. It's parsed with browser's `fromJref`, from
+json-schema's `node_modules` like its JSON parser, so a reference is
+whatever browser says it is: an object with a `$ref` string. Shiki
+highlights it as JSON, by an alias in `astro.config.mjs`, and its title is
+"JRef". It has its own language so it reads apart from JSON, where `$ref`
+means nothing, and so a reference's look, which is JSON Schema's, means
+the same thing in both. GitHub doesn't know `jref`, so it shows the block
+without colors. Rejected: finding JRef in `json` blocks, since `$ref` in
+plain JSON isn't a reference.
+
 Resolving it, not matching patterns, is what makes it right: whether a name
 is a keyword depends on where it is (`"type"` in `properties` is a property
 name) and on the dialect. A TextMate grammar, which is what Shiki uses,

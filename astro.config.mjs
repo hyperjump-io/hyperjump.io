@@ -28,6 +28,9 @@ export default defineConfig({
         plugins: [pluginLabels(), pluginJsonSchema(), pluginReporter()],
         // Stock themes, so any could be swapped in without restyling
         themes: ["kanagawa-dragon", "ayu-light"],
+        // JRef is JSON, highlighted as JSON before its references are marked
+        // (plugins/expressive-code-json-schema.js)
+        shiki: { langAlias: { jref: "json" } },
         // A block's title says what it is (plugins/expressive-code-labels.js),
         // so its header is a caption in the code's background, over a
         // hairline, not an editor's tab bar, which reads as a file name

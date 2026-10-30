@@ -29,6 +29,12 @@
 // A `javascript`, `js`, `typescript`, or `ts` block is highlighted too, in
 // each object literal with `$schema` (see javascript-schemas.js).
 //
+// A `jref` block is parsed as JRef with @hyperjump/browser, and each
+// reference looks like a `$ref` that replaces its schema: `$ref`'s name gets
+// `json-schema-core` and `json-schema-keyword`, the object gets
+// `json-schema-reference-object`, and its other properties get
+// `json-schema-ignored`, since a reference is replaced by what it refers to.
+//
 // The name of a core keyword (`$schema`, `$id`, `$ref`, `$defs`, ... the core
 // vocabulary of 2019-09 and 2020-12, and the same keywords in other dialects)
 // also gets `json-schema-core`.
@@ -71,6 +77,8 @@ export default function pluginJsonSchema() {
       postprocessAnalyzedCode: async ({ codeBlock }) => {
         if (codeBlock.language === "json") {
           await highlightJson(codeBlock);
+        } else if (codeBlock.language === "jref") {
+          await highlightJref(codeBlock);
         } else if (["javascript", "js"].includes(codeBlock.language) && codeBlock.code.includes("$schema")) {
           await highlightJavaScript(codeBlock);
         } else if (["typescript", "ts"].includes(codeBlock.language) && codeBlock.code.includes("$schema")) {
@@ -95,6 +103,25 @@ async function highlightJson(codeBlock) {
   highlight(codeBlock, resolved.tree, (position) => position);
   if (rule) {
     underlineLintMessages(codeBlock, page, rule, resolved.messages);
+  }
+}
+
+// A JRef reference is styled like a `$ref` that replaces its schema.
+async function highlightJref(codeBlock) {
+  const lib = await library();
+  if (!lib) return;
+  const { node } = lib.fromJref(codeBlock.code);
+  for (const reference of node ? referenceObjects(node) : []) {
+    for (const property of reference.children) {
+      const [name] = property.children;
+      if (name.value === "$ref") {
+        annotate(codeBlock, name.position, "json-schema-core");
+        annotate(codeBlock, name.position, "json-schema-keyword");
+      } else {
+        annotate(codeBlock, property.position, "json-schema-ignored");
+      }
+    }
+    annotate(codeBlock, reference.position, "json-schema-reference-object", "later");
   }
 }
 
@@ -253,7 +280,8 @@ function* marks(node, parent) {
   }
 }
 
-// The objects a `$ref` replaces (draft-04 through draft-07)
+// The objects a `$ref` replaces (draft-04 through draft-07), or JRef's
+// references
 function* referenceObjects(node) {
   if (node.type === "reference") {
     yield node;
@@ -299,8 +327,8 @@ function* propertyMarks(property, object) {
 }
 
 // @hyperjump/json-schema v2 isn't published, so it's loaded from the repo the
-// site is built from, with every dialect. unified and browser's JSON parser
-// come from the same place, so they're the copies it uses. Until json-schema
+// site is built from, with every dialect. unified and browser's JSON and JRef
+// parsers come from the same place, so they're the copies it uses. Until json-schema
 // has docs, its branch is v1, which isn't loaded, and examples aren't
 // highlighted.
 let loading;
@@ -326,8 +354,9 @@ function library() {
     const { unified } = await importExport(join(dir, "node_modules/unified"), ".");
     const { VFile } = await importExport(join(dir, "node_modules/vfile"), ".");
     const { rejsonParse } = await importExport(join(dir, "node_modules/@hyperjump/browser"), "./json");
+    const { fromJref } = await importExport(join(dir, "node_modules/@hyperjump/browser"), "./jref");
     const lintRules = async (rule) => (await importExport(dir, `./lint/rules/${rule}`)).default;
-    return { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules };
+    return { jsonSchema, jsonSchemaResolve, rejsonParse, fromJref, unified, VFile, lintRules };
   })();
   return loading;
 }

@@ -24,6 +24,7 @@ const languages = {
   js: "JavaScript",
   typescript: "TypeScript",
   ts: "TypeScript",
+  jref: "JRef",
   bash: "Terminal",
   sh: "Terminal",
   shell: "Terminal",

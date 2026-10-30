@@ -68,6 +68,9 @@ rest.
   ```` ```json dialect=https://json-schema.org/draft/2020-12/schema ````.
   GitHub ignores it. In a `javascript` block, an object literal with
   `$schema` is highlighted the same way.
+- Put a JRef document in a `jref` block. It's highlighted as JSON, and
+  each reference looks like a `$ref` that replaces its schema, underlined
+  as a link. GitHub shows it without colors.
 - On a lint rule's page, each schema example is linted with the rule, and
   what each message is about is underlined. The build fails if the messages
   aren't the ones the page lists after the example.
