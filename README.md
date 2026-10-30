@@ -30,6 +30,24 @@ are copied when the site starts, so restart it to see later changes.
 Docs are plain markdown that reads well on GitHub. The site build handles the
 rest.
 
+Write so a person can read each sentence once and understand it:
+
+- One idea per sentence. When a sentence needs a second "so", "and", or
+  "which" to finish, split it.
+- Don't add clauses with commas. "It's an ES module with TypeScript types"
+  reads better than "It's an ES module, with TypeScript types". Don't put a
+  comma before "and" when it joins only two things.
+- Lead with the action and say who does what: "Use `--frail` to fail on
+  warnings."
+- Use a list or a table for three or more parallel items with details,
+  instead of a long sentence that strings them together.
+- Prefer "for example" and "such as" over a parenthetical, and "see X" as
+  its own sentence over "(see X)".
+- Use small words like "that", "the", and "it's" when they make a sentence
+  easier to read. Short isn't the goal. Clear is.
+
+The rest is about how pages are put together:
+
 - Each page starts with an H1. It becomes the page's title.
 - `website/README.md` lists the pages, as a nested list under a `Contents`
   heading. That list is the package's sidebar, in the same order. Without
