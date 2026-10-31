@@ -9,7 +9,10 @@ Keep each sentence easy to read once.
   than "It's an ES module, with TypeScript types". "No cache of its own
   because `fetch` already caches" needs no comma because the reason is the
   point. A comma is fine before a separate statement that follows from the
-  first: "Entries are JSON, so they can be stored anywhere."
+  first: "Entries are JSON, so they can be stored anywhere." A "so" that
+  means "so that" gives the purpose, which is the point, so it takes no
+  comma: "It follows the references for you so you can work with linked
+  documents as if they were one value."
 - Don't put a comma before "and" when it joins only two things, but do when
   it ends a list of three or more: "apples and bananas", "apples, bananas,
   and oranges". A comma after an introductory clause is fine: "When you step
