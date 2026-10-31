@@ -48,6 +48,16 @@ Write prose that reads as one explanation, not a list of separate facts:
   system" is more useful than the name of the error a backslash causes.
 - Introduce every code block and table with a sentence that says what it
   shows. When an example demonstrates something, say what.
+- When a consequence is hard to picture, show it with a concrete example.
+  "Say Alice and Bob each have their own token for the same URL. If their
+  requests share a cache, Bob sees Alice's account." Then show the code that
+  prevents it. Warnings about security and correctness need this most,
+  because the reader has to understand them to act on them.
+- Order an explanation as the case that's fine, then the case that isn't,
+  then what to do about it.
+- When a term is the reason for a behavior, say what the term means. "The
+  cache is private" explains nothing until it says "which means it's meant
+  for one user".
 - Don't announce. Lines like "Now for the good part" or "Look at what's
   missing" add nothing. Say what's interesting instead.
 
@@ -65,6 +75,16 @@ Keep each sentence easy to read once:
   it ends a list of three or more: "apples and bananas", "apples, bananas,
   and oranges". A comma after an introductory clause is fine: "When you step
   into one, you get the value it refers to."
+- Name the subject when "it" could mean more than one thing. "A URL that
+  ends with `/` gets its headers for everything under it, and any other URL
+  gets them only for itself" makes the reader work out what each "it" is.
+  "Headers for a URL that ends with `/` are sent with every request under
+  that URL" doesn't.
+- Don't add a short sentence that only points back at the one before it,
+  such as "It replaces the default one." or "That's the same rule
+  `allowRetrieval` uses." Fold it into the sentence it's about, or lead with
+  it so it frames what follows: "URLs match the way they do in
+  `allowRetrieval`."
 - Lead with the action and say who does what: "Use `--frail` to fail on
   warnings."
 - Use a list or a table for three or more parallel items with details,
