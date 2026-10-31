@@ -16,6 +16,16 @@ Write prose that reads as one explanation, not a list of separate facts.
 - Say what the reader needs and leave out internals that don't change what
   they do. "The string you pass to `get` is the same on every operating
   system" is more useful than the name of the error a backslash causes.
+- Make a "so" follow directly from what's before it. "A `Hyperjump` can only
+  browse JRef nodes, so this plugin uses `JrefMediaTypeDocument`" skips a
+  step: this plugin's documents come from the JRef parser. When the reader
+  would have to fill in a step, write it.
+- Say what a comparison is compared to. "One that has a lower quality" doesn't
+  say lower than what. When the reader is about to see the values, give them:
+  "a quality of 0.9", "the default quality of 1".
+- Describe things the way the reader sees them, the same way throughout a
+  page. A page about documents that come from HTTP or files shouldn't start
+  with "a response". A file is a document to the reader, not a response.
 - Introduce every code block and table with a sentence that says what it
   shows. When an example demonstrates something, say what.
 - When a consequence is hard to picture, show it with a concrete example.

@@ -24,6 +24,14 @@ Keep each sentence easy to read once.
   `allowRetrieval` uses." Fold it into the sentence it's about, or lead with
   it so it frames what follows: "URLs match the way they do in
   `allowRetrieval`."
+- Don't put an "and" list inside another one. "How it's parsed and what
+  references and fragments mean" makes the reader go back to work out what
+  each "and" joins. Give each item its own sentence.
+- Put a name before its description. "Uses `JrefMediaTypeDocument`, which is
+  the built-in JRef plugin's type for a document that parsed without errors"
+  reads better than a sentence that ends on the name. Don't end on a
+  possessive that leaves out its noun, such as "the same as the built-in JRef
+  plugin's".
 - Lead with the action and say who does what: "Use `--frail` to fail on
   warnings."
 - Use a list or a table for three or more parallel items with details,
