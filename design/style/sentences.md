@@ -12,7 +12,10 @@ Keep each sentence easy to read once.
   first: "Entries are JSON, so they can be stored anywhere." A "so" that
   means "so that" gives the purpose, which is the point, so it takes no
   comma: "It follows the references for you so you can work with linked
-  documents as if they were one value."
+  documents as if they were one value." When the reader needs a term's
+  definition to follow what comes next, give the definition its own
+  sentence: "a hypermedia client for JRef. JRef is JSON with references."
+  After a comma, it reads as an aside.
 - Don't put a comma before "and" when it joins only two things, but do when
   it ends a list of three or more: "apples and bananas", "apples, bananas,
   and oranges". A comma after an introductory clause is fine: "When you step
