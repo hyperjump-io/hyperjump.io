@@ -12,7 +12,9 @@ Write prose that reads as one explanation, not a list of separate facts.
 - Be precise. Use the API's own terms, such as "a `Hyperjump` instance" or
   "the default for `allowRetrieval`", instead of a friendly paraphrase. Don't
   simplify until it's wrong. "The session won't retrieve it again" sounds
-  like a document can only be read once. Say what actually happens.
+  like a document can only be read once. Say what actually happens. Use one
+  word for one thing within a sentence. "Its value is the URL of the value it
+  refers to" uses "value" for two different things.
 - Say what the reader needs and leave out internals that don't change what
   they do. "The string you pass to `get` is the same on every operating
   system" is more useful than the name of the error a backslash causes.
@@ -24,7 +26,9 @@ Write prose that reads as one explanation, not a list of separate facts.
   for a consequence or a separate fact, it hides how they relate: "a file is
   still processed if the parser recovered, and those errors are reported as
   warnings". Use the word that says the relationship, such as "which" for a
-  consequence, or give the second statement its own sentence.
+  consequence, or give the second statement its own sentence. A "which" that
+  only adds a description is a statement of its own, so give it its own
+  sentence.
 - Say what a comparison is compared to. "One that has a lower quality" doesn't
   say lower than what. When the reader is about to see the values, give them:
   "a quality of 0.9", "the default quality of 1".
