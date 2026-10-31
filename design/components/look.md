@@ -67,6 +67,19 @@ Starlight changes, for little gain on a docs site.
   doesn't wrap (`wrap=false` in its fence), and scrolls, since wrapping
   breaks its columns apart. Rejected: wrapping all code. Wrapped code is
   harder to read than code formatted to fit.
+- **Inline code.** On a gray tinted toward the accent's hue (95°),
+  `hsl(95, 10%, 17%)` in the dark theme and `hsl(95, 22%, 93%)` in the
+  light one, with rounded corners. It's the size of code in code blocks,
+  `--sl-text-code`. Picked with a temporary switcher on the site.
+  Rejected:
+  - Starlight's, a cool blue-gray with square corners. In the dark theme
+    it's much lighter than the page, a bright slab beside the warm greens.
+  - Starlight's darker gray (`gray-6`) with rounded corners, which was
+    still blue.
+  - A neutral, untinted gray.
+  - An outline instead of a background.
+  - No box, only the code font, like code in headings.
+  - Starlight's size, a size smaller than the text around it.
 - **Code in headings.** Set apart by its font, without the background
   inline code has, which made a block of gray as big as the heading.
 - **Tables.** Code in a table's first column, which names things like lint
