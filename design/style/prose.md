@@ -16,10 +16,15 @@ Write prose that reads as one explanation, not a list of separate facts.
 - Say what the reader needs and leave out internals that don't change what
   they do. "The string you pass to `get` is the same on every operating
   system" is more useful than the name of the error a backslash causes.
-- Make a "so" follow directly from what's before it. "A `Hyperjump` can only
-  browse JRef nodes, so this plugin uses `JrefMediaTypeDocument`" skips a
-  step: this plugin's documents come from the JRef parser. When the reader
-  would have to fill in a step, write it.
+- Join two statements only with a word that says how they relate. "So" says
+  the second follows from the first. It has to follow directly: "A
+  `Hyperjump` can only browse JRef nodes, so this plugin uses
+  `JrefMediaTypeDocument`" skips a step, which is that this plugin's
+  documents come from the JRef parser. "And" says the two are alike. Used
+  for a consequence or a separate fact, it hides how they relate: "a file is
+  still processed if the parser recovered, and those errors are reported as
+  warnings". Use the word that says the relationship, such as "which" for a
+  consequence, or give the second statement its own sentence.
 - Say what a comparison is compared to. "One that has a lower quality" doesn't
   say lower than what. When the reader is about to see the values, give them:
   "a quality of 0.9", "the default quality of 1".
