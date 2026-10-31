@@ -20,11 +20,18 @@ Keep each sentence easy to read once.
   it ends a list of three or more: "apples and bananas", "apples, bananas,
   and oranges". A comma after an introductory clause is fine: "When you step
   into one, you get the value it refers to."
-- Name the subject when "it" could mean more than one thing. "A URL that
-  ends with `/` gets its headers for everything under it, and any other URL
-  gets them only for itself" makes the reader work out what each "it" is.
-  "Headers for a URL that ends with `/` are sent with every request under
-  that URL" doesn't.
+- Name the subject at the start of a page, a section, and a paragraph. Don't
+  lead with "it". Readers arrive from search, the sidebar, and links. A reader
+  who skims starts at the top of each paragraph. "The Hyperjump browser is an
+  ES module with TypeScript types" instead of "It's an ES module with
+  TypeScript types". Name the kind of thing, even when the heading makes it
+  seem obvious: "A URI scheme plugin defines the `schemes` it handles" instead
+  of "A plugin defines the `schemes` it handles".
+- After that, "it" is fine when only one thing could be meant. When more than
+  one could, name the thing. "A URL that ends with `/` gets its headers for
+  everything under it, and any other URL gets them only for itself" makes the
+  reader work out what each "it" is. "Headers for a URL that ends with `/` are
+  sent with every request under that URL" doesn't.
 - Don't add a short sentence that only points back at the one before it,
   such as "It replaces the default one." or "That's the same rule
   `allowRetrieval` uses." Fold it into the sentence it's about, or lead with
@@ -38,9 +45,6 @@ Keep each sentence easy to read once.
   reads better than a sentence that ends on the name. Don't end on a
   possessive that leaves out its noun, such as "the same as the built-in JRef
   plugin's".
-- Name the kind of thing when a section first mentions it, even when the
-  heading makes it seem obvious. "A URI scheme plugin defines the `schemes`
-  it handles" instead of "A plugin has the `schemes` it handles".
 - Use the same verb for the same relationship on every page. A plugin
   "defines" what it handles everywhere. A vague verb like "has" could mean
   contains, owns, or is given, and a different verb makes the reader wonder
