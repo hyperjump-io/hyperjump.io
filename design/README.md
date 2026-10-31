@@ -4,6 +4,13 @@ One site for json-schema, cli, browser, and the other packages. The docs stay in
 `website/`, so a change and its docs land in the same commit. This repo gets
 them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 
+## Style
+
+How to write docs in every repo, including this one.
+
+- [Prose](style/prose.md): one explanation, not a list of separate facts
+- [Sentences](style/sentences.md): each easy to read once
+
 ## Components
 
 - [Content](components/content.md): one site, where its pages come from, and
