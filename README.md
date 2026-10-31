@@ -53,6 +53,13 @@ easy to read. How pages are put together is here:
   keyword, and types on parameters that aren't inferred. Explain a type
   where its thing is explained, not in an "In TypeScript" section. Check
   that a typed example compiles.
+- Write an example the way a user would write the real thing, and make
+  examples of the same kind of thing look alike. A plugin is a class that
+  keeps its own state on every page, not an object literal that reads a
+  variable from outside it.
+- Document options and properties in a table with a `What it is` column,
+  one row for each by its real name. Write a method with its parameters,
+  like `retrieve(uri, options)`.
 - Show a short return value in a comment on its line
   (`validator.validate(value); // true`). Show anything longer after the
   code block, in a block of its own: what's printed in a `text` block, and

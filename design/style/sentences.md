@@ -32,6 +32,13 @@ Keep each sentence easy to read once.
   reads better than a sentence that ends on the name. Don't end on a
   possessive that leaves out its noun, such as "the same as the built-in JRef
   plugin's".
+- Name the kind of thing when a section first mentions it, even when the
+  heading makes it seem obvious. "A URI scheme plugin defines the `schemes`
+  it handles" instead of "A plugin has the `schemes` it handles".
+- Use the same verb for the same relationship on every page. A plugin
+  "defines" what it handles everywhere. A vague verb like "has" could mean
+  contains, owns, or is given, and a different verb makes the reader wonder
+  whether something different is meant.
 - Lead with the action and say who does what: "Use `--frail` to fail on
   warnings."
 - Use a list or a table for three or more parallel items with details,
