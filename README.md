@@ -30,13 +30,36 @@ are copied when the site starts, so restart it to see later changes.
 Docs are plain markdown that reads well on GitHub. The site build handles the
 rest.
 
-Write so a person can read each sentence once and understand it:
+Write prose that reads as one explanation, not a list of separate facts:
 
-- One idea per sentence. When a sentence needs a second "so", "and", or
-  "which" to finish, split it.
+- Make each sentence pick up from the one before it. Join a cause to what it
+  causes instead of stating them as two sentences. "A document can refer to
+  anything anywhere, so `Hyperjump` won't retrieve anything from the network
+  until you tell it where it may go."
+- Give the reason before the instruction. "The cache belongs to the HTTP
+  plugin, so to change it you replace the HTTP plugin" tells the reader why
+  the step works.
+- Be precise. Use the API's own terms, such as "a `Hyperjump` instance" or
+  "the default for `allowRetrieval`", instead of a friendly paraphrase. Don't
+  simplify until it's wrong. "The session won't retrieve it again" sounds
+  like a document can only be read once. Say what actually happens.
+- Say what the reader needs and leave out internals that don't change what
+  they do. "The string you pass to `get` is the same on every operating
+  system" is more useful than the name of the error a backslash causes.
+- Introduce every code block and table with a sentence that says what it
+  shows. When an example demonstrates something, say what.
+- Don't announce. Lines like "Now for the good part" or "Look at what's
+  missing" add nothing. Say what's interesting instead.
+
+Keep each sentence easy to read once:
+
+- When a sentence needs a second "so", "and", or "which" to finish, split it.
 - Don't add clauses with commas. "It's an ES module with TypeScript types"
   reads better than "It's an ES module, with TypeScript types". Don't put a
-  comma before "and" when it joins only two things.
+  comma before "and" when it joins only two things, but do when it ends a
+  list of three or more: "apples and bananas", "apples, bananas, and
+  oranges". A comma after an introductory clause is fine: "When you step into
+  one, you get the value it refers to."
 - Lead with the action and say who does what: "Use `--frail` to fail on
   warnings."
 - Use a list or a table for three or more parallel items with details,
