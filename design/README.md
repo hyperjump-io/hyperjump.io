@@ -6,10 +6,9 @@ them, rewrites what GitHub-flavored docs need for a site, and deploys it.
 
 ## Style
 
-How to write docs in every repo, including this one.
-
-- [Prose](style/prose.md): one explanation, not a list of separate facts
-- [Sentences](style/sentences.md): each easy to read once
+How to write docs in every repo, including this one, is in
+[style/](style/README.md): the Google developer documentation style guide,
+checked by Vale.
 
 ## Components
 

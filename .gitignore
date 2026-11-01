@@ -16,3 +16,6 @@ src/content/docs/json-language-server/
 src/content/docs/json-schema-formats/
 src/content/docs/uri/
 src/content/docs/uri-template/
+
+# Downloaded by `vale sync`
+.vale/
