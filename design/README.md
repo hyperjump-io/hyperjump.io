@@ -10,6 +10,27 @@ How to write docs in every repo, including this one, is in
 [style/](style/README.md): the Google developer documentation style guide,
 checked by Vale.
 
+## Writing docs
+
+How to write docs for the site, in every repo.
+
+- [Pages](authoring/pages.md): titles, and the page list that sets the
+  sidebar
+- [Links](authoring/links.md): links between pages and repos, and moving
+  a page
+- [Code blocks](authoring/code-blocks.md): schemas, JRef, and wrapping
+- [Code examples](authoring/examples.md): TypeScript, realistic code, and
+  results
+- [Options and methods](authoring/options-and-methods.md): tables and
+  signatures
+- [Version markers](components/version-markers.md): when a feature was
+  added, or that it's coming soon
+- [Lint rule pages](authoring/lint-rule-pages.md): examples and the
+  messages they report
+- [Blog posts](authoring/posts.md): files and frontmatter
+- [Adding a package](authoring/adding-a-package.md): `sources.js`,
+  rebuilding the site, and the style check
+
 ## Components
 
 - [Content](components/content.md): one site, where its pages come from, and
