@@ -2,14 +2,14 @@
 
 ## One site
 
-json-schema, cli, browser, and the other packages have one site, and
-not a site each. Their users move between them: lint rules are json-schema's, but
+`json-schema`, `cli`, `browser`, and the other packages have one site, and
+not a site each. Their users move between them: lint rules are `json-schema`'s, but
 they're run from code with `lint` and from the command line with `hyperjump`, and
-both packages rest on browser's retrieval. One site has one search, one
+both packages rest on `browser`'s retrieval. One site has one search, one
 navigation, and links between packages that are checked.
 
 The site presents JSON Schema tools and the components they're built from,
-each of which works on its own, like browser. See
+each of which works on its own, like `browser`. See
 [Landing page](landing-page.md).
 
 Each package's pages are at `/<repo>/`. The sidebar groups packages by
@@ -21,13 +21,13 @@ Each topic has one home, and the others link to it.
 
 | Topic | Home |
 |---|---|
-| Validation, dialects, keywords, custom keywords, output | json-schema |
-| Lint rules (a page each), presets, rule settings, configuration comments, the `lint` method | json-schema |
-| The CLI, `.hyperjumprc` and its settings, rule packages | cli |
-| Retrieval, URLs, media types, caching, `allowRetrieval` | browser |
-| How json-schema uses retrieval | json-schema, linking to browser |
+| Validation, dialects, keywords, custom keywords, output | `json-schema` |
+| Lint rules (a page each), presets, rule settings, configuration comments, the `lint` method | `json-schema` |
+| The CLI, `.hyperjumprc` and its settings, rule packages | `cli` |
+| Retrieval, URLs, media types, caching, `allowRetrieval` | `browser` |
+| How `json-schema` uses retrieval | `json-schema`, linking to `browser` |
 
-json-schema v1 isn't on the site. The landing page links to the README on
+`json-schema` v1 isn't on the site. The landing page links to the README on
 its branch.
 
 There's no API reference. The packages' TypeScript declarations are in
@@ -107,7 +107,7 @@ the cache the dev server uses.
 ## One version, from branch heads
 
 The site is built from the head of each repo's `main`, not from release tags.
-A major version in progress, like json-schema's v2, is on a branch of its
+A major version in progress, like `json-schema`'s v2, is on a branch of its
 own, and its docs come with it when it's released and merged to `main`.
 Until then, the docs are its [placeholder](#where-pages-come-from) if `main`
 has none.

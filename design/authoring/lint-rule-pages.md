@@ -1,6 +1,6 @@
 # Lint rule pages
 
-Each lint rule in json-schema has a page in `website/linting/rules/`. The
+Each lint rule in `json-schema` has a page in `website/linting/rules/`. The
 site lints each schema example on the page with the page's rule, and
 underlines what each message is about.
 

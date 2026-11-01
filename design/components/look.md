@@ -4,7 +4,7 @@ Starlight's layout, with Hyperjump's branding. Overriding Starlight's
 components for a custom design was rejected: it's more to keep working as
 Starlight changes, for little gain on a docs site.
 
-- **Logo.** The braces and lightning bolt from explore.hyperjump.io, in
+- **Logo.** The braces and lightning bolt from `explore.hyperjump.io`, in
   `src/assets/logo.svg`. It's inline, not an `<img>`, so CSS colors it: the
   braces in the text color and the bolt in the accent. The header's
   `SiteTitle` is overridden to inline it, and `src/route-data.js` puts it in
@@ -96,4 +96,4 @@ Starlight changes, for little gain on a docs site.
 Rejected colors: amber, which was the first choice, after the bolt in the
 original logo; orange, coral, rust, red, yellow, rose, fuchsia, grape,
 purple, violet, periwinkle, indigo, blurple, blue, cyan, teal, emerald,
-green, and lime; and monochrome, like json-schema.hyperjump.io.
+green, and lime; and monochrome, like `json-schema.hyperjump.io`.

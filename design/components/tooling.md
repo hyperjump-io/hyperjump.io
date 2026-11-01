@@ -7,7 +7,7 @@ plain markdown (not MDX, so a `{` in a sentence is fine), has search
 (Pagefind, with no service), page tables of contents, dark mode, and mobile
 navigation, takes a sidebar from code, and builds a static site. Astro can
 use Svelte components, so the ones in
-[json-schema.hyperjump.io](https://github.com/hyperjump-io/json-schema.hyperjump.io)
+[`json-schema.hyperjump.io`](https://github.com/hyperjump-io/json-schema.hyperjump.io)
 could become interactive examples.
 
 Its cost is its look. Changing the theme is easy, but a design far from

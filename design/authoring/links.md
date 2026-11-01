@@ -13,7 +13,7 @@ A broken link fails the build.
 ## Moving a page
 
 When you move a page or merge it into another, add its old path to
-`redirects.js` in the hyperjump.io repo. Links to the old path then keep
+`redirects.js` in the `hyperjump.io` repo. Links to the old path then keep
 working.
 
 For how links are rewritten and checked, see

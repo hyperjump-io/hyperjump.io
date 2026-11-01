@@ -18,11 +18,11 @@ JSON Schema and hypermedia tools, who the Components group is for: its
 description offers them the libraries Hyperjump's tools are built from.
 "Tools for building tools" isn't in the hero. It's abstract, and would
 leave the first audience wondering whether the site is for them.
-"Hypermedia" is in the Components group, next to browser, an example of
+"Hypermedia" is in the Components group, next to `browser`, an example of
 it, and not in the hero, where it would be jargon.
 
 The tagline claims only what's on the site. "Test" is in it for
-json-schema-coverage. Editors, and JSONC and YAML, go in it when they're
+`json-schema-coverage`. Editors, and JSONC and YAML, go in it when they're
 documented here.
 
 "Try it online", the playground, is the hero's main action. It's the one
@@ -32,7 +32,7 @@ way in that needs no install, and there's no one package to start with.
 
 Packages are grouped by where they're used: "In your code", "In your
 terminal", "In your editor" for the language server and its editor
-extensions, "In your tests" for json-schema-coverage, and "Components".
+extensions, "In your tests" for `json-schema-coverage`, and "Components".
 Each group has a heading, one line on what's in it, and a card for each
 package, or one card with a list of links.
 
@@ -70,11 +70,11 @@ Neovim's Mason package. People choose by their editor, not by the server,
 and installing the server from npm is only for wiring up another editor.
 Rejected: a card for each editor. They'd all link to the same docs.
 
-Components are the libraries the tools are built from: browser,
-json-pointer, json-schema-errors, json-schema-formats, pact, uri,
-uri-template, and later json and others. json-schema-errors is used
+Components are the libraries the tools are built from: `browser`,
+`json-pointer`, `json-schema-errors`, `json-schema-formats`, `pact`, `uri`,
+`uri-template`, and later `json` and others. `json-schema-errors` is used
 next to any validator, not only ours, so it stands alone like the rest.
-Rejected: json-schema-errors in "In your code". The group had two cards,
+Rejected: `json-schema-errors` in "In your code". The group had two cards,
 and the single cards beside it stretched to their height. Pact
 has nothing to do with JSON Schema, and fits here because each component
 stands alone. Browser is one.
@@ -88,7 +88,7 @@ the Components page, which has a card for each
 package's card, since it has links in it. A topic gets a card like this
 with `list` in `sources.js`. Rejected:
 - A card for each component. The group would be longer than the rest of
-  the page, and uri-template would look as important as the language
+  the page, and `uri-template` would look as important as the language
   server.
 - A list of links without a card. It didn't line up with the other
   groups' cards.
@@ -96,20 +96,20 @@ with `list` in `sources.js`. Rejected:
   from, and its list of names would get long.
 
 A package's older major versions aren't on the landing page. Its
-overview links them, like json-schema's link to its 1.x README, since
+overview links them, like `json-schema`'s link to its 1.x README, since
 that's where people using it look, and the landing page would need a
 line for each package with one.
 
 Rejected:
 
-- **A card per package, all the same.** With a dozen packages, uri-template
+- **A card per package, all the same.** With a dozen packages, `uri-template`
   would look as important as the language server.
 - **A group for each format.** JSONC and YAML would be lists of links to
   other groups.
 - **The CLI's output as the hero's picture.** It shows linting,
   validation, and positions at once, but makes one tool the face of all of
   them.
-- **"Get started" to json-schema.** People who came for the CLI had to find
+- **"Get started" to `json-schema`.** People who came for the CLI had to find
   their own way.
 - **The 1.x docs of `@hyperjump/json-schema` linked below the groups.**
   It was one package's line on a page about all of them.

@@ -9,7 +9,7 @@ classes, which `src/styles/custom.css` styles.
 | What | Name | Value |
 |---|---|---|
 | A keyword | bold, a stronger shade of the theme's property color | the theme's |
-| A core keyword (`$schema`, `$id`, `$ref`, `$defs`, ...) | like a keyword, and italic | the theme's |
+| A core keyword (`$schema`, `$id`, `$ref`, `$defs`, …) | like a keyword, and italic | the theme's |
 | `$schema` | like a core keyword | bold |
 | An identifier (`$id`, `id`, `$anchor`, `$dynamicAnchor`, `$recursiveAnchor`) | like a core keyword | dotted underline |
 | `$ref`, `$dynamicRef`, `$recursiveRef` | like a core keyword | underlined like a link |
@@ -102,9 +102,9 @@ A `jref` block is a [JRef](https://github.com/hyperjump-io/json-reference/blob/m
 document, and each reference in it looks like a `$ref` that replaces its
 schema: `$ref` is a core keyword, the object is underlined like a link,
 and its other properties are gray and italic, since a reference is
-replaced by what it refers to. It's parsed with browser's `fromJref`, from
-json-schema's `node_modules` like its JSON parser, so a reference is
-whatever browser says it is: an object with a `$ref` string. Shiki
+replaced by what it refers to. It's parsed with `browser`'s `fromJref`, from
+`json-schema`'s `node_modules` like its JSON parser, so a reference is
+whatever `browser` says it is: an object with a `$ref` string. Shiki
 highlights it as JSON, by an alias in `astro.config.mjs`, and its title is
 "JRef". It has its own language so it reads apart from JSON, where `$ref`
 means nothing, and so a reference's look, which is JSON Schema's, means
@@ -126,10 +126,10 @@ name's class could move into the library for both.
   the site is built from (see [Content](content.md)), with every dialect.
   Its `install` in `sources.js` checks out the whole repo, not just
   `website/`, and runs `npm ci --omit=dev`, once its branch has docs.
-  unified and browser's JSON parser come from that repo's `node_modules`, so
-  they're the copies it uses. Until json-schema has docs
+  unified and `browser`'s JSON parser come from that repo's `node_modules`, so
+  they're the copies it uses. Until `json-schema` has docs
   [here](content.md#where-pages-come-from), nothing is loaded,
-  and examples aren't highlighted. They're only on json-schema's pages
+  and examples aren't highlighted. They're only on `json-schema`'s pages
   then, and on "Reading schemas", which nothing links to yet.
 - It's loaded with Node's own `import()`. Astro loads the config with Vite,
   which rewrites `import()` to its module runner, and that's closed by the

@@ -40,5 +40,5 @@ search, and its links into the docs wouldn't be checked.
 
 ## Known limitations
 
-- `starlight-blog` works with satteri and with Astro's remark processor,
+- `starlight-blog` works with `satteri` and with Astro's remark processor,
   so it installs the remark and MDX packages, which the site doesn't use.

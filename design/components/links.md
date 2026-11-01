@@ -11,8 +11,8 @@ them for the site:
   site path of that page.
 - A relative link that leaves `website/`, into `src/` or `design/`, becomes a
   GitHub link at the repo's branch, since those aren't on the site.
-- Anything else is left alone, including a link to a heading on the same
-  page (`#json-text`).
+- Anything else is left alone, including a link to one of the page's own
+  headings (`#json-text`).
 
 A link into a package without [docs here yet](content.md#where-pages-come-from)
 goes to its placeholder, its only page, on any page, this repo's too. So

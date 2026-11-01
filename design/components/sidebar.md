@@ -15,7 +15,7 @@ rule's page.
 
 Rejected: a topic for each package, with small components sharing one
 "Components" topic. There will be a dozen or more packages, and the
-language server, the VS Code extension, and json-schema-coverage aren't
+language server, the VS Code extension, and `json-schema-coverage` aren't
 components, so each would be a topic. A list of more than six or so
 topics pushes the page links down, and would need a dropdown. Where
 packages are used is a short list that grows slowly.
@@ -64,6 +64,6 @@ reads the list:
 
 Rejected:
 - One sidebar with every package. It's long, and someone reading
-  json-schema's docs rarely needs browser's pages next to them.
+  `json-schema`'s docs rarely needs `browser`'s pages next to them.
 - The first list on the page when there's no "Contents" heading. A
   one-page component's API is a list, and was taken for its pages.
