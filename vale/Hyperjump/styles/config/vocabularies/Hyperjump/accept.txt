@@ -7,6 +7,7 @@ Gruvbox
 homeworld
 HTTP
 Hyperjump
+IRIs?
 JRef
 JSON
 JSON Schema
@@ -20,10 +21,13 @@ parser
 Plex
 preset
 proselint
-revalidates
+redirect's
+revalidat(es|ed|ing)
 Shiki
 Solarized
 stringify
+subclass('s|ing)
+unflagged
 unist
 validator
 vfile
