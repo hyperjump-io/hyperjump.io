@@ -10,8 +10,9 @@
     "fetch": "node scripts/fetch-content.js",
     "dev": "npm run fetch && astro dev",
     "dev:local": "LOCAL_REPOS=.. npm run dev",
-    "build": "npm run fetch && astro build",
+    "build": "npm run fetch && astro build && npm run vale-package",
     "build:local": "LOCAL_REPOS=.. npm run build",
+    "vale-package": "rm -f dist/vale/Hyperjump.zip && mkdir -p dist/vale && cd vale && zip -qrX ../dist/vale/Hyperjump.zip Hyperjump",
     "preview": "astro preview",
     "preview:local": "LOCAL_REPOS=.. npm run preview"
   },

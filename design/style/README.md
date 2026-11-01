@@ -5,8 +5,56 @@ Docs in every Hyperjump repo follow the
 [proselint](https://github.com/amperser/proselint) adds checks for
 clichés, jargon, and other common writing mistakes.
 
-Vale checks both. Each repo with docs has a `.vale.ini` that turns on the
-Google and proselint styles at every alert level, including suggestions.
+Vale checks both, and checks spelling. Each repo with docs has a
+`.vale.ini` that turns on Vale's own style, which includes spell check, and
+the Google and proselint styles at every alert level, including
+suggestions.
+It also lists the Hyperjump package, which holds the project's vocabulary:
+
+```ini
+Packages = Google, proselint, https://hyperjump.io/vale/Hyperjump.zip
+```
+
+## Code font
+
+The Google guide says to
+[put code in code font](https://developers.google.com/style/code-in-text).
+In these docs, that includes these names:
+
+- JSON Schema keywords, like `allOf` or `$defs`. Headings too.
+- Repo and package names, like `json-schema`, `browser`, and `unified`.
+
+## Vocabulary
+
+The Hyperjump vocabulary lists terms that Vale doesn't know. Most are names
+of formats or protocols. Vale treats each term as an exception in rules
+that check terms. For example, `Google.Headings` accepts `JRef` in a
+sentence-case heading, and `Google.Acronyms` doesn't ask you to spell out
+`AST`.
+
+The package is in this repo, in `vale/Hyperjump/`. Its `.vale.ini` sets
+`Vocab = Hyperjump`, and Vale merges that into each repo's config, so a
+repo only lists the package. The build zips the package into
+`dist/vale/Hyperjump.zip`, and the site serves it.
+
+To add a term:
+
+1. Add it to
+   `vale/Hyperjump/styles/config/vocabularies/Hyperjump/accept.txt`, one
+   term per line. Each line is a case-sensitive regular expression.
+2. Push to `main`. The site deploys with the new package.
+3. Run `vale sync` in each repo to get it.
+
+Add a term only when Vale flags it in a doc, and the term is correct.
+
+`Vale.Terms` also enforces each term's case. With `JSON` in the
+vocabulary, it flags `json` in prose. Don't add a term that's also correct
+in a different case. For example, `readOnly` would make `Vale.Terms` flag
+the TypeScript word `readonly`. Format identifiers like keywords, repo
+names, and package names as code instead. Vale doesn't check code.
+
+Rejected: a vocabulary in each repo. The repos share most terms, and each
+copy would drift.
 
 ## Setup
 
