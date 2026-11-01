@@ -4,6 +4,7 @@ Ayu
 blockquote's
 blurple
 Catppuccin
+enumerability
 Everforest
 Gruvbox
 homeworld
@@ -12,6 +13,7 @@ Hyperjump
 IRIs?
 JRef
 JSON
+JSON Pointer
 JSON Schema
 Kanagawa
 linter's
@@ -29,6 +31,7 @@ proselint
 redirect's
 resolver's
 revalidat(es|ed|ing)
+RFC
 Shiki
 Solarized
 stringify
@@ -45,3 +48,5 @@ YAML
 YRef
 [Rr]eadonly
 [Ss]ubschemas?
+[Uu]ncurried
+[Uu]nescap(e|es|ed|ing)
