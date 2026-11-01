@@ -353,8 +353,7 @@ function library() {
     });
     const { unified } = await importExport(join(dir, "node_modules/unified"), ".");
     const { VFile } = await importExport(join(dir, "node_modules/vfile"), ".");
-    const { rejsonParse } = await importExport(join(dir, "node_modules/@hyperjump/browser"), "./json");
-    const { fromJref } = await importExport(join(dir, "node_modules/@hyperjump/browser"), "./jref");
+    const { rejsonParse, fromJref } = await importExport(join(dir, "node_modules/@hyperjump/browser"), ".");
     const lintRules = async (rule) => (await importExport(dir, `./lint/rules/${rule}`)).default;
     return { jsonSchema, jsonSchemaResolve, rejsonParse, fromJref, unified, VFile, lintRules };
   })();
