@@ -15,6 +15,24 @@ It also lists the Hyperjump package, which holds the project's vocabulary:
 Packages = Google, proselint, https://hyperjump.io/vale/Hyperjump.zip
 ```
 
+## Design docs
+
+Design docs in `design/` are for contributors, and the Google guide
+doesn't apply to them. Vale checks them for spelling, terms, and proselint
+only:
+
+```ini
+[design/**/*.md]
+BasedOnStyles = Vale, proselint
+```
+
+The Google guide is for docs that people read to use a product. Design
+docs record decisions, so passive voice ("Rejected: X, because it was…"),
+asides in parentheses, and words like "now" are usual and correct in them.
+
+Put this section after the section for the docs. When a file matches more
+than one section, the later one wins.
+
 ## Code font
 
 The Google guide says to
