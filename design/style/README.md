@@ -2,28 +2,50 @@
 
 Docs in every Hyperjump repo follow the
 [Google developer documentation style guide](https://developers.google.com/style).
-[proselint](https://github.com/amperser/proselint) adds checks for
-clichés, jargon, and other common writing mistakes.
+Vale checks docs against the guide, and other styles add more checks:
 
-Vale checks both, and checks spelling. Each repo with docs has a
-`.vale.ini` that turns on Vale's own style, which includes spell check, and
-the Google and proselint styles at every alert level, including
-suggestions.
-It also lists the Hyperjump package, which holds the project's vocabulary:
+- [proselint](https://github.com/amperser/proselint) checks for clichés,
+  jargon, and other common writing mistakes.
+- [Harper](https://writewithharper.com) checks grammar.
+- A11y checks for writing that some readers can't use, like an image
+  without alt text, a link that says "here", or text that points to
+  something by its color.
+- ai-tells checks for habits of AI-written prose, like "X, not Y"
+  contrasts and figurative verbs like "lands" and "sits".
+
+Each repo with docs has a `.vale.ini` that turns on Vale's own style,
+which includes spell check, and these styles at every alert level,
+including suggestions. It also lists the Hyperjump package, which holds
+the project's vocabulary:
 
 ```ini
-Packages = Google, proselint, https://hyperjump.io/vale/Hyperjump.zip
+Packages = Google, proselint, Harper, A11y, ai-tells, https://hyperjump.io/vale/Hyperjump.zip
 ```
+
+Harper's package has its own configuration, which turns Harper on for every
+file, including code and docs that Vale shouldn't check. A `[**]` section
+at the start of `.vale.ini` turns every style off, and the sections after
+it turn styles on where they apply. It has to be `[**]`: Vale adds a
+`[*]` section to Harper's `[*]` section instead of replacing it.
+
+Rejected:
+
+- write-good. Most of its alerts are from `E-Prime`, which flags every
+  "is" and "are", and its `Passive` repeats `Google.Passive`.
+- Readability. `Polysyllables` flags every word of three or more
+  syllables, and its scores are one alert for a whole file, which doesn't
+  say what to fix.
+- `alex`. It flags "color" and "slant" as profane.
 
 ## Design docs
 
 Design docs in `design/` are for contributors, and the Google guide
-doesn't apply to them. Vale checks them for spelling, terms, and proselint
-only:
+doesn't apply to them. Vale checks them for spelling and terms
+and the other styles only:
 
 ```ini
 [design/**/*.md]
-BasedOnStyles = Vale, proselint
+BasedOnStyles = Vale, proselint, Harper, A11y, ai-tells
 ```
 
 The Google guide is for docs that people read to use a product. Design
@@ -31,7 +53,8 @@ docs record decisions, so passive voice ("Rejected: X, because it was…"),
 asides in parentheses, and words like "now" are usual and correct in them.
 
 Put this section after the section for the docs. When a file matches more
-than one section, the later one wins.
+than one section, Vale uses each setting from the last section that has
+it.
 
 ## Code font
 
@@ -51,7 +74,7 @@ sentence-case heading, and `Google.Acronyms` doesn't ask you to spell out
 `AST`.
 
 The package is in this repo, in `vale/Hyperjump/`. Its `.vale.ini` sets
-`Vocab = Hyperjump`, and Vale merges that into each repo's config, so a
+`Vocab = Hyperjump`, and Vale merges that into each repo's configuration, so a
 repo only lists the package. The build zips the package into
 `dist/vale/Hyperjump.zip`, and the site serves it.
 
@@ -90,5 +113,14 @@ To check docs yourself, run `vale` on a file or a directory, such as
 
 ## Exceptions
 
-None yet. When a rule is wrong for these docs, turn it off in the
-`.vale.ini` of every repo and record the reason here.
+When a rule is wrong for these docs, turn it off in the `[**]` section of
+the `.vale.ini` of every repo and record the reason here.
+
+- `Harper.NumericRangeEnDash` asks for an en dash in a range of numbers.
+  The Google guide says not to use en dashes, and to use a hyphen or "to".
+- `ai-tells.VerbTricolon` flags most lists of three, not only three verbs.
+- `ai-tells.ConsequenceClause` flags every ", so".
+- `ai-tells.ColonUsage` flags a capital letter after a colon, even in a
+  name like Starlight.
+- `ai-tells.FormalTransitions` flags "For example", which the Google guide
+  uses.
