@@ -10,8 +10,6 @@ Vale checks docs against the guide, and other styles add more checks:
 - A11y checks for writing that some readers can't use, like an image
   without alt text, a link that says "here", or text that points to
   something by its color.
-- ai-tells checks for habits of AI-written prose, like "X, not Y"
-  contrasts and figurative verbs like "lands" and "sits".
 
 Each repo with docs has a `.vale.ini` that turns on Vale's own style,
 which includes spell check, and these styles at every alert level,
@@ -19,7 +17,7 @@ including suggestions. It also lists the Hyperjump package, which holds
 the project's vocabulary:
 
 ```ini
-Packages = Google, proselint, Harper, A11y, ai-tells, https://hyperjump.io/vale/Hyperjump.zip
+Packages = Google, proselint, Harper, A11y, https://hyperjump.io/vale/Hyperjump.zip
 ```
 
 Harper's package has its own configuration, which turns Harper on for every
@@ -36,6 +34,10 @@ Rejected:
   syllables, and its scores are one alert for a whole file, which doesn't
   say what to fix.
 - `alex`. It flags "color" and "slant" as profane.
+- ai-tells, which checks for habits of AI-written prose. Its rules are
+  lists of words and phrases, and too many of them are usual in technical
+  writing. Four of its rules had to be off, and others flagged words like
+  "implementation", which these docs need.
 
 ## Design docs
 
@@ -45,7 +47,7 @@ and the other styles only:
 
 ```ini
 [design/**/*.md]
-BasedOnStyles = Vale, proselint, Harper, A11y, ai-tells
+BasedOnStyles = Vale, proselint, Harper, A11y
 ```
 
 The Google guide is for docs that people read to use a product. Design
@@ -118,9 +120,3 @@ the `.vale.ini` of every repo and record the reason here.
 
 - `Harper.NumericRangeEnDash` asks for an en dash in a range of numbers.
   The Google guide says not to use en dashes, and to use a hyphen or "to".
-- `ai-tells.VerbTricolon` flags most lists of three, not only three verbs.
-- `ai-tells.ConsequenceClause` flags every ", so".
-- `ai-tells.ColonUsage` flags a capital letter after a colon, even in a
-  name like Starlight.
-- `ai-tells.FormalTransitions` flags "For example", which the Google guide
-  uses.
