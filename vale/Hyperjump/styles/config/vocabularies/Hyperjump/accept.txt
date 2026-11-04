@@ -41,6 +41,7 @@ unflagged
 unified's
 unist
 untinted
+URN(s|'s)?
 validator
 vfile
 Vitesse
