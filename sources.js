@@ -96,6 +96,16 @@ export const sources = [
     command: "npm install --save-dev @hyperjump/json-schema-coverage"
   },
   {
+    repo: "abnf",
+    ref: "main",
+    unreleased: true,
+    topic: "components",
+    label: "ABNF",
+    summary: "RFC 5234 grammars",
+    description: "Compile the ABNF grammars that RFCs are written in into regular expressions as fast as hand-written ones.",
+    command: "npm install @hyperjump/abnf"
+  },
+  {
     repo: "browser",
     ref: "main",
     topic: "components",

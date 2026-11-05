@@ -2,7 +2,8 @@
 
 To add a package to the site, add it to `sources.js` in this repo, with
 the topic that lists it. Mark a package that isn't released yet
-`unreleased`.
+`unreleased`. Add its `src/content/docs/<repo>/` to `.gitignore`, since
+the build copies its pages there.
 
 Until the package's branch has a `website/` directory, its page links to
 its README on GitHub. For what the placeholder shows, see
