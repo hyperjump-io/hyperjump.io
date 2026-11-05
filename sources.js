@@ -98,7 +98,6 @@ export const sources = [
   {
     repo: "abnf",
     ref: "main",
-    unreleased: true,
     topic: "components",
     label: "ABNF",
     summary: "RFC 5234 grammars",
