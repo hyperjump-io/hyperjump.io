@@ -20,6 +20,7 @@ linter's
 mdast
 mdsvex
 Neovim
+NID(s|'s)?
 Nord
 org's
 Pagefind
@@ -47,6 +48,9 @@ vfile
 Vitesse
 YAML
 YRef
+[Bb]ackreferences?
+[Ll]ookaheads?
+[Ll]ookbehinds?
 [Rr]eadonly
 [Ss]ubschemas?
 [Uu]ncurried
