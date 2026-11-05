@@ -36,7 +36,7 @@ revalidat(es|ed|ing)
 RFC
 Shiki
 Solarized
-stringify
+stringify(ing)?
 subclass('s|ing)
 subgrid
 unflagged
