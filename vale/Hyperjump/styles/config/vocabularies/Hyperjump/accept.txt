@@ -30,6 +30,7 @@ Plex
 prerelease's
 preset
 proselint
+Punycode
 redirect's
 resolver's
 revalidat(es|ed|ing)
