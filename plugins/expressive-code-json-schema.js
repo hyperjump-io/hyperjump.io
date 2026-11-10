@@ -110,7 +110,8 @@ async function highlightJson(codeBlock) {
 async function highlightJref(codeBlock) {
   const lib = await library();
   if (!lib) return;
-  const { node } = lib.fromJref(codeBlock.code);
+  // Every document has a URL, and nothing here resolves against it
+  const { node } = lib.fromJref(codeBlock.code, "https://example.com/example.jref");
   for (const reference of node ? referenceObjects(node) : []) {
     for (const property of reference.children) {
       const [name] = property.children;
@@ -250,12 +251,12 @@ async function resolve(code, dialectUri, rule) {
   if (!lib) return undefined;
   const { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = lib;
   const processor = unified()
-    .use(rejsonParse, { accept: "recovered" })
+    // A block has no path, so the parser gives its document this URL. Each
+    // block has a session of its own, so they can share it. It's in some
+    // lint messages.
+    .use(rejsonParse, { accept: "recovered", url: "https://example.com/schema.json" })
     .use(jsonSchemaResolve, {
       session: jsonSchema.session({ allowRetrieval: [] }),
-      // Each block has a session of its own, so they can share a URI. It's in
-      // some lint messages.
-      uri: "https://example.com/schema.json",
       ...dialectUri && { dialectUri }
     });
   if (rule) {
