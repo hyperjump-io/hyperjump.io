@@ -29,14 +29,8 @@ a link. GitHub shows the block without colors.
 
 ## Wrapping
 
-`text` blocks wrap, so printed output can be any length. Other blocks
-scroll.
-
-- To wrap a block that has a value that you can't break across lines,
-  such as a long URI in JSON, add `wrap` to the fence:
-  ```` ```json wrap ````.
-- To keep a `text` block from wrapping, such as output that's a table,
-  add `wrap=false` to the fence.
+Code blocks don't wrap. A line that's too long scrolls. Don't add `wrap`
+to a fence.
 
 For how highlighting works, see
 [JSON Schema highlighting](../components/highlighting.md).

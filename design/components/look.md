@@ -59,14 +59,13 @@ Starlight changes, for little gain on a docs site.
     theme, which another theme would need chosen again.
 - **Code block width.** A code block fits about 80 characters on a
   desktop and 77 at 1024 pixels wide, measured in a browser, so code in the
-  docs is kept to 76. A phone scrolls anyway. What a program prints, like
-  messages and reporter output, can't be reformatted like code, so `text`
-  blocks wrap, with continued lines indented so they don't read as new
-  ones. A block with a value that can't be broken, like a long URI in JSON,
-  wraps with `wrap` in its fence. Output that's a table, like the CLI's,
-  doesn't wrap (`wrap=false` in its fence), and scrolls, since wrapping
-  breaks its columns apart. Rejected: wrapping all code. Wrapped code is
-  harder to read than code formatted to fit.
+  docs is kept to 76. A phone scrolls anyway. No code block wraps,
+  including what a program prints: a longer line scrolls. Rejected:
+  - Wrapping all code. Wrapped code is harder to read than code formatted
+    to fit.
+  - Wrapping `text` blocks, with continued lines indented, and `wrap` in
+    the fence of other blocks with a value that can't be broken, like a
+    long URI. Wrapping breaks apart the columns of output that's a table.
 - **Inline code.** On a gray tinted toward the accent's hue (95°),
   `hsl(95, 10%, 17%)` in the dark theme and `hsl(95, 22%, 93%)` in the
   light one, with rounded corners. It's the size of code in code blocks,

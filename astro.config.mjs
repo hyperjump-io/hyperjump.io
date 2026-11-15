@@ -46,12 +46,8 @@ export default defineConfig({
             editorTabBarBorderBottomColor: ({ resolveSetting }) => resolveSetting("borderColor")
           }
         },
-        // What a program prints, like messages and reporter output, can't
-        // be reformatted for a narrow code block the way code can, so it
-        // wraps instead of scrolling
         defaultProps: {
           overridesByLang: {
-            "text,plaintext,txt": { wrap: true, hangingIndent: 4 },
             // A command has the same frame as other code, titled
             // "Terminal", not a terminal window's, with its three dots
             "bash,sh,shell": { frame: "code" }

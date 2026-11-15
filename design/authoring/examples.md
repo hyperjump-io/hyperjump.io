@@ -37,5 +37,5 @@ Show a longer result after the code block, in a block of its own:
 ## Keep lines short
 
 Keep lines in code blocks to 76 characters or fewer, so they fit without
-scrolling. Printed output in `text` blocks can be any length, because the
-site wraps it. For other ways to wrap, see [Code blocks](code-blocks.md).
+scrolling. Printed output in `text` blocks can't always be reformatted,
+so it can be longer, and it scrolls.

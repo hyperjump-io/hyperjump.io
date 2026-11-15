@@ -18,7 +18,7 @@ How to write docs for the site, in every repo.
   sidebar
 - [Links](authoring/links.md): links between pages and repos, and moving
   a page
-- [Code blocks](authoring/code-blocks.md): schemas, JRef, and wrapping
+- [Code blocks](authoring/code-blocks.md): schemas, JRef, and long lines
 - [Code examples](authoring/examples.md): TypeScript, realistic code, and
   results
 - [Options and methods](authoring/options-and-methods.md): tables and
