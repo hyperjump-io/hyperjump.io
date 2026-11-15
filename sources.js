@@ -55,7 +55,8 @@ export const topics = [
 // yet: its card and badge say "Coming soon" in place of its command and
 // version. Set
 // LOCAL_REPOS to a directory holding checkouts of the repos to build from
-// those instead.
+// those instead. `local` is the checkout's directory name there, when it
+// isn't the repo's name, like a worktree.
 export const sources = [
   {
     repo: "json-schema",
@@ -174,7 +175,7 @@ export const localRepos = process.env.LOCAL_REPOS;
 export const repoUrl = (source) => `https://github.com/hyperjump-io/${source.repo}.git`;
 
 export const repoDir = (source) => localRepos
-  ? resolve(localRepos, source.repo)
+  ? resolve(localRepos, source.local ?? source.repo)
   : resolve(".cache/repos", source.repo);
 
 export const websiteDir = (source) => resolve(repoDir(source), "website");
