@@ -249,14 +249,14 @@ function annotate(codeBlock, { start, end }, className, renderPhase = "earlier",
 async function resolve(code, dialectUri, rule) {
   const lib = await library();
   if (!lib) return undefined;
-  const { jsonSchema, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = lib;
+  const { config, Hyperjump, jsonSchemaResolve, rejsonParse, unified, VFile, lintRules } = lib;
   const processor = unified()
     // A block has no path, so the parser gives its document this URL. Each
     // block has a session of its own, so they can share it. It's in some
     // lint messages.
     .use(rejsonParse, { accept: "recovered", url: "https://example.com/schema.json" })
     .use(jsonSchemaResolve, {
-      session: jsonSchema.session({ allowRetrieval: [] }),
+      session: new Hyperjump(config),
       ...dialectUri && { dialectUri }
     });
   if (rule) {
@@ -338,7 +338,7 @@ function library() {
     const source = sources.find(({ repo }) => repo === "json-schema");
     if (!hasDocs(source)) return undefined;
     const dir = repoDir(source);
-    const { JsonSchema, jsonSchemaResolve } = await importExport(dir, ".");
+    const { jsonSchemaConfig, jsonSchemaResolve } = await importExport(dir, ".");
     const dialects = {
       "./v1": "v1Dialect",
       "./draft-04": "draft04Dialect",
@@ -347,16 +347,18 @@ function library() {
       "./draft-2019-09": "draft201909Dialect",
       "./draft-2020-12": "draft202012Dialect"
     };
-    const jsonSchema = new JsonSchema({
+    // Nothing is retrieved: a block's schema is all there is
+    const config = jsonSchemaConfig({
       dialects: await Promise.all(Object.entries(dialects).map(async ([subpath, name]) => {
         return (await importExport(dir, subpath))[name];
-      }))
+      })),
+      allowRetrieval: []
     });
     const { unified } = await importExport(join(dir, "node_modules/unified"), ".");
     const { VFile } = await importExport(join(dir, "node_modules/vfile"), ".");
-    const { rejsonParse, fromJref } = await importExport(join(dir, "node_modules/@hyperjump/browser"), ".");
+    const { Hyperjump, rejsonParse, fromJref } = await importExport(join(dir, "node_modules/@hyperjump/browser"), ".");
     const lintRules = async (rule) => (await importExport(dir, `./lint/rules/${rule}`)).default;
-    return { jsonSchema, jsonSchemaResolve, rejsonParse, fromJref, unified, VFile, lintRules };
+    return { config, Hyperjump, jsonSchemaResolve, rejsonParse, fromJref, unified, VFile, lintRules };
   })();
   return loading;
 }
