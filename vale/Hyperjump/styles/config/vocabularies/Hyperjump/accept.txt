@@ -52,6 +52,7 @@ Vitesse
 YAML
 YRef
 [Bb]ackreferences?
+[Cc]ombinators?
 [Ll]ookaheads?
 [Ll]ookbehinds?
 [Rr]eadonly
