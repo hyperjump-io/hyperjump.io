@@ -84,9 +84,20 @@ Starlight changes, for little gain on a docs site.
 - **Tables.** Code in a table's first column, which names things like lint
   rules, doesn't break at hyphens, from 64rem wide. On a narrower screen it
   does, since a name on one line left the next column a sliver.
-- **404 page.** `src/content/docs/404.md`, a splash page like the landing
-  page, with links to each package's docs. Without it, Starlight warns on
-  every build that it has no 404 entry and uses its own.
+- **404 page.** `src/content/docs/404.mdx`, a splash page like the landing
+  page, without its logo, so it doesn't look like a second landing page.
+  Its hero is centered, since there's no logo beside it, and shorter, so
+  the links are on the first screen, with "404" over the title. The
+  tagline points to search, and below it,
+  `src/components/NotFound.astro` links every package's docs by topic,
+  from `sources.js`, so the list can't fall behind the site. GitHub Pages
+  serves the same page for every missing path, so a script reads the path,
+  and when it's under a package, like `/json-schema/old-page`, shows a
+  button to that package's docs above the list, like a hero's action.
+  Without the script, the list is all there is. Without the page,
+  Starlight warns on every build that it has no 404 entry and uses its
+  own. Rejected: the landing page's groups of cards. It would be a second
+  landing page, as long as the first.
 - **Fonts.** IBM Plex Sans and IBM Plex Mono, from `@fontsource`, served with
   the site.
 - **Landing page.** See [Landing page](landing-page.md). Its logo is

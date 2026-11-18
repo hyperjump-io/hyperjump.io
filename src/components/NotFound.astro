@@ -1,0 +1,126 @@
+---
+// The 404 page's links to each package's docs, by topic, from sources.js.
+// GitHub Pages serves the same page for every missing path, so a script
+// reads the path, and when it's under a package's docs, offers that
+// package's front page first, as a button under the hero. Without the
+// script, the list is all there is.
+import { LinkButton } from "@astrojs/starlight/components";
+import { topics, sources } from "../../sources.js";
+
+const groups = topics.map((topic) => ({
+  label: topic.label,
+  packages: sources.filter((source) => source.topic === topic.id)
+}));
+const labels = Object.fromEntries(sources.map((source) => [source.repo, source.label]));
+---
+
+<div class="not-found not-content">
+  <div class="suggestion" hidden>
+    <LinkButton href="/" icon="right-arrow"><span></span></LinkButton>
+  </div>
+
+  <dl>
+    {groups.map((group) => (
+      <div>
+        <dt>{group.label}</dt>
+        <dd>
+          <ul>
+            {group.packages.map((source) => <li><a href={`/${source.repo}/`}>{source.label}</a></li>)}
+          </ul>
+        </dd>
+      </div>
+    ))}
+  </dl>
+</div>
+
+<script is:inline define:vars={{ labels }}>
+  const repo = location.pathname.split("/")[1];
+  if (Object.hasOwn(labels, repo)) {
+    const suggestion = document.querySelector(".not-found .suggestion");
+    const button = suggestion.querySelector("a");
+    button.href = `/${repo}/`;
+    button.querySelector("span").textContent = `${labels[repo]} docs`;
+    suggestion.hidden = false;
+  }
+</script>
+
+<style is:global>
+  /* The hero has no logo here, so it's centered on its own, like on a
+     phone, instead of leaving the logo's column empty. It's shorter than
+     the landing page's, so the links are on the first screen. */
+  main:has(.not-found) .hero {
+    grid-template-columns: 100%;
+    padding-block: clamp(2.5rem, calc(1rem + 8vmin), 6rem) 0;
+  }
+  main:has(.not-found) .hero .stack {
+    text-align: center;
+  }
+  main:has(.not-found) .hero .copy {
+    align-items: center;
+  }
+  /* Says what happened, over the title that says what it means. */
+  main:has(.not-found) .hero h1::before {
+    content: "404";
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: var(--sl-text-sm);
+    letter-spacing: 0.1em;
+    color: var(--sl-color-text-accent);
+  }
+</style>
+
+<style>
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 1rem;
+  }
+  .suggestion[hidden] {
+    display: none;
+  }
+  dl {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.75rem 2rem;
+    width: 100%;
+    max-width: 44rem;
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+  }
+  dl > div {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+  }
+  dt {
+    color: var(--sl-color-gray-3);
+  }
+  dd, ul {
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    list-style: none;
+  }
+  dl a {
+    color: var(--sl-color-white);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  dl a:hover {
+    color: var(--sl-color-text-accent);
+  }
+  /* The topic over its packages, since there's no room beside them. */
+  @media (max-width: 30rem) {
+    dl, dl > div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
