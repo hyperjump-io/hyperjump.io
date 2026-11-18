@@ -67,3 +67,13 @@ Rejected:
   `json-schema`'s docs rarely needs `browser`'s pages next to them.
 - The first list on the page when there's no "Contents" heading. A
   one-page component's API is a list, and was taken for its pages.
+
+## Previous and next links
+
+The previous and next links at the bottom of a page stay in its package
+(`src/route-data.js`). Starlight takes them from the sidebar, so in a
+topic with more than one package, a package's last page linked to the
+next package's front page, which reads as more of the same package. A
+topic's front page isn't a package's, so it has neither link: its cards
+link to each package. `starlight-sidebar-topics` already keeps the links in
+the topic.
