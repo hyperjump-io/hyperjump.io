@@ -68,6 +68,15 @@ export const sources = [
     command: "npm install @hyperjump/json-schema"
   },
   {
+    repo: "openapi",
+    ref: "main",
+    unreleased: true,
+    topic: "code",
+    label: "OpenAPI",
+    description: "OpenAPI 3.0, 3.1, and 3.2 for the JSON Schema library: Schema Object dialects, the Schema Objects in OpenAPI documents, and lint rules.",
+    command: "npm install @hyperjump/openapi"
+  },
+  {
     repo: "cli",
     ref: "main",
     unreleased: true,
