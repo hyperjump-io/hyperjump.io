@@ -60,7 +60,9 @@ export const topics = [
 export const sources = [
   {
     repo: "json-schema",
-    ref: "main",
+    // v2 is on main, but isn't released, so the site stays on v1's branch,
+    // which has no website/, until it is.
+    ref: "v1",
     install: true,
     topic: "code",
     label: "JSON Schema",

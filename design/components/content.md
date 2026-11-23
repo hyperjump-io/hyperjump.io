@@ -73,8 +73,8 @@ before every package's release. A repo whose branch has no
 placeholder front page instead, with its description from `sources.js`.
 Most packages without docs here are released, with docs in their READMEs,
 so their placeholder has their command and a link to the README on
-GitHub, and their card and sidebar badge have their command and version,
-as with docs. A package marked `unreleased` in `sources.js`, like the CLI
+GitHub, on the branch the site builds from, and their card and sidebar
+badge have their command and version, as with docs. A package marked `unreleased` in `sources.js`, like the CLI
 or the language server, isn't released yet: its placeholder says its docs
 are coming soon, with a link to the repo on GitHub unless GitHub needs a
 sign-in to see it, since it's private or doesn't exist, and its card and
@@ -107,10 +107,11 @@ the cache the dev server uses.
 ## One version, from branch heads
 
 The site is built from the head of each repo's `main`, not from release tags.
-A major version in progress, like `json-schema`'s v2, is on a branch of its
-own, and its docs come with it when it's released and merged to `main`.
-Until then, the docs are its [placeholder](#where-pages-come-from) if `main`
-has none.
+A major version in progress, like `json-schema`'s v2, can be on `main` before
+it's released. Then the site builds from the branch of the released version
+(`ref` in `sources.js`), like `json-schema`'s `v1`, until the release, and the
+docs are its [placeholder](#where-pages-come-from) if that branch has none.
+The placeholder links to the README on that branch, not on `main`.
 Improvements to the docs should show up right away, for everyone, and not
 wait for a release. There's one version of the docs, and
 [version markers](version-markers.md) say when a feature was added, or that

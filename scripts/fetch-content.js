@@ -134,7 +134,7 @@ function placeholder(source) {
   const command = source.unreleased ? "" : commands(source.command);
   const docs = source.unreleased
     ? `Docs are coming soon.${hidden.has(source.repo) ? "" : ` Until then, see [${source.repo} on GitHub](${url}).`}`
-    : `Its docs aren't on this site yet. See [its README on GitHub](${url}#readme).`;
+    : `Its docs aren't on this site yet. See [its README on GitHub](${url}/tree/${source.ref}#readme).`;
   return `---\ntitle: ${JSON.stringify(source.label)}\n---\n\n${source.description}\n\n${command}${docs}\n`;
 }
 
